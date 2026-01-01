@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mikulás Puttonya</title>
+  <style>
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      background: #f1f1f1;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      z-index: 10;
+    }
+    .close-btn:hover {
+      background: #ff4d4d;
+      color: white;
+      border-color: #ff1a1a;
+    }
+
+    :root {
+      --piros: #d00;
+      --feher: #fff;
+      --szoveg: #111;
+      --maxw: 1400px;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: center / cover no-repeat url("hatter.jpg");
+      color: var(--szoveg);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .overlay {
+      min-height: 100vh; /* mindig a teljes oldal magasságáig ér */
+      background: color-mix(in srgb, #000 15%, transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 0; /* hogy ha nagyobb a tartalom, legyen tér alul-felül */
+      box-sizing: border-box;
+    }
+
+    .wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 2rem;
+      max-width: var(--maxw);
+      width: 100%;
+      padding: 1rem 2rem;
+      box-sizing: border-box;
+    }
+
+    /* Bal oszlop */
+    .left {
+      background: var(--feher);
+      border: 3px solid var(--piros);
+      border-radius: 12px;
+      padding: 1.5rem;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0.75rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .left h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: var(--piros);
+    }
+
+    .left p.lead {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .btns {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 2px solid var(--piros);
+      background: var(--feher);
+      color: var(--piros);
+      text-decoration: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--piros);
+      color: white;
+    }
+
+    /* Jobb oszlop */
+    .right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .thumbs, .hero {
+      width: 100%;
+      text-align: center;
+    }
+
+    .thumbs img, .hero img {
+      width: 100%;
+      max-width: 260px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .thumbs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: nowrap;
+    }
+
+    .thumbs p, .hero p {
+      margin: 0.3rem 0;
+      font-weight: bold;
+      color: var(--feher);
+      font-size: 1.1rem;
+    }
+
+    .hero img {
+      max-width: 400px;
+    }
+
+    /* Mobil nézet */
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1rem; }
+      .gallery { width: 100%; }
+      .thumbs { flex-direction: column; }
+      .hero img { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="akciok.html" class="close-btn">×</a>
+
+<div class="overlay">
+  <main class="wrap">
+    <!-- Bal oszlop -->
+    <section class="left" aria-labelledby="focim">
+      <h1 id="focim"><b><i>MIKULÁS PUTTONYA</i></b></h1>
+      <p class="lead"><b><i>TEGYÉL FÉLRE <span style="color: red;">2x 5000-FT</span> AZ AJÁNDÉKOKÉRT!</i></b></p>
+      <p class="lead"><b><i>Promóciós időszak:<br>2025.12.01. - 2026.01.05.</i></b></p>
+      <div class="btns">
+        <a class="btn" href="teljesitesinaplo_mikulasputtonya.html"><b><i>TELJESÍTÉSI NAPLÓ</i></b></a>
+        <a class="btn" href="#masodik-link"><b><i>JÁTÉKSZABÁLYZAT</i></b></a>
+      </div>
+    </section>
+
+    <!-- Jobb oszlop -->
+    <aside class="right" aria-label="Képgaléria">
+      <div class="gallery">
+        <div class="thumbs">
+          <div>
+            <p><b><i>Főbónusz</i></b></p>
+            <img src="kuponok/Dia1.JPG" alt="Kis kép 1">
+          </div>
+          <div>
+            <p><b><i>Főbónusz</i></b></p>
+            <img src="kuponok/Dia2.JPG" alt="Kis kép 2">
+          </div>
+          <div>
+            <p><b><i>Főbónusz</i></b></p>
+            <img src="kuponok/Dia3.JPG" alt="Kis kép 3">
+          </div>
+        </div>
+        <div class="hero">
+          <p><b><i>Napi bónusz</i></b></p>
+          <img src="kuponok/Dia4.JPG" alt="Nagy kép">
+        </div>
+
+
+
+        
+      </div>
+    </aside>
+  </main>
+</div>
+
+</body>
+</html>

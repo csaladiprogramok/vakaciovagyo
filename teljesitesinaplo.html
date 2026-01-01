@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teljesítési Napló</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Bezáró gomb */
+    .close-btn{position:absolute;top:10px;right:15px;text-decoration:none;font-size:24px;font-weight:700;color:#333;background:#f1f1f1;border:1px solid #ccc;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;transition:.3s}
+    .close-btn:hover{background:#ff4d4d;color:#fff;border-color:#ff1a1a}
+
+    :root{--accent:#e6f2ff;--line:#d9e6f2;--text:#0f172a;--muted:#475569}
+    html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;color:var(--text);background:#fefcc8}
+    main{max-width:1100px;margin:24px auto;padding:0 16px;position:relative}
+    h1{font-size:clamp(1.25rem,1rem+1.5vw,1.75rem);margin:0 0 12px;text-align:center}
+
+    /* Nem összecsukható doboz */
+    .naplo-box{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+    .naplo-header{padding:14px 16px;font-weight:600;background:var(--accent);border-bottom:1px solid var(--line);text-align:center}
+
+    .naplo-scroll{overflow:auto}
+    .naplo-table{border-collapse:separate;border-spacing:0;width:100%;min-width:720px}
+    .naplo-table thead th{position:sticky;top:0;background:#fafcff;border-bottom:2px solid var(--line);text-align:center;padding:10px}
+    .naplo-table th,.naplo-table td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px;vertical-align:middle;text-align:center}
+    .naplo-table th:last-child,.naplo-table td:last-child{border-right:none}
+    .naplo-left{text-align:left}
+    .naplo-month{white-space:nowrap;font-weight:600}
+    .ok{display:inline-flex;align-items:center;gap:.4ch}
+    .ok .dot{inline-size:.65em;block-size:.65em;border-radius:50%;background:#16a34a}
+    caption{caption-side:bottom;color:var(--muted);padding:10px 0}
+
+    /* --- Mobilbarát nézet (táblázat helyett kártyák) --- */
+    @media (max-width: 720px){
+      .naplo-scroll{overflow:visible}
+      .naplo-table{min-width:0;border:0}
+      .naplo-table thead{display:none}
+      .naplo-table tr{display:block;border:1px solid var(--line);border-radius:12px;margin:12px 0;background:#fff}
+      .naplo-table td,.naplo-table th{display:grid;grid-template-columns: 1fr 1fr;align-items:center;border:0;border-bottom:1px solid var(--line);padding:12px}
+      .naplo-table td:last-child{border-bottom:0}
+      .naplo-table td::before{content:attr(data-label);font-weight:600;text-align:left;padding-right:8px}
+      .naplo-table .naplo-month{display:block;font-size:1.05rem;padding:12px 12px 4px;font-weight:700;border-bottom:0}
+      .naplo-table td[data-label="Hónap"]{grid-template-columns: 1fr;}
+      table[aria-label="Teljesítési Napló"]{text-align:left}
+    }
+
+    /* Sötét mód */
+    @media (prefers-color-scheme: dark){
+      :root{--accent:#0b213a;--line:#1f2e3b;--text:#e5e7eb;--muted:#cbd5e1}
+      .naplo-header{background:var(--accent)}
+      .naplo-table thead th{background:#0f172a}
+      body{background:#0b1020}
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="akciok.html" class="close-btn" aria-label="Vissza az akciókhoz">×</a>
+   
+
+    <section class="naplo-box" aria-labelledby="naplo-cim">
+      <div id="naplo-cim" class="naplo-header">TELJESÍTÉSI NAPLÓ - SOK KICSI, SOKRA MEGY</div>
+
+      <div class="naplo-scroll">
+        <table class="naplo-table" aria-label="Teljesítési Napló">
+          <thead>
+            <tr>
+              <th rowspan="2" class="naplo-left">Hónap</th>
+              <th colspan="2">Orosz Sándor</th>
+              
+              <th colspan="2">Orosz Kristóf</th>
+            </tr>
+            <tr>
+              <th>Befizetés</th><th>Bónusz</th>
+              
+              <th>Befizetés</th><th>Bónusz</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr>
+              <td class="naplo-left naplo-month" data-label="Hónap">2025. október</td>
+              <td data-label="Orosz Sándor – Befizetés"><span class="ok"><span class="" aria-hidden="true"></span><span aria-label="Teljesítve" title="Teljesítve">❌</span></span></td>
+              <td data-label="Orosz Sándor – Bónusz"><span class="ok"><span class="" aria-hidden="true"></span><span aria-label="Teljesítve" title="Teljesítve">❌</span></span></td>
+              <td data-label="Orosz Kristóf – Befizetés"><span class="ok"><span class="" aria-hidden="true"></span><span aria-label="Teljesítve" title="Teljesítve">✅</span></span></td>
+              <td data-label="Orosz Kristóf – Bónusz"><span class="ok"><span class="" aria-hidden="true"></span><span aria-label="Teljesítve" title="Teljesítve">✅</span></span></td>
+            </tr>
+            <tr>
+              <td class="naplo-left naplo-month" data-label="Hónap">2025. november</td>
+              <td data-label="Orosz Sándor – Befizetés"><span class="ok"><span class="" aria-hidden="true"></span><span aria-label="Teljesítve" title="Teljesítve">❌</span></span></td></td>
+              <td data-label="Orosz Sándor – Bónusz"><span class="ok"><span class="" aria-hidden="true"></span><span aria-label="Teljesítve" title="Teljesítve">❌</span></span></td></td>
+              <td data-label="Orosz Kristóf – Befizetés"><span class="ok"><span class="" aria-hidden="true"></span><span aria-label="Teljesítve" title="Teljesítve">✅</span></span></td>
+              <td data-label="Orosz Kristóf – Bónusz"><span class="ok"><span class="" aria-hidden="true"></span><span aria-label="Teljesítve" title="Teljesítve">✅</span></span></td>
+            </tr>
+            <tr>
+              <td class="naplo-left naplo-month" data-label="Hónap">2025. december</td>
+              <td data-label="Orosz Sándor – Befizetés"></td>
+              <td data-label="Orosz Sándor – Bónusz"></td>
+              <td data-label="Orosz Kristóf – Befizetés"></td>
+              <td data-label="Orosz Kristóf – Bónusz"></td>
+            </tr>
+            <tr>
+              <td class="naplo-left naplo-month" data-label="Hónap">2026. január</td>
+              <td data-label="Orosz Sándor – Befizetés"></td>
+              <td data-label="Orosz Sándor – Bónusz"></td>
+              <td data-label="Orosz Kristóf – Befizetés"></td>
+              <td data-label="Orosz Kristóf – Bónusz"></td>
+            </tr>
+            <tr>
+              <td class="naplo-left naplo-month" data-label="Hónap">2026. február</td>
+              <td data-label="Orosz Sándor – Befizetés"></td>
+              <td data-label="Orosz Sándor – Bónusz"></td>
+              <td data-label="Orosz Kristóf – Befizetés"></td>
+              <td data-label="Orosz Kristóf – Bónusz"></td>
+            </tr>
+            <tr>
+              <td class="naplo-left naplo-month" data-label="Hónap">2026. március</td>
+              <td data-label="Orosz Sándor – Befizetés"></td>
+              <td data-label="Orosz Sándor – Bónusz"></td>
+              <td data-label="Orosz Kristóf – Befizetés"></td>
+              <td data-label="Orosz Kristóf – Bónusz"></td>
+            </tr>
+            <tr>
+              <td class="naplo-left naplo-month" data-label="Hónap">2026. április</td>
+              <td data-label="Orosz Sándor – Befizetés"></td>
+              <td data-label="Orosz Sándor – Bónusz"></td>
+              <td data-label="Orosz Kristóf – Befizetés"></td>
+              <td data-label="Orosz Kristóf – Bónusz"></td>
+            </tr>
+            <tr>
+              <td class="naplo-left naplo-month" data-label="Hónap">2026. május</td>
+              <td data-label="Orosz Sándor – Befizetés"></td>
+              <td data-label="Orosz Sándor – Bónusz"></td>
+              <td data-label="Orosz Kristóf – Befizetés"></td>
+              <td data-label="Orosz Kristóf – Bónusz"></td>
+            </tr>
+                        <tr>
+              <td class="naplo-left naplo-month" data-label="Hónap">2026. június</td>
+              <td data-label="Orosz Sándor – Befizetés"></td>
+              <td data-label="Orosz Sándor – Bónusz"></td>
+              <td data-label="Orosz Kristóf – Befizetés"></td>
+              <td data-label="Orosz Kristóf – Bónusz"></td>
+            </tr>
+          </tbody>
+          <caption>Áttekintő táblázat a 2025. október – 2026. június közötti időszakról.</caption>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

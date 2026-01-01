@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Továbbiak</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: grey;
+      color: #333;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 2em;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a.logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: yellowgreen;
+    }
+
+    .menu {
+      display: flex;
+      gap: 1em;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: #333;
+      margin: 4px;
+      border-radius: 2px;
+    }
+
+    @media(max-width:768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* TARTALOM */
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1em;
+      color: #222;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.2em;
+    }
+
+    .card-title {
+      margin: 0 0 .5em;
+      font-size: 1.3rem;
+      color: yellowgreen;
+    }
+
+    .card-text {
+      margin: 0 0 1em;
+    }
+
+    /* GOMB STÍLUS – lekerekített, piros szegélyű, szürke hátterű, sárga szövegű */
+    button,
+    .btn,
+    .btn4,
+    a.btn {
+      display: inline-block;
+      background-color: #555;
+      /* szürke háttér */
+      color: yellow;
+      /* sárga szöveg */
+      padding: 10px 18px;
+      border: 2px solid red;
+      /* piros szegély */
+      border-radius: 25px;
+      /* lekerekített forma */
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 10px;
+    }
+
+    /* Hover hatás */
+    button:hover,
+    .btn:hover,
+    .btn4:hover,
+    a.btn:hover {
+      background-color: #777;
+      margin: 10px;
+      /* világosabb szürke */
+      color: #fff700;
+      /* világosabb sárga szöveg */
+      border-color: darkred;
+      /* sötétebb piros szegély */
+      transform: scale(1.05);
+      /* finom nagyítás */
+    }
+
+    footer {
+
+      text-align: center;
+      padding: 15px;
+
+    }
+
+    footer h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      background: #f1f1f1;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    .close-btn:hover {
+      background: #ff4d4d;
+      color: white;
+      border-color: #ff1a1a;
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="tovabbiak.html" class="close-btn">×</a>
+
+  <h1>ARCHÍV DOKUMENTUMOK</h1>
+
+
+  <h2 style="text-align: center;">JÁTÉKSZABÁLYZATOK</h2>
+
+<!------
+  <p style="text-align: center;"><b><i>Jelenleg nincsenek rendelkezésre álló archív játékszabályzatok.</i></b></p>
+  <br>
+  ------->
+
+        <div class="btn-row" style="text-align: center; font-size: 20px;">
+
+    <a class="btn4" href="https://drive.google.com/file/d/1nLXXotgucC8YH5Xrd5QXdX9u_WLg8Wm6/view?usp=sharing" ><b><i>RAKJ FÉLRE EGY KIS APRÓT AZ EXTRA BÓNUSZÉRT</b></i> <br></a> <br>
+    
+    <div class="btn-row" style="text-align: center; font-size: 20px;">
+
+    <a class="btn4" href="https://drive.google.com/file/d/1_IFT5lJbY7-yewXKbQ0572Y9n6eK32TV/view?usp=sharing" ><b><i>TUDTAD LEMONDOK A TARTOZÁSOD EGY RÉSZÉRŐL</b></i> <br></a>
+
+    <a class="btn4" href="https://drive.google.com/file/d/1rryYoVr3c1okkjlAftWq41vBFZOZQcPd/view?usp=sharing" ><b><i>NYERJ ÉS CSEKKOLJ KI</b></i> <br></a>
+
+    
+  <h2 style="text-align: center;">BIZONYLATOK</h2>
+
+  <p style="text-align: center;"><b><i>Jelenleg nincsenek rendelkezésre álló archív bizonylatok.</i></b></p>
+  <br>
+
+  <h2 style="text-align: center;">HATÁROZATOK</h2>
+
+  <p style="text-align: center;"><b><i>Jelenleg nincsenek rendelkezésre álló archív határozatok.</i></b></p>
+  <br>
+
+
+
+
+  <!-- EGY KÁRTYA -->
+
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+  </script>
+</body>
+
+</html>

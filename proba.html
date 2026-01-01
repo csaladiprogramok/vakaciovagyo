@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VakációVágyó 2026</title>
+  <style>
+    :root {
+      --duration-ms: 5000;
+      --duration: calc(var(--duration-ms) * 1ms);
+      --bg: #1e90ff;
+      --text: #ffffff;
+      --yellow: #ffd700;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      background-color: #fefcc8;
+      color: black;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    /* ===== FŐTARTALOM ===== */
+    header {
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 2.2rem;
+      font-weight: 800;
+    }
+
+    main {
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .left-text {
+      flex: 1 1 400px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+
+    .right-img {
+      flex: 1 1 400px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .right-img img {
+      width: 85%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* ===== GOMBOK ===== */
+    .login-btn,
+    .alt-btn {
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+      width: fit-content;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .login-btn {
+      background-color: #ffd700;
+      color: #000;
+      border: none;
+    }
+    .login-btn:hover { transform: scale(1.05); }
+
+    .alt-btn {
+      background: #000;
+      color: #fff;
+      border: 2px solid #1e90ff;
+    }
+    .alt-btn:hover { transform: scale(1.05); }
+
+    .auth-buttons {
+      display: flex;
+      gap: .6rem;
+    }
+
+    /* DESKTOP */
+    @media (min-width: 769px) {
+      .auth-buttons {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        flex-direction: row;
+      }
+    }
+
+    /* MOBIL */
+    @media (max-width: 768px) {
+      .auth-buttons {
+        position: fixed;
+        left: 50%;
+        bottom: 16px;
+        transform: translateX(-50%);
+        flex-direction: column;
+        align-items: center;
+        z-index: 1000;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>VakációVágyó <br>2026</header>
+
+<main>
+  <div class="left-text">
+    <p><b><i>Fogjunk össze 🤝, tegyünk félre 💰, és utazzunk az egyenlítő környékére 🌎</i></b></p>
+    <p>Ne feledd! Sok kicsi, sokra megy!</p>
+  </div>
+
+  <div class="right-img">
+    <img src="vakaciovagyo.jpg" alt="Utazás hangulatkép">
+  </div>
+
+  <!-- === GOMBOK === -->
+  <div class="auth-buttons">
+    <a href="regisztracio.html" class="alt-btn">REGISZTRÁCIÓ</a>
+    <button class="login-btn" id="loginBtn">BEJELENTKEZÉS</button>
+  </div>
+</main>
+
+</body>
+</html>

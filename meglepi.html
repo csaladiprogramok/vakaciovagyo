@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meglepi</title>
+  <style>
+    /* Bezárás gomb (jobb felső sarokban, mindig látható) */
+    .close-btn {
+      position: fixed;
+      top: 10px;
+      right: 15px;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      background: gray;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      z-index: 9999;
+      box-shadow: 0 0 8px rgba(0,0,0,0.4);
+    }
+
+    .close-btn:hover {
+      background: red;
+    }
+
+    :root {
+      --piros: #d00;
+      --feher: #fff;
+      --szoveg: #111;
+      --maxw: 1400px;
+    }
+
+    /* Háttérkép javítva */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-image: url("kuponok/hatter_tök.jpg");
+      background-size: cover;           /* teljes képernyőt lefedi */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;     /* görgetésnél fixen marad */
+      color: var(--szoveg);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    /* Tartalom középre igazítása külön rétegen */
+    .tartalom {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* mindig teljes magasságot kitölt */
+      background-color: rgba(0, 0, 0, 0.3); /* halvány sötét átfedés, hogy jobban látszódjon a szöveg */
+    }
+
+    h1 {
+      color: white;
+      background-color: black;
+      text-align: center;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .kepek {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .kepek img {
+      width: 45%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .kozepre {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+      margin-bottom: 60px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      font-size: 18px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      background-color: #339CFF;
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    @media (max-width: 768px) {
+      .kepek {
+        flex-direction: column;
+      }
+
+      .kepek img {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="akciok.html" class="close-btn">×</a>
+
+  <div class="tartalom">
+    <h1><i>Röfi kereső játék<br>2025.10.27. – 2025.11.03. <br> <span style="color: yellow;">Tegyél félre 3000 - Ft a bónuszjóváírásért!</span></i></h1>
+
+    <div class="kepek">
+      <img src="kuponok/felhivas_tök.jpg" alt="Első kép">
+      <img src="kuponok/kupon_tök.jpg" alt="Második kép">
+    </div>
+
+    <div class="kozepre">
+      <a href="https://drive.google.com/file/d/1eMWqspbH8X-EDkOsVq3L6e9eFSH4lZlM/view?usp=sharing"><button><i>JÁTÉKSZABÁLYZAT</i></button></a>
+    </div>
+  </div>
+
+</body>
+</html>

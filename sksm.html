@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sok kicsi sokra megy – Játékszabályzat</title>
+
+  <!-- Webfontok (opcionális, de szépek mobilon is) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#f8d78c;   /* napsárga */
+      --bg2:#f8d78c; 
+      --bg3:#f8d78c;    /* tengerzöld */   /* vízkék */
+      --ink:#0d0d0d;
+      --accent:#ea6b1f;
+      --card:#ffffff;
+      --link:#2b6cb0;
+      --cta:green;
+      --cta2:red;
+      
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg, var(--bg1), var(--bg2) 55%, var(--bg3));
+      font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.6;
+    }
+button {
+  background-color: red;
+  color: #ffffff;
+font-size: 18px;
+border-radius: 8px;
+    }
+
+    /* Bezárás gomb a jobb felső sarokban */
+    .close{
+      position: fixed;
+      top: 12px; right: 12px;
+      z-index: 20;
+      background: rgba(255,255,255,.9);
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #0b3a5b;
+      font-weight: 800;
+      box-shadow: 0 6px 18px rgba(0,0,0,.15);
+    }
+    .close:hover{ background:#fff }
+
+    /* Tartalom kártya */
+    .wrap{
+      max-width: 980px;
+      margin: clamp(16px, 3vw, 40px) auto;
+      padding: clamp(12px, 3vw, 28px);
+    }
+    .card{
+      background: var(--card);
+      border-radius: 18px;
+      padding: clamp(16px, 3.5vw, 40px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    }
+
+    /* Fejléc */
+    .subtitle{
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: .06em;
+      color:#14374f;
+      margin: 0 0 6px;
+      font-size: clamp(14px, 2.2vw, 16px);
+    }
+    h1{
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 8vw, 76px);
+      line-height: 1;
+      margin: 0 0 18px;
+      color:#b95812;
+      text-shadow: 0 3px 0 rgba(0,0,0,.12);
+      border-bottom: 3px solid rgba(185,88,18,.3);
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+
+    h2{
+      margin: 26px 0 6px;
+      font-size: clamp(20px, 3.5vw, 28px);
+      line-height:1.3;
+    }
+
+    h4 {
+      color: red;
+    }
+    p{margin: 0 0 10px}
+    ul{margin:10px 0 0 1.2em}
+
+    /* Alsó CTA és kép */
+    .cta-area{
+      margin-top: clamp(22px, 5vw, 42px);
+      text-align:center;
+    }
+    .cta{
+      display:inline-block;
+      background: var(--cta);
+      color:#fff; text-decoration:none;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(229,57,53,.35);
+      font-size: clamp(16px, 3.5vw, 18px);
+    }
+    
+    .cta:active{ transform: translateY(1px) }
+
+    .bottom-img{
+      display:block;
+      max-width: min(760px, 94%);
+      margin: 16px auto 4px;
+      height:auto;
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.18);
+    }
+
+    /* Finom kontraszt a szakaszcímeknél */
+    .kicker{ color:#1a4c6b; font-weight:800; }
+
+    /* Linkek */
+    a{color:var(--link)}
+
+    /* --- Teljesítési Napló (csak ehhez) --- */
+.naplo-acc { margin-top: clamp(16px,4vw,28px); }
+.naplo-acc summary{
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  background:#fff;
+  border-radius:12px;
+  padding:14px 16px;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+  font-weight:800;
+  display:flex; align-items:center; gap:10px;
+}
+.naplo-acc summary::before{
+  content:"▸";
+  display:inline-block; transform: translateY(-1px);
+  transition: transform .2s ease;
+  font-size:18px; color:#1a4c6b;
+}
+.naplo-acc[open] summary::before{ transform: rotate(90deg); }
+
+/* görgethető keret asztali/mobilon */
+.naplo-scroll{overflow:auto; -webkit-overflow-scrolling:touch; margin-top:12px;}
+.naplo-table{
+  width:100%; border-collapse:separate; border-spacing:0;
+  min-width:720px; /* marad áttekinthető nagyobb kijelzőn is */
+  background:#fff; border-radius:12px; overflow:hidden;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+  font-size: clamp(13px, 3.4vw, 15px);
+}
+.naplo-table th, .naplo-table td{
+  padding:10px 12px; text-align:center; white-space:nowrap;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.naplo-table thead th{
+  background:#f3f6fb; color:#14374f; font-weight:800;
+}
+.naplo-table thead tr:first-child th{
+  background:#e9f0fb; /* felső fejléccsík */
+}
+.naplo-table tbody tr:nth-child(even){ background:rgba(0,0,0,.02); }
+.naplo-left{ text-align:center; font-weight:600; white-space:normal; }
+
+/* Mobilbarát „kártyás” nézet  ≤ 640px */
+@media (max-width:640px){
+  .naplo-table{min-width:0; border-radius:10px;}
+  .naplo-table thead{display:none;}
+  .naplo-table, .naplo-table tbody, .naplo-table tr, .naplo-table td{display:block; width:100%}
+  .naplo-table tr{background:#fff; margin:10px 0; border-radius:10px; box-shadow:0 6px 16px rgba(0,0,0,.08); padding:8px 0;}
+  .naplo-table td{
+    display:grid; grid-template-columns: 1fr 1fr; gap:8px;
+    border:none; padding:8px 12px; white-space:normal; text-align:right;
+  }
+  .naplo-table td::before{
+    content: attr(data-label);
+    text-align:center; font-weight:700; color:#14374f;
+  }
+  .naplo-table td.naplo-month{
+    grid-template-columns: 1fr; text-align:left; font-weight:800; color:#1a4c6b;
+    border-bottom:1px dashed rgba(0,0,0,.12); margin-bottom:4px;
+  }
+}
+
+.color {
+  color: green;
+}
+.color2 {
+  color: red;
+}
+  .responsive-img {
+    width: 100%;      /* mindig a képernyő teljes szélessége */
+    height: auto;     /* magasság arányosan változik */
+    display: block;   /* ne maradjon körülötte üres hely */
+  }
+  </style>
+</head>
+<body>
+
+  <!-- Bezárás -->
+  <a class="close" href="akciok.html" aria-label="Bezárás és vissza az akciok.html oldalra">Bezárás ✕</a>
+<div style="text-align: justify;">
+  <main class="wrap">
+    <article class="card" aria-labelledby="cim">
+      <div class="subtitle">Játékszabályzat</div>
+      <h1 id="cim">Sok kicsi sokra megy</h1>
+
+      <section aria-labelledby="c1">
+        <h4> A játék már elindult, de <a href="https://docs.google.com/forms/d/e/1FAIpQLSfFbeMBA9uWFOXbd6H_kyRKpDnkcJGvnsT8GhtpbmYJNFG0_w/viewform?usp=dialog">ide kattintva</a> csatlakozhatsz bátran a játékhoz bármikor! :)</h4></i>
+        <h2 id="c1">1. A játék célja</h2>
+        <p>A <em>Sok kicsi sokra megy</em> program célja, hogy a család közösen, játékos és motiváló módon gyűjtse össze a nyaraláshoz szükséges összeget. A játék során minden résztvevő napi, heti és végső vállalásokat teljesít, amelyekhez bónuszjóváírás és közös fődíj kapcsolódik. <br> A játék időtartama: <br><strong>2025. október 01. – 2026. június 05.</strong></p>
+      </section>
+
+      <section aria-labelledby="c2">
+        <h2 id="c2">2. Résztvevők</h2>
+        <ul>
+          <li>A játékban összesen <strong>3 fő</strong> vesz részt.</li>
+          <li>Mindhárom fő vállalja a napi, heti vagy havi befizetéseket.</li>
+          <li>Ha valaki <strong> a játék közben kilép vagy nem csatlakozik a játékhoz</strong> akkor főnyeremény <strong>elévül</strong>, és <strong>nem kerül kiosztásra</strong>.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="c3">
+        <h2 id="c3">3. Jelentkezés és visszalépés</h2>
+        <ul>
+          <li>A játékban való részvételhez <strong>jelentkezni kell egy megadott űrlap kitöltésével</strong>.</li>
+          <li>A jelentkezéssel minden résztvevő elfogadja a jelen játékszabályzatot.</li>
+          <li><strong>A játékból való visszalépésre a játék indulásától számított öt hónap elteltével van lehetőség a hónap 05.-ig napjáig. </strong> <br> <i> (Visszalépési lehetőség: 2026.02.01. – 2026.02.05.)</i></li>
+          <li>A visszalépési űrlap a szabályok értelmében <strong>az ötödik hónaptól érhető el a weboldalon a játékszabályzatban a lap alján.  </strong> </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="c4">
+        <h2 id="c4">4. Befizetés szabályai</h2>
+        <ul>
+          <li>Minden résztvevő <strong>naponta 535 Ft-ot</strong> gyűjt a saját <strong>Perselyszámláján</strong>.</li>
+          <li>Ez heti bontásban <strong>3.750 Ft</strong>, havi bontásban <strong>15.000 Ft</strong>.</li>
+          <li>A befizetéseket lehet teljesíteni <strong>heti rendszerességgel (3.750 Ft)</strong> vagy egy összegben <strong>a hónap elején (15.000 Ft)</strong>.</li>
+          <li>A befizetések rögzítése ezen a <strong>weboldalon</strong> történik, amelyet <strong>a következő hónap 05. napjáig</strong> kell vezetni és lezárni.</li>
+          <li><strong>Kihagyott nap, hét vagy hónap esetében a befizetések a következő hónapban pótolhatóak.</strong></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="c5">
+        <h2 id="c5">5. Heti bónusz szabályai</h2>
+        <p>Minden résztvevő, aki az adott héten teljesítette befizetéseit, <strong>+150 Ft jóváírást</strong> kap a saját <strong>Perselyszámlájára</strong>. A bónuszjóváírásokat a rendszer automatikusan rögzíti a weboldalon.</p>
+      </section>
+
+        <section aria-labelledby="c51">
+        <h2 id="c51"> 5.1 Extra bónusz</h2>
+        <p>Aki <b>3 alkalommal (3x)</b> megduplázza a havi befizetését annak <b>5000 – Ft </b>bónusz jár. <br>
+
+      </section>
+
+
+    
+
+
+      <section aria-labelledby="c6">
+        <h2 id="c6">6. Főnyeremény szabályai</h2>
+        <ul>
+          <li>A program végén <strong>2026. június 05-én</strong> a gyűjtés lezárul, és a teljesítést ellenőrizzük.</li>
+          <li>Ha <strong>minden résztvevő maradéktalanul teljesítette a befizetéseket és nem lépett ki senki a játék közben</strong>, akkor a család közös főnyereményben részesül.</li>
+          <li><strong>Főnyeremény:</strong> A nyaralás alatt <strong>egy fakultatív programhoz való hozzájárulás 25.000 Ft értékben.</strong>.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="c7">
+        <h2 id="c7">7. Ellenőrzés és átláthatóság</h2>
+        <p>A Perselyszámlák állását és a befizetések rögzítését <strong>havi szinten</strong> vezetjük. A heti bónuszok jóváírása is <strong>havi szinten a következő hónap 05. napjáig</strong> kerül összesítésre a weboldalon.</p>
+      </section>
+
+      <section aria-labelledby="c8">
+        <h2 id="c8">8. Záró rendelkezések</h2>
+        <p>A szabályzat keretet ad a folyamathoz. A szabályzat <strong>2025. október 03. (péntek) 23:59-ig közösen módosítható.</strong>.</p>
+        <p>A játékban való részvételhez javasoljuk a saját <strong>Mobilalkalmazás</strong> segítségével a saját <strong>Perselyszámlára</strong> beállítani a rendszeres átvezetést:
+          <br>– heti <strong>3.750 Ft</strong>, vagy
+          <br>– havi <strong>15.000 Ft</strong> a hónap elején.
+          <br>- Júniusban <strong>csak havi befizetésre van lehetőség </strong>a hónap 05. napjáig.
+        <p>A havi megtakarítási tranzakciókról szóló bizonylatot <strong>minden hónap 05.-ig napjáig szükséges elküldeni emailben.</strong></p>
+       
+      </p>
+<!--
+      <img src="KÜLFÖLD.jpg" alt="Külföld" height="150px" width="500px" style="text-align: center;" class="responsive-img"> <br><br>
+      <img src="orszagok.jpg" alt="Külföld" height="150px" width="500px" style="text-align: center;" class="responsive-img"> <br><br>
+-->
+        <span>------------------ <br><b><i>A játékszabályzatot <a href="https://drive.google.com/file/d/1eo1BTQfwFcKFpT222E-JaShCrwAmDlFt/view?usp=sharing">ide kattintva</a> is eléred PDF formátumban!</i></b></span>
+<br> <b><i>2025. szeptember 28. </i></b> 
+
+      </section>
+
+      <!-- Alsó CTA + kép 
+      <div class="cta-area">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfFbeMBA9uWFOXbd6H_kyRKpDnkcJGvnsT8GhtpbmYJNFG0_w/viewform?usp=dialog" class="cta">Jelentkezz a játékra</a>
+          <div class="cta-area cta2">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdPlI9Gjv_Acx8LDHpGLnHBKLNgpmgW9yWsAtmzxp6-XEDwXw/viewform?usp=dialog" class="cta2"><button>Visszalépési nyilatkozat</button></a>
+        -->
+        <!-- A kép forrását cseréld a sajátodra -->
+        <img class="bottom-img" src="repulomalac.jpg" alt="Repülőmalac"> <br> <span style="display:block; text-align:center !important;">Röfi, a repülőmalac :)</span>
+
+    </article>
+  </main>
+  </div>
+
+</body>
+</html>

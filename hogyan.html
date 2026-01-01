@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Persely – Mobilbankos útmutató</title>
+  <meta name="description" content="Általános útmutató a mobilbank Persely (megtakarítási zseb) használatához havi átvezetéssel és vásárlások utáni felkerekítéssel." />
+  <style>
+:root {
+  --bg: #fffccf;   /* világos pasztell sárga háttér */
+  --card: #ffffff; /* fehér kártya */
+  --card-alt: #fdf5cc; /* halvány sárgás árnyalat */
+  --text: #222222; /* sötét szöveg */
+  --muted: #555555; /* halványszürke szöveg */
+  --accent: #0077cc; /* kék kiemelés */
+  --border: #ddddaa; /* finom szegély */
+}
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";line-height:1.55}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .topbar{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(15,23,42,.9),rgba(15,23,42,.6));backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
+    .topbar-inner{max-width:920px;margin:0 auto;display:flex;align-items:center;justify-content:flex-end;padding:.75rem 1rem}
+    .close-link{font-weight:600;border:1px solid var(--border);padding:.5rem .75rem;border-radius:.75rem;display:inline-flex;gap:.5rem;align-items:center}
+    .close-link:after{content:"✕";font-size:.95rem;opacity:.8}
+
+    .page{max-width:920px;margin:0 auto;padding:1.25rem}
+
+    .hero{margin:1.25rem 0 1.5rem;background:radial-gradient(1200px 400px at 10% -10%, rgba(34,211,238,.15), transparent 50%);}
+    .hero h1{font-size:clamp(1.5rem,3.5vw,2.25rem);margin:.25rem 0 .5rem;letter-spacing:.2px}
+    .hero p{color:var(--muted);margin:0}
+
+    .section{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem 1.1rem;margin:1rem 0;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .section.alt{background:var(--card-alt)}
+    .section h2{font-size:clamp(1.1rem,2.6vw,1.35rem);margin:.25rem 0 .75rem}
+    .section h3{font-size:1.05rem;margin:.75rem 0 .25rem}
+    .section hr{border:none;border-top:1px dashed var(--border);margin:.9rem 0}
+    .badge{display:inline-block;padding:.25rem .55rem;border-radius:.5rem;border:1px solid var(--border);background:rgba(34,211,238,.08);color:var(--accent);font-size:.8rem;font-weight:600}
+
+    ul{margin:.25rem 0 .75rem;padding-left:1.15rem}
+    li{margin:.35rem 0}
+    .hint{color:var(--muted);font-size:.95rem}
+
+    .example{border-left:3px solid var(--accent);padding:.65rem .9rem;background:rgba(34,211,238,.05);border-radius:.5rem}
+
+    .image-container{margin-top:1.5rem;text-align:center}
+    .image-container img{max-width:100%;height:auto;border-radius:.75rem;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+
+    @media (max-width:520px){
+      .section{padding:.9rem .85rem}
+      .topbar-inner{padding:.6rem .8rem}
+      .close-link{padding:.45rem .65rem}
+      .hero h1{letter-spacing:.1px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar" role="navigation" aria-label="Felső sáv">
+    <div class="topbar-inner">
+      <a class="close-link" href="befizetesek.html" title="Bezárás">Bezárás</a>
+    </div>
+  </div>
+
+  <main class="page">
+    <header class="hero" role="banner">
+      <span class="badge">Útmutató</span>
+      <h1>Persely – Mobilbankos használati útmutató</h1>
+      <p>Általános leírás havi átvezetéssel és vásárlások utáni felkerekítéssel. Célmintánk: <strong>„VakációVágyó 2026”</strong> </p>
+    </header>
+
+    <section class="section" aria-labelledby="mi-a-persely">
+      <h2 id="mi-a-persely">1) Mi az a Persely?</h2>
+      <ul>
+        <li>A Persely (megtakarítási zseb) egy <strong>virtuális elkülönítés</strong> a folyószámlán belül.</li>
+        <li>Önálló célokhoz használható (pl. <em>VakációVágyó 2026 – nyaralás</em>).</li>
+        <li>Nem külön számla, hanem a fő számlád része – csak vizuálisan elkülönítve.</li>
+      </ul>
+    </section>
+
+    <section class="section alt" aria-labelledby="letrehozas">
+      <h2 id="letrehozas">2) Persely létrehozása</h2>
+      <ol>
+        <li>Nyisd meg a mobilbank alkalmazást.</li>
+        <li>Keresd: <strong>Persely / Megtakarítási zseb</strong>.</li>
+        <li>Adj meg adatokat:
+          <ul>
+            <li><strong>Név:</strong> „VakációVágyó 2026”</li>
+            <li><strong>Cél:</strong> „Nyaralásra gyűjtünk.”</li>
+            <li><strong>Opcionális célösszeg/időpont:</strong> pl. 340 000 Ft 2026 nyaráig.</li>
+          </ul>
+        </li>
+        <li>Erősítsd meg a létrehozást.</li>
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="atvezetes">
+      <h2 id="atvezetes">3) Pénz átvezetése a Perselybe</h2>
+      <h3>a) Manuális átvezetés</h3>
+      <ul>
+        <li>Bármikor indítható egyszeri átvezetés a fő számláról a Perselybe.</li>
+      </ul>
+      <hr />
+      <h3>b) Havi automatikus átvezetés</h3>
+      <ul>
+        <li>Beállítható közvetlenül a Perselynél <em>vagy</em> „Állandó átutalás / Rendszeres megbízás” formájában.</li>
+        <li>Általános mezők:
+          <ul>
+            <li><strong>Összeg:</strong> pl. 10 000 Ft</li>
+            <li><strong>Gyakoriság:</strong> havonta</li>
+            <li><strong>Nap:</strong> pl. minden hónap 5-én</li>
+          </ul>
+        </li>
+      </ul>
+      <div class="example" aria-label="Példa havi átvezetéssel">
+        <strong>Példa:</strong> havi 10 000 Ft januártól → júniusra <strong>60 000 Ft</strong>.
+      </div>
+    </section>
+
+    <section class="section alt" aria-labelledby="felkerekites">
+      <h2 id="felkerekites">4) Vásárlások utáni felkerekítés (ha elérhető)</h2>
+      <p class="hint">Több banknál elérhető „aprópénz gyűjtés” néven.</p>
+      <ul>
+        <li>Minden kártyás vásárlás után az összeg <strong>felkerekítésre kerül</strong>, a különbözet automatikusan a Perselybe megy.</li>
+        <li>Beállítás: Persely &rarr; <em>Automatikus feltöltés vásárlások után / Felkerekítés</em> &rarr; kerekítési lépcső (100 / 500 / 1 000 Ft).</li>
+      </ul>
+      <div class="example" aria-label="Kerekítési példák">
+        <ul>
+          <li>1 240 Ft vásárlás, 100 Ft-os kerekítés → 1 300 Ft terhelés, <strong>60 Ft</strong> a Perselybe.</li>
+          <li>5 990 Ft vásárlás, 1 000 Ft-os kerekítés → 6 000 Ft terhelés, <strong>10 Ft</strong> a Perselybe.</li>
+        </ul>
+      </div>
+      <p class="hint">A havi átvezetés és a felkerekítés <strong>együtt is használható</strong> a gyorsabb céleléréshez.</p>
+    </section>
+
+    <section class="section" aria-labelledby="kovetes">
+      <h2 id="kovetes">5) Követés és felhasználás</h2>
+      <ul>
+        <li>A mobilbankban külön látható a Persely egyenlege; a fő számláról a beállított napokon automatikus az átvezetés.</li>
+        <li>A Persely rugalmas: a pénz <strong>bármikor visszatehető</strong> a fő számlára, majd szabadon elkölthető.</li>
+      </ul>
+    </section>
+
+    <section class="section alt" aria-labelledby="osszefoglalo">
+      <h2 id="osszefoglalo">Összefoglaló</h2>
+      <ul>
+        <li><strong>Hozz létre</strong> egy Perselyt (pl. „VakációVágyó 2026 – nyaralás”).</li>
+        <li><strong>Töltsd</strong> manuálisan, vagy <strong>állíts be</strong> havi automatikus átvezetést.</li>
+        <li><strong>Használd</strong> a vásárlások utáni felkerekítést, ha elérhető.</li>
+        <li><strong>Kövesd</strong> a gyarapodást, és amikor kell, <strong>vedd vissza</strong> a fő számlára.</li>
+      </ul>
+    </section>
+
+    <footer class="section" aria-label="Jogi megjegyzés">
+      <p class="hint">Megjegyzés: Az elnevezések és menüpontok bankonként kis mértékben eltérhetnek, a fenti lépések általánosíthatók.</p>
+    </footer>
+
+    <!-- Kép blokk a végén -->
+    <div class="image-container">
+      <img src="repulomalac.jpg" alt="Persely illusztráció – VakációVágyó 2026 nyaralás" /> <br>
+      Röfi, a repülőmalac! :)
+    </div>
+  </main>
+</body>
+</html>

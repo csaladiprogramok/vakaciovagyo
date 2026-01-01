@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akciók</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: grey;
+      color: #333;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 2em;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a.logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: yellowgreen;
+    }
+
+    .menu {
+      display: flex;
+      gap: 1em;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: #333;
+      margin: 4px;
+      border-radius: 2px;
+    }
+
+    @media(max-width:768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* TARTALOM */
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1em;
+      color: #222;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.2em;
+    }
+
+    .card-title {
+      margin: 0 0 .5em;
+      font-size: 1.3rem;
+      color: yellowgreen;
+    }
+
+    .card-text {
+      margin: 0 0 1em;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: .6em 1.2em;
+      background: yellowgreen;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .btn:hover {
+      background: #6fa72d;
+    }
+
+    button {
+      background-color: #22c55e;
+      /* zöld háttér */
+      color: #fff;
+      /* fehér szöveg */
+      border: none;
+      padding: 10px 16px;
+      border-radius: 9999px;
+      /* teljesen lekerekített */
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color .2s ease;
+    }
+
+    button:hover {
+      background-color: #16a34a;
+      /* sötétebb zöld hover-re */
+    }
+
+    button:focus {
+      outline: 2px solid #bbf7d0;
+      /* halvány zöld fókuszkeret */
+      outline-offset: 2px;
+    }
+
+    footer {
+
+      text-align: center;
+      padding: 15px;
+
+    }
+
+    footer h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      background: #f1f1f1;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    .close-btn:hover {
+      background: #ff4d4d;
+      color: white;
+      border-color: #ff1a1a;
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="akciok.html" class="close-btn">×</a>
+
+  <!-- EGY KÁRTYA -->
+  <main class="container">
+    <h1>ARCHÍV AKCIÓK</h1>
+
+
+
+    <article class="card">
+      <img src="akcio_szuperlotto_lezart.jpg" alt="Akció">
+      <div class="card-body">
+        <h3 class="card-title" style="color: green;"> Húú, ebből sok nyaralásra elmehetnénk!</h3>
+         <p style="color: red;"><b><i>A játék jelentkezők hiánya miatt megszüntetve!</i></b></p>
+        <p class="card-text"> <b>Promóciós időszak: <br> 2025. december 28. - 2026. február 05.</b></p>           
+        <p><b>Sorsolás - Szerencsejáték Zrt. <br> 2026.01.01. 0:20</b></p>
+        <p> Tegyél félre összesen <b>legalább 15.000 Ft-ot</b> (azaz 7.500 - Ft , 7.500 - Ft) összegű megtakarítást <b>2026. január és február hónapban </b> és cserébe bónuszként jogosult leszel egy
+<b>9 mezős Szilveszteri Szuperlottó szelvényre, </b>  3600 Ft értékben! <br><br>
+       </div> </article> <br>
+    <article class="card">
+      <img src="akcioknyerjcsekkolj.jpg" alt="Akció">
+      <div class="card-body">
+        <h3 class="card-title" style="color: red;"> Nyerj, és csekkolj ki a télből!</h3>
+        <p class="card-text"> <b>JÁTÉKSZERVEZŐ:<br> 7days HU</b></p>
+        <p class="card-text"> <b>Promóciós időszak: <br> 2025. október 06. - 2025. november 30.</b></p>
+
+        <p class="card-text" style="text-align: justify;"> A VakációVágyó 2026 kiegészítő akció keretében annak a
+          felhasználónak aki összegyűjt legalább <span style="color: red;"><b><i>20 db blokkot, akkor 4000 - Ft
+              </i></b></span> bónuszt ír jóvá a felhasználó Perselyébe! </p>
+        <p class="card-text"> <b>Erről bővebben <a
+              href="https://drive.google.com/file/d/1rryYoVr3c1okkjlAftWq41vBFZOZQcPd/view?usp=sharing"><i>ide
+                kattintva</i></a> olvashatsz!</b></p>
+
+        <p class="card-text"> <b><i>Blokkszámláló:</i> </b> <br> Orosz Szilvia blokkjainak száma:  <b>3 db </b><br>Orosz
+          Sándor blokkjainak száma: <b>8 db</b> <br>Orosz Kristóf blokkjainak száma: <b>10 db</b></i><br><b>Összesen: 21
+            db</b></p>
+        <p class="card-text"><b><i>A blokkszámlálót minden vasárnap 20:00-kor frissítjük!</i></b> <br><i>Utolsó
+            frissítés: 2025.11.30. 20:00 <br><b style="color: red;">LEZÁRVA: 2025. november 30.-án!</b></i></p>
+        <a href="https://7dayspromo.hu/"><button>IRÁNY A JÁTÉK WEBOLDALA</button></a>
+      </div>
+    </article> <br>
+ 
+  <article class="card">
+      <img src="lezart3.jpg" alt="Akció">
+      <div class="card-body">
+        <h3 class="card-title">Röfi kereső játék! - HALOWEEN</h3>
+        <p class="card-text"> <b>Promóciós időszak: <br> 2025.10.27. - 2025.11.03. 22:00</b></p>
+        <p class="card-text"> <b>Röfit az alábbi menüpontok alatt találhatod meg: </b> <br>
+          <i>- Számláló / Befizetések / Éld újra / Akciók / Rangom / Információk / Továbbiak</i>
+        </p>
+        <p><b><i>A játékszabályzatot <a
+                href="https://drive.google.com/file/d/1eMWqspbH8X-EDkOsVq3L6e9eFSH4lZlM/view?usp=sharing">ide
+                kattintva</a> éred el!</p></i></b>
+        <p><b><i>JÓ KERESÉST!</i></b></p>
+      </div>
+    </article> <br>
+
+    <article class="card">
+      <img src="lezárt2.jpg" alt="Akció">
+      <div class="card-body">
+        <h3 class="card-title"> Tudtad? Lemondok a tartozásod egy részéről!</h3>
+        <p class="card-text"> <b> Annak egy részét félreteszem a saját perselyszámlámra a nyaralási alapba!
+          </b></p>
+        <p><b><i>A játékszabályzatot <a
+                href="https://drive.google.com/file/d/1_IFT5lJbY7-yewXKbQ0572Y9n6eK32TV/view?usp=sharing">ide
+                kattintva</a> éred el!</p></i></b>
+        </b>Hiszen sok kicsi sokra megy! <br> <br> <i>Érvényes: Visszavonásig</i></p>
+      </div>
+    </article><br>
+
+
+    <article class="card">
+      <img src="lezárt1.jpg" alt="Akció">
+      <div class="card-body">
+        <h3 class="card-title"> Rakj félre egy kis aprót az extra bónuszért!</h3>
+        <p class="card-text"> <span style="color: black"><b>Ha 2025.09.30.-ig félreraksz legalább 10.000- Ft-ot, akkor
+              most extra 5.000- Ft -ot írunk jóvá a nyaralási alapba! </b> <br> Forrás: Fillérfaló - Orosz Kristóf <br>
+            <p><b><i>A játékszabályzatot <a
+                    href="https://drive.google.com/file/d/1nLXXotgucC8YH5Xrd5QXdX9u_WLg8Wm6/view?usp=sharing">ide
+                    kattintva</a> éred el!</p></i></b>
+            Megj.: Az akció más akciókkal nem összevonható és O.Kristófnak nem jár bónusz. <br><br> <i>Érvényes: 2025.
+              szeptember 30.-ig</i></p>
+
+      </div>
+    </article> <br>
+
+
+  </main>
+
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+  </script>
+</body>
+
+</html>

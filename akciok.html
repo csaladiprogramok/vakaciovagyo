@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akciók</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fefcc8;
+      /* ugyanaz a háttér mindkettőn */
+      min-height: 100dvh;
+      /* teljes mobilnézet lefedése */
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fefcc8;
+      color: #333;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 2em;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a.logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: yellowgreen;
+    }
+
+    .menu {
+      display: flex;
+      gap: 1em;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: #333;
+      margin: 4px;
+      border-radius: 2px;
+    }
+
+    @media(max-width:768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* TARTALOM */
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1em;
+      color: #222;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.2em;
+    }
+
+    .card-title {
+      margin: 0 0 .5em;
+      font-size: 1.3rem;
+      color: yellowgreen;
+    }
+
+    .card-text {
+      margin: 0 0 1em;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: .6em 1.2em;
+      background: yellowgreen;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .btn:hover {
+      background: #6fa72d;
+    }
+
+    button {
+      background-color: #22c55e;
+      /* zöld háttér */
+      color: #fff;
+      /* fehér szöveg */
+      border: none;
+      padding: 10px 16px;
+      border-radius: 9999px;
+      /* teljesen lekerekített */
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color .2s ease;
+    }
+
+    button:hover {
+      background-color: #16a34a;
+      /* sötétebb zöld hover-re */
+    }
+
+    button:focus {
+      outline: 2px solid #bbf7d0;
+      /* halvány zöld fókuszkeret */
+      outline-offset: 2px;
+    }
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 10px;
+      
+    }
+
+    footer a {
+      text-decoration: none;
+      color: #007bff; /* link színe */
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <a href="index.html" class="logo">VakációVágyó 2026</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="menu" id="navMenu">
+      <a href="szamlalo.html">Számláló</a>
+      <a href="befizetesek.html">Befizetések</a>
+      <a href="eldujra.html">Éld újra</a>
+      <a href="akciok.html">Akciók</a>
+      <a href="rangom.html">Rangom</a>
+      <a href="tudnivalok.html">Információk</a>
+      <a href="tovabbiak.html">Továbbiak</a>
+      <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/fooldal"><i style="color: red;">Kilépés</i></a>
+    </div>
+  </div>
+
+
+  <main class="container">
+    <h1>KIEMELT AKCIÓK</h1>
+
+    <article class="card">
+      <img src="sksmakcio.jpg" alt="Akció">
+      <div class="card-body">
+        <h3 class="card-title"> Sok kicsi, sokra megy! </h3>
+        <p class="card-text"> <b>Promóciós időszak: <br> 2025. október 01. - 2026. június 05.</b></p>
+        <p><b><i>A játékszabályzatot <a href="sksm.html">ide kattintva</a> éred el!</p></i></b>
+        <a href="teljesitesinaplo.html"><button>MEGNÉZEM A TELJESÍTÉSI NAPLÓT </button></a>
+      </div>
+    </article> <br>
+
+
+
+
+  <!-- EGY KÁRTYA -->
+
+    <h1>AKCIÓK</h1>
+
+    
+
+    <p style="text-align: center;"><b><i>Jelenleg nincs rendelkezésre álló akciónk. Tekintsd meg a kiemelt
+          ajánlatunkat!</i></b></p>
+    <br>
+
+
+      </main>
+  <footer>
+    <a href="archivakciok.html">
+      <h3 style="font-size: 15px;"><b><i>Archív akciók</i></b></h3>
+    </a>
+
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+  </script>
+</body>
+
+</html>
+

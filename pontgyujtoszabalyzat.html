@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pontgyűjtő Rendszer - Játékszabályzat</title>
+  <style>
+  /* --- Alap táblázat --- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    display: table;           /* desktopon normál tábla */
+    font-size: 1rem;          /* alap betűméret */
+  }
+
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+    word-break: keep-all;
+    white-space: nowrap;      /* segít a görgethetőségnél mobilon */
+  }
+
+  table th {
+    background: #ffcc66;
+  }
+
+  table tr:nth-child(even) {
+    background: #f9f9f9;
+  }
+
+  /* --- Mobilbarát táblázat --- */
+  @media (max-width: 600px) {
+    table {
+      display: block;              /* görgethető blokk */
+      overflow-x: auto;            /* vízszintes görgetés */
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+      font-size: 0.85rem;          /* kisebb betűk mobilon */
+    }
+    table th, table td {
+      padding: 6px 8px;            /* kisebb cellaméret */
+    }
+  }
+
+  @media (max-width: 200px) {
+    table {
+      font-size: 0.4rem;          /* még kisebb betű mobilon */
+    }
+    table th, table td {
+      padding: 5px 6px;
+    }
+  }
+</style>
+
+  <style>
+  
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #fefcc8;
+      color: #333;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    header {
+      padding: 1rem;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #333;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: #ff4444;
+      color: white;
+      border: none;
+      padding: 10px 16px;       /* kicsit nagyobb érintési felület */
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      text-decoration: none;
+      line-height: 1;
+      touch-action: manipulation;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      text-align: justify;
+    }
+
+    h2 {
+      color: #444;
+      margin-top: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      display: table;           /* desktopon normál tábla */
+    }
+
+    .kozep {
+  display: block;       /* alapból az <img> inline elem, így nem lehet margóval középre rakni */
+  margin-left: auto;    /* bal margó automatikusan számolódik */
+  margin-right: auto;   /* jobb margó automatikusan számolódik */
+  max-width: 100%;      /* mobilbarát */
+  height: auto;         /* arányosan méretezve */
+}
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      vertical-align: middle;
+      word-break: keep-all;
+      white-space: nowrap;      /* segít a görgethetőségnél mobilon */
+    }
+
+    table th {
+      background: #ffcc66;
+    }
+
+    table tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .important {
+      background: #fff8e1;
+      padding: 10px;
+      border-left: 4px solid #ff9800;
+      margin-top: 1rem;
+    }
+
+    .centered-image {
+      display: block;        /* blokkszintű elem legyen */
+      margin: 1rem auto;     /* automatikus margó = középre igazítás */
+      max-width: 90%;        /* mobilon ne lógjon túl */
+      height: auto;          /* arányosan méretezve */
+      text-align: center;
+    }
+
+    /* 🔧 Mobilbarát képek (globálisan minden img-re) */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* --- Mobilbarát kiegészítések --- */
+    @media (max-width: 300px) {
+      header { padding: 0.8rem 0.75rem; }
+      .container {
+        margin: 1rem auto;
+        padding: 0.75rem;
+      }
+      header h1 { font-size: 1.4rem; }
+      h1 { font-size: clamp(1.25rem, 2.5vw + 1rem, 1.75rem); }
+      h2 { font-size: clamp(1.05rem, 2vw + 0.75rem, 1.3rem); }
+      body { font-size: 0.98rem; }
+
+      .close-btn {
+        top: 8px;
+        right: 10px;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+      }
+
+      /* Tábla vízszintes görgetéssel – wrapper nélkül is működik */
+      table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;      /* középre igazítja */
+        overflow-x: auto;             /* ha kell, görgethető */
+        -webkit-overflow-scrolling: touch;
+      }
+      table th, table td {
+        padding: 10px 12px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container { padding: 0.75rem 0.6rem; }
+      .close-btn {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        border-radius: 6px;
+      }
+      ul { padding-left: 1.1rem; }
+    }
+
+    .img1{
+      width: 90%;
+      max-width: 700px;
+      height: auto;
+      display: block;
+      margin: 2em auto;
+    }
+
+    .img2 {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="rangom.html" class="close-btn">Bezárás ✖</a>
+  </header>
+
+  <div class="container">
+    <h1>JÁTÉKSZABÁLYZAT</h1>
+    <h1>VakációVágyó Pontgyűjtő Rendszer</h1>
+    
+    <p>A VakációVágyó weboldal pontgyűjtő rendszere lehetőséget biztosít a felhasználók számára, hogy befizetéseik után pontokat szerezzenek, és ezek alapján különböző rangokat, valamint vásárlási utalványokat érjenek el.</p>
+
+    <div style="text-align: center;" class="img1 img2"><img src="ötegypont.jpg" alt="Pontrendszer" height="150px" width="600px"></div>
+    <h2>1. A pontgyűjtés alapelvei</h2>
+    <ul>
+      <li>Minden befizetett <strong>5000 Ft után 1 pont</strong> kerül jóváírásra a felhasználó pontszámláján.</li>
+      <li>A pontok számítása a befizetett összeg alapján automatikusan történik, kerekítési eltérés nélkül.</li>
+      <li>A maximálisan elérhető pontszám: <strong>68 pont</strong>.</li>
+    </ul>
+
+    <h2>2. Rangok és vásárlási utalványok</h2>
+    <p>A megszerzett pontok alapján a felhasználók különböző rangokat érhetnek el. A rang elérésekor a rendszer automatikusan <strong>vásárlási utalványt utal át a játékos bankszámlájára</strong>.</p>
+
+    <table>
+      <tr>
+        <th>Rang</th>
+        <th>Ponthatár</th>
+        <th>Vásárlási <br> utalvány</th>
+      </tr>
+      <tr>
+        <td>Hátizsákos utazó</td>
+        <td>0–14 pont</td>
+        <td>–</td>
+      </tr>
+      <tr>
+        <td>Kalandor</td>
+        <td>15–39 pont</td>
+        <td>1000 Ft</td>
+      </tr>
+      <tr>
+        <td>Vakáció Mester</td>
+        <td>40–61 pont</td>
+        <td>3000 Ft</td>
+      </tr>
+      <tr>
+        <td>Horizontkutató</td>
+        <td>62–68 pont</td>
+        <td>5000 Ft</td>
+      </tr>
+    </table>
+
+    <div class="important">
+      <p><strong>Fontos:</strong></p>
+      <ul>
+        <li>Az utalvány a rang elérésekor automatikusan utalásra kerül a játékos bankszámlájára.</li>
+        <li>Az utalvány készpénznek minősül, ezért szabadon, bármire és bármikor felhasználható.</li>
+        <li>Az utalványoknak nincs lejárati ideje.</li>
+      </ul>
+    </div>
+
+    <h2>3. A pontok és rangok nyilvántartása</h2>
+    <ul>
+      <li>A felhasználó aktuális pontszáma és rangja a VakációVágyó weboldalán ellenőrizhető a <b>Rangom</b> menüpont alatt  <b>a felhasználó születési évének</b> megadásával.</li>
+      <li>A pontok és rangok számítása a befizetések alapján történik.</li>
+    </ul>
+
+    <h2>4. Záró rendelkezések</h2>
+    <ul>
+      <li>A pontgyűjtés <b>nem függ semelyik</b> meghirdetett akciótól sem.</li>
+      <li>A jóváírt bónuszösszegek <b>nem</b> tartoznak a pontggyűjtések közé.</li>
+      <li>Az utalványok utalása minden ranglépés esetén kizárólag egyszer kerül utalásra így összesen egy felhasználó <b>maximum 9.000 - Ft</b> értékben szerezhet utalványt a ranglépései során.</li>
+      <li>Ha <b>elírást tapasztalsz a rangodban, vagy esetleg a pontszámodban, </b>akkor jelezd kérlek azt a <b>vakaciovagyo@gmail.com </b>email címen.</li>
+      <li><b>A rendszerben való részvétel automatikusan a szabályzat elfogadását jelenti.</b></li>
+    </ul>
+<span>------------------ <br><b><i>A játékszabályzatot <a href="https://drive.google.com/file/d/1sOTW_jWKU0rb-TEgBdRr4FCbumxZ9jED/view?usp=sharing">ide kattintva</a> is eléred PDF formátumban!</i></b></span>
+<br> <b><i>2025. szeptember 22. </i></b> 
+</div>
+
+  <div class="centered-image">
+     <img class="bottom-img kozep" src="repulomalac.jpg" alt="Repülőmalac"> <br> Röfi, a repülőmalac :)
+  
+  </div>
+</body>
+</html>

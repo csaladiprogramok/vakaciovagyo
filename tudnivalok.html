@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Információk</title>
+  <link rel="icon" href="kep.png" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fefcc8;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+    }
+
+    /* MENÜSÁV */
+    .navbar {
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 2em;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar a.logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      text-decoration: none;
+      color: yellowgreen;
+    }
+
+    .menu {
+      display: flex;
+      gap: 1em;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 1em;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      margin: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .container {
+      padding: 5vw;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+
+    .faq-section { margin-bottom: 2em; }
+    details { border: 1px solid #ccc; border-radius: 8px; padding: .8em; background: #fff; }
+    details summary { cursor: pointer; font-weight: bold; }
+    details[open] { border-color: yellowgreen; }
+    .answer { margin-top: .5em; color: #555; }
+  </style>
+</head>
+<body>
+
+  <!-- MENÜSÁV -->
+  <div class="navbar">
+    <a href="index.html" class="logo">VakációVágyó 2026</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="menu" id="navMenu">
+      <a href="szamlalo.html">Számláló</a>
+      <a href="befizetesek.html">Befizetések</a>
+      <a href="eldujra.html">Éld újra</a>
+      <a href="akciok.html">Akciók</a>
+      <a href="rangom.html">Rangom</a>
+      <a href="tudnivalok.html">Információk</a>
+      <a href="tovabbiak.html">Továbbiak</a>
+      <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/fooldal"><i style="color: red;">Kilépés</i></a>
+      
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Gyakran Ismételt Kérdések (GYIK)</h1>
+
+    <div class="faq-section">
+      <details>
+        <summary>Mi az a VakációVágyó?</summary>
+        <div class="answer">A VakációVágyó egy közös családi projekt, amely a közös nyaralási célhoz történő apró hozzájárulásokat mutatja be.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Kinek készült az oldal?</summary>
+        <div class="answer">A családunknak, aki szívesen támogat egy közös nyaralási célt akár jelképes összeggel is.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Milyen aloldalak érhetők el?</summary>
+        <div class="answer">A jelenlegi aloldalak: Befizetések, Számláló, Tudnivalók, Éld újra, Akciók és az Információk.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Miért látok „Jelszó szükséges” üzenetet?</summary>
+        <div class="answer">Az oldal bizonyos részei csak meghívottak számára érhetők el, ezért jelszó kérés jelenhet meg.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Hogyan tudok bejelentkezni?</summary>
+        <div class="answer">Nyisd meg a Főoldalt, és kövesd a bejelentkezési utasításokat. Ha nem kaptál belépési adatot, vedd fel a kapcsolatot az oldal gazdájával.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Elfelejtettem a jelszavam – mit tegyek?</summary>
+        <div class="answer">Vedd fel a kapcsolatot az oldal gazdájával a jelszó frissítéséhez. Automatikus visszaállításra nincs lehetőség.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Hogyan működik a „repülőmalac” ötlet?</summary>
+        <div class="answer">A „repülőmalac” a közös cél szimbóluma: minden apró számít. A Befizetések oldalon naplózhatóak a hozzájárulások.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Valódi online fizetés történik az oldalon?</summary>
+        <div class="answer">Nem. Az oldal statikus, ezért nem fogad vagy dolgoz fel bankkártyaadatokat.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Van minimum összeg?</summary>
+        <div class="answer">Nincs kötelező minimum – a mottó szerint: „Sok kicsi, sokra megy!”.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Mit mutat a Számláló oldal?</summary>
+        <div class="answer">A Számláló oldal a cél felé tett előrehaladást jeleníti meg. Összesen 1.000. 000 Ft-os összcélt, amely fejenként 340.000- Ft jelent.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Hogyan lehet módosítani a célt vagy az állást?</summary>
+        <div class="answer">Módosításokat az üzemeltető segítségével lehet végrehajtani.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Mennyi az álomösszeg?</summary>
+        <div class="answer">Az álomösszeg <b>1.000.000 Ft</b>. Ez fejenként körülbelül <b>340.000 Ft</b>-ot jelent három fő esetén.</div>
+      </details>
+    </div>
+    <div class="faq-section">
+      <details>
+        <summary>Mindenkinek kötelező a célt teljesíteni?</summary>
+        <div class="answer"><b>Egyáltalán nem, </b> csak annyit szükséges félretenni Mindenkinek amennyit a pénztárcája megenged, hiszen a mottónk szerint: „Sok kicsi, sokra megy!”.</div>
+      </details>
+    </div>
+  
+    <div class="faq-section">
+      <details>
+        <summary>Milyen adatokat kezel az oldal?</summary>
+        <div class="answer">Az oldal nem gyűjt bankkártyaadatokat és nem fut szerveroldali kód. Az esetleges nevek/összegek csak a tartalomban jelennek meg.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Használ az oldal sütiket (cookie)?</summary>
+        <div class="answer">Alapértelmezetten nem használ követő sütiket. </div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Hol jelezhetem a hibát?</summary>
+        <div class="answer">A <b>vakaciovagyo@gmail.com</b> email címen.</div>
+      </details>
+    </div>
+
+    <div class="faq-section">
+      <details>
+        <summary>Hogyan kérhetek új funkciót?</summary>
+        <div class="answer">Írd le röviden az ötleted, és oszd meg az oldal gazdájával a <b>vakaciovagyo@gmail.com</b> email címen.</div>
+      </details>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

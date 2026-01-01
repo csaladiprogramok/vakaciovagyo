@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Számláló</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fefcc8;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      text-align: center;
+    }
+
+    /* NAVIGÁCIÓS SÁV */
+    .navbar {
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 2em;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar a.logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      text-decoration: none;
+      color: yellowgreen;
+    }
+
+    .menu {
+      display: flex;
+      gap: 1em;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 1em;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      margin: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .container {
+      padding: 5vw;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 6vw;
+      margin-bottom: 1em;
+    }
+
+    p {
+      font-size: 4.5vw;
+      margin-bottom: 2em;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3em;
+      }
+
+      p {
+        font-size: 1.5em;
+      }
+    }
+
+    .counter-box {
+      background-color: #fff;
+      padding: 1.5em;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      display: block;
+      width: 100%;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    .amount {
+      font-size: 6vw;
+      color: yellowgreen;
+      margin: 0.5em 0;
+      font-weight: bold;
+    }
+
+    @media (min-width: 768px) {
+      .amount {
+        font-size: 2.5em;
+      }
+
+      .counter-box {
+        max-width: 400px;
+      }
+    }
+
+    .progress-bar {
+      background-color: #eee;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 20px;
+      margin-top: 20px;
+    }
+
+    .progress {
+      background-color: yellowgreen;
+      height: 100%;
+      width: 0%;
+      transition: width 1s ease-in-out;
+    }
+
+    .button-box {
+      margin-top: 2em;
+    }
+
+    .button-box a {
+      display: inline-block;
+      padding: 1em 2em;
+      font-size: 1.1em;
+      background-color: yellowgreen;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-box a:hover {
+      background-color: #6da06d;
+    }
+
+    .individual-counter {
+      margin-top: 3em;
+    }
+
+    .individual-name {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 0.5em;
+    }
+
+    .individual-amount {
+      margin-bottom: 0.3em;
+    }
+
+    .meret {
+      font-size: 30px;
+    }
+    .individual-amount {
+  margin-top: 0.8em;
+  font-weight: bold; /* kis térköz a perselyszám után */
+}
+
+  </style>
+<style>
+    /* Teljes képernyős, SZÜRKE, ÁTTETSZŐ háttér */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(128, 128, 128, 0.6); /* szürke + áttetsző */
+      z-index: 9999;
+    }
+    .hidden { display: none; }
+
+    /* Tartó */
+    .modal__content {
+      display: grid;
+      place-items: center;
+      padding: 0;
+      background: transparent;
+      max-width: 95vw;
+      max-height: 95vh;
+    }
+
+    /* A kép: max 45×50 cm, mobilon összemegy */
+    .modal__img {
+      width: min(45cm, 90vw);
+      height: min(50cm, 90vh);
+      object-fit: contain;
+      display: block;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    main { padding: 24px; font: 16px/1.5 system-ui, sans-serif; }
+
+.fejlec {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.fejlec img {
+    width: 70vw;        /* kisebb mobilon */
+    max-width: 600px;   /* asztali gépen is kisebb */
+    height: auto;       /* arány megtartása */
+}
+
+
+  </style>
+</head>
+<body>
+
+   <!-- MODAL: automatikusan nyitjuk betöltéskor -->
+  <div class="modal" id="imgModal" role="dialog" aria-modal="true" aria-label="Kép megnyitva">
+    <div class="modal__content">
+      <img
+        id="modalImage"
+        class="modal__img"
+        src="tudtad.jpg"
+        alt="Megnyitott kép – kattints a bezáráshoz"
+      />
+    </div>
+  </div>
+
+  <!-- MENÜSÁV -->
+  <div class="navbar">
+    <a href="index.html" class="logo">VakációVágyó 2026</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="menu" id="navMenu">
+      <a href="szamlalo.html">Számláló</a>
+      <a href="befizetesek.html">Befizetések</a>
+      <a href="eldujra.html">Éld újra</a>
+      <a href="akciok.html">Akciók</a>
+      <a href="rangom.html">Rangom</a>
+      <a href="tudnivalok.html">Információk</a>
+      <a href="tovabbiak.html">Továbbiak</a>
+      <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/fooldal"><i style="color: red;">Kilépés</i></a>
+    </div>
+  </div>
+  <div class="container">
+    <h1>VakációVágyó <br>2026</h1>
+    <p><b><i>Álomgyűjtés alakulása az <br> <span class="meret"><b><u> 1.000.000 Ft</u></b> </span><br>cél felé.</i></b></p>
+
+    <!-- Összesített számláló -->
+    <div class="counter-box">
+      <div class="amount" id="currentAmount">0 Ft</div>
+      <!-- ÚJ: Befizetett + félretett / cél -->
+      <div id="totalVsGoal" aria-live="polite"></div>
+      <!-- ÚJ: százalék -->
+      <div id="totalPercent" aria-live="polite"></div>
+
+      <div class="progress-bar">
+        <div class="progress" id="progressBar"></div>
+      </div>
+    </div>
+
+    <!-- Egyéni számlálók -->
+    <div class="individual-counter">
+      <div class="individual-name">Orosz Sándor</div>
+      <!-- ÚJ: Persely adatok -->
+      <div>Perselyszámlanév: <br><span id="sandorAccountName"></span><br></div>
+
+
+      <div class="individual-amount" id="sandorAmount">0 Ft</div>
+      <!-- ÚJ: százalék -->
+      <div id="sandorPercent"></div>
+
+      <div class="progress-bar">
+        <div class="progress" id="sandorBar"></div>
+      </div>
+    </div>
+
+    <div class="individual-counter">
+      <div class="individual-name">Orosz Szilvia</div>
+      <!-- ÚJ: Persely adatok -->
+      <div>Perselyszámlanév: <br><span id="szilviaAccountName"></span></div>
+   
+
+      <div class="individual-amount" id="szilviaAmount">0 Ft</div>
+      <!-- ÚJ: százalék -->
+      <div id="szilviaPercent"></div>
+
+      <div class="progress-bar">
+        <div class="progress" id="szilviaBar"></div>
+      </div>
+    </div>
+
+    <div class="individual-counter">
+      <div class="individual-name">Orosz Kristóf</div>
+      <!-- ÚJ: Persely adatok -->
+      <div>Perselyszámlanév: <br> <span id="kristofAccountName"></span></div>
+      
+
+      <div class="individual-amount" id="kristofAmount">0 Ft</div>
+      <!-- ÚJ: százalék -->
+      <div id="kristofPercent"></div>
+
+      <div class="progress-bar">
+        <div class="progress" id="kristofBar"></div>
+      </div>
+    </div>
+
+    <div class="button-box">
+      <a href="befizetesek.html">Befizetések megtekintése</a>
+    </div>
+  </div>
+
+  <a href="https://smartlinetravel.hu/menu/last-minute">
+    <img src="ajanlat.png" alt="Ajánlat" style="width: 90%; max-width: 700px; height: auto; display: block; margin: 0 auto;">
+  </a>
+
+  <script>
+    // NAVIGÁCIÓS MENÜ
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('active');
+    }
+
+    // Összesített érték
+    const currentValue = 100000;
+    const maxValue = 1000000;
+
+    // ÚJ: Félretett (összesítő)
+    const savedValue = 0; // itt adható meg a félretett összeg
+
+    // Egyéni értékek (befizetett)
+    const sandorValue = 0;
+    const szilviaValue = 0;
+    const kristofValue = 100000;
+    const individualMax = 340000;
+
+    // ÚJ: Egyéni félretett értékek
+    const sandorSaved = 0;
+    const szilviaSaved = 0;
+    const kristofSaved = 0;
+
+    // ÚJ: Perselyszámla adatok
+    const sandorAccountName = '';       // pl.: "Családi persely - Sándor"
+    const sandorAccountNumber = '';     // pl.: "12345678-00000000"
+    const szilviaAccountName = '';
+    const szilviaAccountNumber = '';
+    const kristofAccountName = 'VakációVágyó 2026 - Kristóf';
+    const kristofAccountNumber = '11773047-02016142-00000000';
+
+    function animateCounter() {
+      const el = document.getElementById("currentAmount");
+      let current = 0;
+      const step = Math.ceil(currentValue / 60);
+
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= currentValue) {
+          current = currentValue;
+          clearInterval(interval);
+        }
+        el.innerText = current.toLocaleString('hu-HU') + ' Ft';
+      }, 20);
+    }
+
+    function updateProgressBar() {
+      const percent = Math.min(100, (currentValue / maxValue) * 100);
+      document.getElementById("progressBar").style.width = percent + "%";
+    }
+
+    // ÚJ: Összesítő kiírása: (befizetett + félretett) / cél + százalék
+    function updateTotalTexts() {
+      const totalNow = (currentValue + savedValue);
+      const totalText = `${totalNow.toLocaleString('hu-HU')} Ft / ${maxValue.toLocaleString('hu-HU')} Ft`;
+      document.getElementById('totalVsGoal').innerText = totalText;
+
+      const percentNow = maxValue > 0 ? (totalNow / maxValue) * 100 : 0;
+      document.getElementById('totalPercent').innerText = ` ${percentNow.toFixed(1)}%`;
+    }
+
+    function updateIndividual(idAmount, idBar, value, saved, percentId) {
+      // Kiírás: (befizetett + félretett) / cél
+      const totalInd = value + saved;
+      document.getElementById(idAmount).innerText =
+        `${totalInd.toLocaleString('hu-HU')} Ft / ${individualMax.toLocaleString('hu-HU')} Ft`;
+
+      // Százalék kiírása
+      const p = individualMax > 0 ? (totalInd / individualMax) * 100 : 0;
+      if (percentId) {
+        document.getElementById(percentId).innerText = `${p.toFixed(1)}%`;
+      }
+
+      // Meglévő progress bar működését NEM módosítjuk (az eredeti value alapján)
+      const percent = Math.min(100, (value / individualMax) * 100);
+      document.getElementById(idBar).style.width = percent + "%";
+    }
+
+    // ÚJ: Persely adatok kiírása
+    function fillAccount(idName, idNum, nameVal, numVal){
+      const n1 = document.getElementById(idName);
+      const n2 = document.getElementById(idNum);
+      if (n1) n1.textContent = nameVal || '—';
+      if (n2) n2.textContent = numVal || '—';
+    }
+
+    window.onload = () => {
+      animateCounter();
+      updateProgressBar();
+      updateTotalTexts();
+
+      updateIndividual("sandorAmount", "sandorBar", sandorValue, sandorSaved, "sandorPercent");
+      updateIndividual("szilviaAmount", "szilviaBar", szilviaValue, szilviaSaved, "szilviaPercent");
+      updateIndividual("kristofAmount", "kristofBar", kristofValue, kristofSaved, "kristofPercent");
+
+      fillAccount("sandorAccountName", "sandorAccountNumber", sandorAccountName, sandorAccountNumber);
+      fillAccount("szilviaAccountName", "szilviaAccountNumber", szilviaAccountName, szilviaAccountNumber);
+      fillAccount("kristofAccountName", "kristofAccountNumber", kristofAccountName, kristofAccountNumber);
+    };
+  </script>
+
+  <script>
+    const modal = document.getElementById('imgModal');
+    const modalImage = document.getElementById('modalImage');
+
+    function openModal() {
+      modal.classList.remove('hidden');
+      document.documentElement.style.overflow = 'hidden'; // görgetés tiltása
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      document.documentElement.style.overflow = ''; // görgetés visszaállítása
+    }
+
+    // 1) MINDEN betöltéskor nyit
+    window.addEventListener('DOMContentLoaded', openModal);
+
+    // 2) Kattintásra tűnjön el (kép vagy háttér)
+    modal.addEventListener('click', (e) => {
+      // Ha bárhová kattint, zárjuk; ha csak háttérre kellene, akkor: if (e.target === modal) closeModal();
+      closeModal();
+    });
+
+    // 3) (opcionális) ESC-re is bezár
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>

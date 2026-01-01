@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Továbbiak</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fefcc8;
+      min-height: 100dvh;
+      /* teljes mobilnézet lefedése */
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .btn2:hover {
+      background-color: #cc7000;
+      /* hoverre még sötétebb narancs */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fefcc8;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      text-align: center;
+    }
+
+    /* NAVIGÁCIÓS SÁV */
+    .navbar {
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 2em;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar a.logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      text-decoration: none;
+      color: yellowgreen;
+    }
+
+    .menu {
+      display: flex;
+      gap: 1em;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 1em;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      margin: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .container {
+      padding: 5vw;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 6vw;
+      margin-bottom: 1em;
+    }
+
+    p {
+      font-size: 4.5vw;
+      margin-bottom: 2em;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3em;
+      }
+
+      p {
+        font-size: 1.5em;
+      }
+    }
+
+    .counter-box {
+      background-color: #fff;
+      padding: 1.5em;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      display: block;
+      width: 100%;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    .amount {
+      font-size: 6vw;
+      color: yellowgreen;
+      margin: 0.5em 0;
+      font-weight: bold;
+    }
+
+    @media (min-width: 768px) {
+      .amount {
+        font-size: 2.5em;
+      }
+
+      .counter-box {
+        max-width: 400px;
+      }
+    }
+
+    .progress-bar {
+      background-color: #eee;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 20px;
+      margin-top: 20px;
+    }
+
+    .progress {
+      background-color: yellowgreen;
+      height: 100%;
+      width: 0%;
+      transition: width 1s ease-in-out;
+    }
+
+    .button-box {
+      margin-top: 2em;
+    }
+
+    .button-box a {
+      display: inline-block;
+      padding: 1em 2em;
+      font-size: 1.1em;
+      background-color: yellowgreen;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-box a:hover {
+      background-color: #6da06d;
+    }
+
+    .individual-counter {
+      margin-top: 3em;
+    }
+
+    .individual-name {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 0.5em;
+    }
+
+    .individual-amount {
+      margin-bottom: 0.3em;
+    }
+
+    .meret {
+      font-size: 30px;
+    }
+
+    .individual-amount {
+      margin-top: 0.8em;
+      font-weight: bold;
+      /* kis térköz a perselyszám után */
+    }
+
+    :root {
+      --bg: #0f172a;
+      /* háttér (opcionális) */
+      --btn: #2563eb;
+      /* gomb színe */
+      --btn-hover: #1d4ed8;
+      /* hover */
+      --text: #fff;
+      --ring: #93c5fd;
+    }
+
+    /* Opcionális háttér kontraszt miatt: 
+  body { background: var(--bg); } */
+    .btn2 {
+      background-color: darkorange;
+      /* sötét narancs háttér */
+      color: white;
+      /* fehér szöveg */
+    }
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 10px;
+      
+    }
+
+    footer a {
+      text-decoration: none;
+      color: #007bff; /* link színe */
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      /* mobil: egymás alatt */
+      gap: 14px;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .btn.btn2 {
+      background-color: darkorange !important;
+      color: white !important;
+    }
+
+    .btn.btn2:hover {
+      background-color: #cc7000 !important;
+    }
+
+    /* nagyobb kijelző: 3 oszlop */
+    @media (min-width: 768px) {
+      .btn-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 20px;
+      border-radius: 9999px;
+      /* teljesen lekerekített */
+      background: var(--btn);
+      color: var(--text);
+      text-decoration: none;
+      font: 600 16px/1.2 system-ui, sans-serif;
+      letter-spacing: .2px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+
+    .btn:hover {
+      background: var(--btn-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .22);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+    }
+
+    .btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px var(--ring), 0 8px 22px rgba(0, 0, 0, .18);
+    }
+
+    /* Sötét mód támogatás (ha az oldal világos) */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220;
+      }
+    }
+
+    /* Mozgáscsökkentés tiszteletben tartása */
+    @media (prefers-reduced-motion: reduce) {
+      .btn {
+        transition: none;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- MENÜSÁV -->
+  <div class="navbar">
+    <a href="index.html" class="logo">VakációVágyó 2026</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="menu" id="navMenu">
+      <a href="szamlalo.html">Számláló</a>
+      <a href="befizetesek.html">Befizetések</a>
+      <a href="eldujra.html">Éld újra</a>
+      <a href="akciok.html">Akciók</a>
+      <a href="rangom.html">Rangom</a>
+      <a href="tudnivalok.html">Információk</a>
+      <a href="tovabbiak.html">Továbbiak</a>
+      <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/fooldal"><i style="color: red;">Kilépés</i></a>
+    </div>
+  </div>
+
+
+  <h2><i>GYŰJTŐSZÁMLAKIVONATOK</i></h2>
+
+  <div class="btn-row">
+    <a class="btn btn2" href="https://drive.google.com/file/d/11o7C-0eG_CLEBjWTG_idEr0DdObjP89C/view?usp=sharing"> 2025.
+      SZEPTEMBER</a>
+
+          <a class="btn btn2" href="https://drive.google.com/file/d/1xWpA-nl1qU3lCDR30lCBjN5sW3QIzaPP/view?usp=sharing"> 2025.
+      OKTÓBER</a>
+  </div>
+
+           <a class="btn btn2" href="https://drive.google.com/file/d/15zLERf885sv21Ez4nniVX5ckv6HV51kj/view?usp=sharing"> 2025.
+      NOVEMBER</a>
+  </div>
+  <br>
+  <h2><i>JÁTÉKSZABÁLYZATOK</i></h2>
+
+
+  <div class="btn-row">
+    <a class="btn" href="https://drive.google.com/file/d/1sOTW_jWKU0rb-TEgBdRr4FCbumxZ9jED/view?usp=sharing">PONTGYŰJTŐ
+      RENDSZER <br></a>
+    <a class="btn" href="https://drive.google.com/file/d/1eo1BTQfwFcKFpT222E-JaShCrwAmDlFt/view?usp=sharing">SOK KICSI
+      SOKRA MEGY</a>
+   
+      <a class="btn" href="https://drive.google.com/file/d/1eMWqspbH8X-EDkOsVq3L6e9eFSH4lZlM/view?usp=sharing"> RÖFI KERESŐ JÁTÉK<br></a>
+  </div>
+
+        <a class="btn" href="https://drive.google.com/file/d/10XFBwOoY4ZnYh4_OaklHtgE8B5r3LwaR/view?usp=sharing">HÚÚ EBBŐL SOK NYARALÁSRA ELMEHETNÉNK!<br></a>
+  </div>
+
+  <script>
+    // NAVIGÁCIÓS MENÜ
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('active');
+    }
+  </script>
+
+ <footer>
+    <a href="archivdokumentumok.html"><b><i>Archívum</i></b></a>
+  </footer>
+
+</body>
+
+</html>
