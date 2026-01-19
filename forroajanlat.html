@@ -263,7 +263,18 @@ li {
     opacity: 0.8;
     animation: fall linear;
 }
+.kozepre-kep {
+    width: 90vw;          /* mobilon kitölti a képernyőt */
+    max-width: 800px;     /* asztalin kb. 20 cm helyett */
+    aspect-ratio: 8 / 1;  /* 20 : 2.5 arány */
+}
 
+.kozepre-kep img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
 @keyframes fall {
     from { transform: translateY(0); }
     to { transform: translateY(110vh); }
@@ -287,12 +298,16 @@ li {
     <div class="container">
         <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/fooldal.html" class="close-btn">✕</a>
     <div class="kep-tarolo">
-    <img src="iranykulfold.jpg" alt="Kép leírása">
+    <img src="iranykulfold.jpg" alt="Ajánlat">
 </div> 
            <div class="center-image">
-  <img src="repulosajanlat.jpg" alt="Középre igazított kép">
+  <img src="repulosajanlat.jpg" alt="Ajánlat">
 
 </div>
+
+<div class="kep-tarolo">
+        <img src="repulosajanlatszalag.jpg" alt="Ajánlat">
+    </div>
 
             </div>
         </div>
