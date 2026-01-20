@@ -243,6 +243,24 @@ li {
         font-size: 28px;
     }
 }
+.gomb {
+    text-decoration: none;
+    background-color: #0077cc;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 30px;       /* lekerekítés */
+    text-align: center;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+.gomb-kontener {
+    display: flex;
+    flex-direction: column;    /* egymás alá */
+    gap: 20px;                 /* távolság a gombok között */
+}
+.gomb:hover {
+    background-color: #005fa3;
+}
 
 /* ===== HÓESÉS ===== */
 #snow-container {
@@ -292,7 +310,7 @@ li {
 <body>
 
     <h1 style="color: black;">JELENLEG NEM ELÉRHETŐ TARTALOM!<br> Hamarosan...</h1>
-<!------
+<!---------
     <div id="snow-container"></div>
 
     <div class="container">
@@ -327,7 +345,12 @@ li {
             <span class="datum zold">2026. TAVASZ</span>
         </p>
     </div>
-</div>         
+</div>     
+<br><br>
+<div class="gomb-kontener">
+    <a href="https://www.booking.com/" class="gomb"><b>SZÁLLÁS AJÁNLATOK</b></a>
+    <a href="https://www.skyscanner.hu/" class="gomb"><b>REPJEGY AJÁNLATOK</b></a>
+</div>
     <script>
 let index = 0;
 const images = document.querySelectorAll(".slides img");
