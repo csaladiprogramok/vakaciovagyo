@@ -194,6 +194,22 @@
   margin-top: 0.8em;
   font-weight: bold; /* kis térköz a perselyszám után */
 }
+.kozep {
+  text-align: center;
+  margin: 20px 0;
+  margin-top: 0px;
+}
+
+.kozep-kep {
+  width: 90%;
+  max-width: 700px;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 0px;
+}
+
 
   </style>
 <style>
@@ -243,6 +259,54 @@
     height: auto;       /* arány megtartása */
 }
 
+/* AJÁNLATI MODAL */
+.modal__box {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal__box h2 {
+  margin-top: 0;
+  color: yellowgreen;
+}
+
+.modal-buttons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.cancel-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #ccc;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cancel-btn:hover {
+  background: #aaa;
+}
+
+.ok-btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background: red;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.ok-btn:hover {
+  background: red;
+}
 
   </style>
 </head>
@@ -278,8 +342,35 @@
       <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/fooldal"><i style="color: red;">Kilépés</i></a>
     </div>
   </div>
+
   <div class="container">
-    <h1>VakációVágyó <br>2026</h1>
+<div class="kozep">
+  <img src="NYAajanlatok.jpg"
+       alt="Útmutató"
+       class="kozep-kep"
+       onclick="openOfferModal()"
+       style="cursor:pointer;">
+</div>
+<!-- AJÁNLATI MODAL -->
+<div class="modal hidden" id="offerModal">
+  <div class="modal__box">
+    <p>
+      Az ajánlatok megtekintéséhez ki kell jelentkezned a <b>VakációVágyó</b> rendszeréből és át kell jelentkezned a 
+      <b>Családi Programjaink</b> című webalkalmazásunkba!<br><br>
+      Jelenleg ott vannak a frissebnél frissebb 
+      <b>2026-os nyaralási ajánlatok.</b>
+    </p>
+
+    <div class="modal-buttons">
+      <button onclick="closeOfferModal()" class="cancel-btn">Mégse</button>
+      <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/nyaralasiajanlatok.html" class="ok-btn">
+        Rendben, irány az ajánlatokhoz
+      </a>
+    </div>
+  </div>
+</div>
+
+    <h1>VakációVágyó <br>2026</h1> 
     <p><b><i>Álomgyűjtés alakulása az <br> <span class="meret"><b><u> 1.000.000 Ft</u></b> </span><br>cél felé.</i></b></p>
 
     <!-- Összesített számláló -->
@@ -482,5 +573,27 @@
       }
     });
   </script>
+
+  <script>
+  const offerModal = document.getElementById('offerModal');
+
+  function openOfferModal() {
+    offerModal.classList.remove('hidden');
+    document.documentElement.style.overflow = 'hidden';
+  }
+
+  function closeOfferModal() {
+    offerModal.classList.add('hidden');
+    document.documentElement.style.overflow = '';
+  }
+
+  // háttérre kattintva is zárjon
+  offerModal.addEventListener('click', function(e){
+    if(e.target === offerModal){
+      closeOfferModal();
+    }
+  });
+</script>
+
 </body>
 </html>
