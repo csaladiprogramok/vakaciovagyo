@@ -329,6 +329,23 @@
         transition: none;
       }
     }
+/* Alapértelmezett (mobil) */
+.btn-row {
+  display: flex;
+  flex-direction: column-reverse; /* <<< EZ fordítja meg mobilon */
+  gap: 14px;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* Laptop / nagy kijelző */
+@media (min-width: 768px) {
+  .btn-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 
   </style>
 </head>
