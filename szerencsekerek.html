@@ -429,8 +429,8 @@ const validCodes = [
     "L2Z6P",
     "B4N9X",
     "Q1J5M",
-    "H8R3T",
-    "V6C2K"
+    "H9R3T",
+    "V7C3K"
 ];
 
 let spinning=false,currentRotation=0;
@@ -520,17 +520,22 @@ function spinWheel(){
     currentRotation+=360*8+(360-getTargetDegree(prize));
     wheel.style.transform="rotate("+currentRotation+"deg)";
 
-    setTimeout(()=>{
-        result.style.color="green";
-        result.innerHTML=
-        "🎉 Gratulálunk!<br>" +
-        "Név: <b>"+name+"</b><br>" +
-        "Nyeremény: <b>"+prize+" Ft</b><br>" +
-        "Kód: <b>"+code+"</b><br>" +
-        "Átvétel: <b>"+claim+"</b>";
+  setTimeout(()=>{
+    result.style.color="green";
+    result.innerHTML=
+    "🎉 Gratulálunk!<br>" +
+    "Név: <b>"+name+"</b><br>" +
+    "Nyeremény: <b>"+prize+" Ft</b><br>" +
+    "Kód: <b>"+code+"</b><br>" +
+    "Átvétel: <b>"+claim+"</b><br><br>" +
 
-        spinning=false;
-    },4200);
+    "<div style='background:#fff8d6;border:2px solid #ffcc00;padding:10px;border-radius:10px;color:#06326e;font-size:13px;line-height:1.5;text-align:left;'>" +
+    "<b>FONTOS!</b><br>" +
+    "A pörgetés eredményéről készíts egy képernyőfotót, majd küldd be a <b>Pörgető Nyereményfelvétel</b> űrlap segítségével, vagy küldd el a <b>vakaciovagyo@gmail.com</b> e-mail címre <b> a nyeremény jóváírása miatt. </b>" +
+    "</div>";
+
+    spinning=false;
+},4200);
 }
 </script>
 
