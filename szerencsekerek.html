@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Szerencsekerék</title>
+
+<style>
+.close-btn{
+    position:absolute;
+    top:8px;
+    right:12px;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:700;
+    color:#333;
+    background:#f1f1f1;
+    border:1px solid #ccc;
+    border-radius:50%;
+    width:32px;
+    height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+}
+
+.close-btn:hover{
+    background:#ff4d4d;
+    color:#fff;
+    border-color:#ff1a1a;
+}
+
+*{
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:#fefcc8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:8px;
+    color:#06214a;
+}
+
+.container{
+    position:relative;
+    width:100%;
+    max-width:780px;
+    background:linear-gradient(135deg,#00aaff 0%,#fff3b0 50%,#ffcc00 100%);
+    border-radius:18px;
+    border:3px dashed #fff;
+    box-shadow:0 6px 18px rgba(0,0,0,.22);
+    padding:14px;
+    text-align:center;
+}
+
+h1{
+    margin:0;
+    font-size:30px;
+    color:#fff;
+    text-shadow:2px 2px #06326e;
+}
+
+h2{
+    display:inline-block;
+    background:#06326e;
+    color:#fff;
+    padding:6px 16px;
+    border-radius:8px;
+    margin:6px 0 8px;
+    font-size:18px;
+}
+
+.top-links{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:4px 0 10px;
+}
+
+.link-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:linear-gradient(135deg,#ffcc00,#ff8c00);
+    color:#06326e;
+    font-weight:bold;
+    font-size:13px;
+    padding:8px 12px;
+    border-radius:25px;
+    box-shadow:0 3px 0 #b86600;
+}
+
+.link-btn:hover{
+    transform:translateY(-1px);
+}
+
+.main{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.left,
+.right{
+    flex:1;
+    min-width:240px;
+}
+
+p{
+    margin:7px 0 3px;
+    font-size:14px;
+}
+
+input,
+select{
+    width:100%;
+    max-width:280px;
+    padding:8px;
+    font-size:14px;
+    border-radius:10px;
+    border:2px dashed #0077cc;
+    text-align:center;
+    margin-top:4px;
+}
+
+#codeInput{
+    font-size:18px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
+
+button{
+    margin-top:10px;
+    padding:10px 24px;
+    border:none;
+    border-radius:35px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ffcc00,#ff8c00);
+    color:#06326e;
+}
+
+.rules{
+    margin-top:8px;
+    display:flex;
+    justify-content:center;
+}
+
+.rules-label{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    max-width:280px;
+    text-align:left;
+    line-height:1.25;
+    font-size:12px;
+}
+
+.rules-label input{
+    width:15px;
+    height:15px;
+    margin-top:2px;
+    flex-shrink:0;
+}
+
+.rules-label a{
+    color:#0056b3;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.wheel-wrap{
+    position:relative;
+    width:190px;
+    height:190px;
+    margin:auto;
+}
+
+.pointer{
+    position:absolute;
+    left:50%;
+    top:-8px;
+    transform:translateX(-50%);
+    width:0;
+    height:0;
+    border-left:15px solid transparent;
+    border-right:15px solid transparent;
+    border-top:28px solid #ffcc00;
+    z-index:2;
+}
+
+.wheel{
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    border:8px solid #ffcc00;
+    background:conic-gradient(
+        #2fa84f 0 270deg,
+        #008bd2 270deg 306deg,
+        #7b3fa1 306deg 342deg,
+        #e52626 342deg 360deg
+    );
+    box-shadow:inset 0 0 0 4px #06326e,0 6px 12px rgba(0,0,0,.3);
+    transition:transform 4s cubic-bezier(.12,.72,.18,1);
+    position:relative;
+}
+
+.wheel::after{
+    content:"★";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#ffcc00;
+    border:3px solid #fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    color:#06326e;
+}
+
+.result{
+    margin-top:10px;
+    padding:9px;
+    background:#fff;
+    border-radius:10px;
+    min-height:45px;
+    font-size:14px;
+}
+
+.prizes{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:10px;
+}
+
+.prize{
+    padding:6px 10px;
+    border-radius:7px;
+    color:#fff;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.p1{background:#2fa84f;}
+.p2{background:#008bd2;}
+.p3{background:#7b3fa1;}
+.p4{background:#e52626;}
+
+.footer{
+    margin-top:10px;
+    background:#06326e;
+    color:#fff;
+    padding:7px;
+    border-radius:8px;
+    font-size:12px;
+}
+
+@media(max-width:768px){
+    body{
+        align-items:flex-start;
+    }
+
+    .main{
+        flex-direction:column-reverse;
+        gap:10px;
+    }
+
+    .wheel-wrap,
+    .wheel{
+        width:165px;
+        height:165px;
+    }
+
+    .wheel::after{
+        width:36px;
+        height:36px;
+        font-size:17px;
+    }
+
+    h1{
+        font-size:25px;
+    }
+
+    h2{
+        font-size:15px;
+    }
+
+    input,
+    select,
+    button{
+        max-width:100%;
+    }
+
+    .link-btn{
+        width:100%;
+        max-width:300px;
+    }
+}
+.info-box{
+    margin:12px auto 16px;
+    max-width:650px;
+    background:#fff;
+    border-left:6px solid #ff9800;
+    border-radius:12px;
+    padding:12px 16px;
+    font-size:14px;
+    line-height:1.5;
+    color:#06214a;
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.info-box strong{
+    color:#d97706;
+}
+
+.info-box b{
+    color:#06326e;
+}
+
+@media(max-width:768px){
+    .info-box{
+        font-size:13px;
+        padding:10px 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<a href="akciok.html" class="close-btn" aria-label="Vissza az akciókhoz">×</a>
+
+<h1>VAKÁCIÓVÁGYÓ</h1>
+<h2>SZERENCSEKERÉK</h2>
+
+<div class="top-links">
+    <a class="link-btn" href="https://forms.gle/7txvkJhYYwJDmaKt5" target="_blank">
+        PÖRGETŐ TICKET VÁSÁRLÁS
+    </a>
+
+    <a class="link-btn" href="https://forms.gle/PvRu6DRsqH3JLumJA" target="_blank">
+        PÖRGETŐ NYEREMÉNYFELVÉTEL
+    </a>
+</div>
+<div class="info-box">
+    <strong>INFORMÁCIÓ</strong><br>
+    Amennyiben a <b>Pörgető Ticket Vásárlás</b> vagy a
+    <b>Pörgető Nyereményfelvétel</b> űrlap nem működik,
+    kérjük ügyét (a ticket vásárlást és a nyereményfelvételt) a
+    <b>vakaciovagyo@gmail.com</b>
+    e-mail címen intézze.
+</div>
+<div class="main">
+<div class="left">
+
+<p><b>Név megadása:</b></p>
+<input id="nameInput" type="text" placeholder="NÉV">
+
+<p><b>Írd be az 5 karakteres kódodat:</b></p>
+<input id="codeInput" maxlength="5" placeholder="_____">
+
+<p><b>Nyereményfelvétel módja:</b></p>
+<select id="claimType">
+<option value="">VÁLASSZ OPCIÓT</option>
+<option value="BÓNUSZ JÓVÁÍRÁS">BÓNUSZJÓVÁÍRÁS</option>
+<option value="BANKKÁRTYÁS ÁTUTALÁS">BANKKÁRTYÁS ÁTUTALÁS</option>
+</select>
+
+<div class="rules">
+<label class="rules-label">
+<input type="checkbox" id="acceptRules">
+<span>
+Elfogadom a játékszabályzatot,
+<a href="szerencskerekjatekszabalyzat.html" target="_blank">amit ide kattintva elolvastam.</a>
+</span>
+</label>
+</div>
+
+<button onclick="spinWheel()">PÖRGETÉS</button>
+
+<div class="result" id="result">Sok szerencsét! 🎁</div>
+
+</div>
+
+<div class="right">
+<div class="wheel-wrap">
+<div class="pointer"></div>
+<div class="wheel" id="wheel"></div>
+</div>
+</div>
+</div>
+
+<div class="prizes">
+<div class="prize p1">1000 Ft</div>
+<div class="prize p2">2000 Ft</div>
+<div class="prize p3">3000 Ft</div>
+<div class="prize p4">5000 Ft</div>
+</div>
+
+<div class="footer">
+A ticket egyszeri pörgetésre jogosít. A kódot csak egyszer lehet felhasználni.
+</div>
+</div>
+
+<script>
+const validCodes = [
+    "M8Q2L",
+    "X4P7N",
+    "T9K3V",
+    "R5W1H",
+    "C7Y8F",
+    "L2Z6P",
+    "B4N9X",
+    "Q1J5M",
+    "H8R3T",
+    "V6C2K"
+];
+
+let spinning=false,currentRotation=0;
+
+function randomBetween(a,b){
+    return Math.floor(Math.random()*(b-a+1))+a;
+}
+
+function getPrize(){
+    let r=Math.random()*100;
+    return r<75?1000:r<85?2000:r<95?3000:5000;
+}
+
+function getTargetDegree(p){
+    if(p===1000)return randomBetween(40,250);
+    if(p===2000)return randomBetween(280,300);
+    if(p===3000)return randomBetween(315,335);
+    return randomBetween(348,357);
+}
+
+function spinWheel(){
+    const name=document.getElementById("nameInput").value.trim();
+    const code=document.getElementById("codeInput").value.trim().toUpperCase();
+    const claim=document.getElementById("claimType").value;
+    const rules=document.getElementById("acceptRules").checked;
+    const result=document.getElementById("result");
+    const wheel=document.getElementById("wheel");
+
+    if(spinning)return;
+
+    if(name.length<2){
+        result.style.color="red";
+        result.innerHTML="Add meg a neved!";
+        return;
+    }
+
+    if(code.length!==5){
+        result.style.color="red";
+        result.innerHTML="A kódnak pontosan 5 karakteresnek kell lennie!";
+        return;
+    }
+
+    if(!validCodes.includes(code)){
+        result.style.color="red";
+        result.innerHTML="Érvénytelen kód!";
+        return;
+    }
+
+    if(!claim){
+        result.style.color="red";
+        result.innerHTML="Válaszd ki a nyereményfelvétel módját!";
+        return;
+    }
+
+    if(!rules){
+        result.style.color="red";
+        result.innerHTML="Fogadd el a játékszabályzatot!";
+        return;
+    }
+
+    if(localStorage.getItem("used_code_"+code)){
+        const s=JSON.parse(localStorage.getItem("used_code_"+code));
+        result.style.color="red";
+        result.innerHTML=
+        "Ezt a kódot már felhasználták!<br>" +
+        "Név: <b>"+s.name+"</b><br>" +
+        "Kód: <b>"+s.code+"</b><br>" +
+        "Nyeremény: <b>"+s.prize+" Ft</b><br>" +
+        "Átvétel: <b>"+s.claimType+"</b>";
+        return;
+    }
+
+    spinning=true;
+    result.style.color="#06326e";
+    result.innerHTML="Pörgetés folyamatban...";
+
+    const prize=getPrize();
+
+    localStorage.setItem("used_code_"+code,JSON.stringify({
+        name:name,
+        code:code,
+        prize:prize,
+        claimType:claim,
+        date:new Date().toLocaleString("hu-HU")
+    }));
+
+    currentRotation+=360*8+(360-getTargetDegree(prize));
+    wheel.style.transform="rotate("+currentRotation+"deg)";
+
+    setTimeout(()=>{
+        result.style.color="green";
+        result.innerHTML=
+        "🎉 Gratulálunk!<br>" +
+        "Név: <b>"+name+"</b><br>" +
+        "Nyeremény: <b>"+prize+" Ft</b><br>" +
+        "Kód: <b>"+code+"</b><br>" +
+        "Átvétel: <b>"+claim+"</b>";
+
+        spinning=false;
+    },4200);
+}
+</script>
+
+</body>
+</html>

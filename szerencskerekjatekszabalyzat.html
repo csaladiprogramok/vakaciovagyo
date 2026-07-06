@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VakációVágyó Játékszabályzat</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:#fefcc8;
+    padding:12px;
+    color:#06214a;
+}
+
+.container{
+    position:relative;
+    max-width:950px;
+    margin:0 auto;
+    background:linear-gradient(135deg,#00aaff 0%,#fff3b0 50%,#ffcc00 100%);
+    border:4px dashed #fff;
+    border-radius:24px;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+    padding:22px;
+}
+
+.close-btn{
+    position:absolute;
+    top:12px;
+    right:14px;
+    text-decoration:none;
+    font-size:24px;
+    font-weight:bold;
+    color:#333;
+    background:#fff;
+    border:2px solid #ccc;
+    border-radius:50%;
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+}
+
+.close-btn:hover{
+    background:#ff4d4d;
+    color:#fff;
+    border-color:#ff1a1a;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:22px;
+}
+
+.header h1{
+    margin:0;
+    font-size:38px;
+    color:white;
+    text-shadow:3px 3px #06326e;
+}
+
+.header h2{
+    display:inline-block;
+    background:#06326e;
+    color:white;
+    padding:10px 24px;
+    border-radius:12px;
+    font-size:22px;
+    margin:12px 0 0;
+}
+
+.rule-box{
+    background:rgba(255,255,255,.93);
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:14px;
+    box-shadow:0 4px 10px rgba(0,0,0,.12);
+    border-left:8px solid #06326e;
+}
+
+.rule-box h3{
+    margin:0 0 10px;
+    color:#06326e;
+    font-size:20px;
+}
+
+.rule-box p{
+    margin:8px 0;
+    line-height:1.5;
+    font-size:15px;
+}
+
+ul,ol{
+    margin-top:8px;
+    padding-left:24px;
+}
+
+li{
+    margin:6px 0;
+    line-height:1.4;
+}
+
+.highlight{
+    background:#ffcc00;
+    color:#06326e;
+    font-weight:bold;
+    padding:2px 6px;
+    border-radius:6px;
+}
+
+.email,
+.link{
+    font-weight:bold;
+    color:#0056b3;
+    word-break:break-word;
+}
+
+.prize-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:8px;
+    margin-top:10px;
+}
+
+.prize{
+    color:white;
+    padding:10px;
+    border-radius:10px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.p1{background:#2fa84f;}
+.p2{background:#008bd2;}
+.p3{background:#7b3fa1;}
+.p4{background:#e52626;}
+
+.footer{
+    background:#06326e;
+    color:white;
+    text-align:center;
+    padding:14px;
+    border-radius:14px;
+    margin-top:18px;
+    font-size:14px;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:14px;
+    text-decoration:none;
+    background:linear-gradient(135deg,#ffcc00,#ff8c00);
+    color:#06326e;
+    font-weight:bold;
+    padding:12px 24px;
+    border-radius:30px;
+    box-shadow:0 4px 0 #b86600;
+}
+
+@media(max-width:600px){
+    .container{
+        padding:16px;
+        border-radius:18px;
+    }
+
+    .header h1{
+        font-size:29px;
+    }
+
+    .header h2{
+        font-size:17px;
+        padding:8px 16px;
+    }
+
+    .rule-box{
+        padding:14px;
+    }
+
+    .rule-box h3{
+        font-size:17px;
+    }
+
+    .rule-box p,
+    li{
+        font-size:14px;
+    }
+
+    .close-btn{
+        width:34px;
+        height:34px;
+        font-size:21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="szerencsekerek.html" class="close-btn" aria-label="Bezárás">×</a>
+
+<div class="header">
+    <h1>VAKÁCIÓVÁGYÓ</h1>
+    <h2>SZERENCSEKERÉK JÁTÉKSZABÁLYZAT</h2>
+</div>
+
+<div class="rule-box">
+    <h3>1. A játék megnevezése</h3>
+    <p>A játék neve: <span class="highlight">VakációVágyó Szerencsekerék</span>.</p>
+    <p>A játék célja, hogy a résztvevők pörgető kód segítségével részt vegyenek egy egyszeri online pörgetésben, amely során különböző összegű nyereményeket nyerhetnek.</p>
+</div>
+
+<div class="rule-box">
+    <h3>2. A részvétel feltétele</h3>
+    <ul>
+        <li>A játékban kizárólag az vehet részt, aki rendelkezik érvényes, 5 karakterből álló pörgető kóddal.</li>
+        <li>Pörgető kódot a résztvevő úgy igényelhet, hogy a megtakarítási bizonylatot elküldi a <span class="email">vakaciovagyo@gmail.com</span> e-mail címre, vagy az erre szolgáló űrlapon keresztül benyújtja az igénylését.</li>
+        <li>Az igénylő űrlap elérhetősége: <a class="link" href="https://forms.gle/7txvkJhYYwJDmaKt5" target="_blank">Pörgető ticket igénylése</a></li>
+        <li>A pörgető kód kiadása az igénylés ellenőrzése után történik.</li>
+    </ul>
+</div>
+
+<div class="rule-box">
+    <h3>3. A pörgető ticket ára</h3>
+    <ul>
+        <li>Egy pörgető ticket ára: <span class="highlight">3000 Ft</span>.</li>
+        <li>Egy ticket egy darab egyszeri pörgetésre jogosít.</li>
+    </ul>
+</div>
+
+<div class="rule-box">
+    <h3>4. A pörgető kód használata</h3>
+    <p>A pörgető kód 5 karakterből álló egyedi azonosító.</p>
+    <p>Egy kód kizárólag egyszer használható fel. A sikeres pörgetés után a rendszer a kódot felhasználtnak tekinti.</p>
+</div>
+
+<div class="rule-box">
+    <h3>5. A pörgetés menete</h3>
+    <p>A résztvevőnek a pörgetés előtt meg kell adnia:</p>
+    <ul>
+        <li>a saját nevét;</li>
+        <li>az 5 karakteres pörgető kódot;</li>
+        <li>a nyereményfelvétel választott módját;</li>
+        <li>el kell fogadnia a játékszabályzatot.</li>
+    </ul>
+    <p>A pörgetés gomb megnyomása után a szerencsekerék elindul, majd a rendszer megjeleníti a pörgető nevét, a nyeremény összegét, a felhasznált kódot és a választott nyereményfelvételi módot.</p>
+</div>
+
+<div class="rule-box">
+    <h3>6. Nyeremények</h3>
+    <p>A játékban az alábbi nyeremények nyerhetők:</p>
+    <div class="prize-grid">
+        <div class="prize p1">1000 Ft</div>
+        <div class="prize p2">2000 Ft</div>
+        <div class="prize p3">3000 Ft</div>
+        <div class="prize p4">5000 Ft</div>
+    </div>
+</div>
+
+<div class="rule-box">
+    <h3>7. Nyerési esélyek</h3>
+    <ul>
+        <li>1000 Ft nyeremény: <b>75%</b></li>
+        <li>2000 Ft nyeremény: <b>10%</b></li>
+        <li>3000 Ft nyeremény: <b>10%</b></li>
+        <li>5000 Ft nyeremény: <b>5%</b></li>
+    </ul>
+</div>
+
+<div class="rule-box">
+    <h3>8. Nyereményfelvétel módja</h3>
+    <p>A résztvevő a pörgetés előtt választhatja ki, hogy a nyereményét milyen módon szeretné felvenni.</p>
+    <ol>
+        <li>Bónuszjóváírás</li>
+        <li>Bankkártyás átutalás</li>
+    </ol>
+</div>
+
+<div class="rule-box">
+    <h3>9. Bónusz jóváírás</h3>
+    <p>Bónuszjóváírás választása esetén a nyeremény teljes összege bónuszként kerül jóváírásra. Ebben az esetben kezelési költség nem kerül levonásra.</p>
+</div>
+
+<div class="rule-box">
+    <h3>10. Bankkártyás átutalás</h3>
+    <p>Bankkártyás átutalás választása esetén a nyeremény összegéből <span class="highlight">500 Ft kezelési költség</span> kerül levonásra.</p>
+    <ul>
+        <li>1000 Ft nyeremény esetén kifizethető összeg: <b>500 Ft</b></li>
+        <li>2000 Ft nyeremény esetén kifizethető összeg: <b>1500 Ft</b></li>
+        <li>3000 Ft nyeremény esetén kifizethető összeg: <b>2500 Ft</b></li>
+        <li>5000 Ft nyeremény esetén kifizethető összeg: <b>4500 Ft</b></li>
+    </ul>
+    <p>A kezelési költség az átutalás adminisztrációs és banki feldolgozási költségeként kerül levonásra.</p>
+</div>
+
+<div class="rule-box">
+    <h3>11. Hibás vagy érvénytelen kód</h3>
+    <p>Érvénytelen kód esetén a rendszer nem enged pörgetni.</p>
+    <ul>
+        <li>nem szerepel az előre rögzített kódlistában;</li>
+        <li>nem pontosan 5 karakterből áll;</li>
+        <li>már korábban felhasználásra került.</li>
+    </ul>
+</div>
+
+<div class="rule-box">
+    <h3>12. A pörgetés eredményének rögzítése</h3>
+    <p>A rendszer a sikeres pörgetés után rögzíti:</p>
+    <ul>
+        <li>a pörgető nevét;</li>
+        <li>a felhasznált kódot;</li>
+        <li>a nyeremény összegét;</li>
+        <li>a választott nyereményfelvételi módot.</li>
+    </ul>
+</div>
+
+<div class="rule-box">
+    <h3>13. Visszaélés kizárása</h3>
+    <p>A szervező kizárhatja azt a résztvevőt, aki:</p>
+    <ul>
+        <li>technikai hibát próbál kihasználni;</li>
+        <li>a játék működését megpróbálja módosítani vagy kijátszani;</li>
+        <li>ugyanazt a kódot többször próbálja felhasználni.</li>
+    </ul>
+</div>
+
+<div class="rule-box">
+    <h3>14. Technikai hibák</h3>
+    <p>A szervező nem vállal felelősséget olyan hibákért, amelyek a résztvevő eszközéből, internetkapcsolatából, böngészőjéből vagy egyéb technikai problémából erednek.</p>
+    <p>Amennyiben bizonyítható technikai hiba történik, a szervező egyedileg bírálhatja el az esetet.</p>
+</div>
+
+<div class="rule-box">
+    <h3>15. Adatkezelés</h3>
+    <p>A pörgető kód igénylése és a nyeremény kiadása során a szervező kezelheti a résztvevő által megadott adatokat, például:</p>
+    <ul>
+        <li>név;</li>
+        <li>e-mail cím;</li>
+        <li>beküldött bizonylat;</li>
+        <li>pörgető kód;</li>
+        <li>nyeremény összege;</li>
+        <li>választott nyereményfelvételi mód.</li>
+    </ul>
+    <p>Az adatokat a szervező kizárólag a pörgető kód kiadása, a játék lebonyolítása és a nyeremény rendezése céljából használja fel, harmadik személynek sosem adja ki.</p>
+</div>
+
+<div class="rule-box">
+    <h3>16. Felelősség</h3>
+    <ul>
+        <li>A résztvevő a játékban saját felelősségére vesz részt.</li>
+        <li>A játékszabályzat elfogadásával a résztvevő kijelenti, hogy megértette és elfogadta a játék feltételeit.</li>
+    </ul>
+</div>
+
+<div class="rule-box">
+    <h3>17. A szabályzat módosítása</h3>
+    <ul>
+        <li>A szervező fenntartja a jogot a játékszabályzat módosítására.</li>
+        <li>A módosított szabályzat a közzétételtől érvényes.</li>
+    </ul>
+</div>
+
+<div class="rule-box">
+    <h3>18. Kapcsolat</h3>
+    <p>A játékkal kapcsolatos kérdések és pörgető kód igénylések az alábbi e-mail címen intézhetők:</p>
+    <p class="email">vakaciovagyo@gmail.com</p>
+</div>
+
+<div class="footer">
+    VakációVágyó Szerencsekerék – Játékszabályzat
+    <br>
+    <a href="szerencsekerek.html" class="back-btn">Vissza a szerencsekerékhez</a>
+</div>
+
+</div>
+
+</body>
+</html>

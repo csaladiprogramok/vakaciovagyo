@@ -338,6 +338,41 @@
   margin: 20px auto;
   padding: 0 16px;
 }
+.statements-box{
+  max-width:900px;
+  margin:20px auto;
+  padding:0 16px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.statement-details{
+  width:100%;
+  background:#fff;
+  border-radius:18px;
+  padding:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,.18);
+}
+
+.statement-details summary{
+  cursor:pointer;
+  font-weight:bold;
+  color:#333;
+  font-size:17px;
+  padding:8px;
+}
+
+.statement-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-top:12px;
+}
+
+.statements-box .btn{
+  width:100%;
+}
 
 /* Laptop / nagy kijelző */
 @media (min-width: 768px) {
@@ -372,34 +407,33 @@
   </div>
 
 
-  <h2><i>GYŰJTŐSZÁMLAKIVONATOK</i></h2>
+<h2><i>GYŰJTŐSZÁMLAKIVONATOK</i></h2>
 
-  <div class="btn-row">
-    <a class="btn btn2" href="https://drive.google.com/file/d/11o7C-0eG_CLEBjWTG_idEr0DdObjP89C/view?usp=sharing"> 2025.
-      SZEPTEMBER</a>
+<div class="statements-box">
 
-          <a class="btn btn2" href="https://drive.google.com/file/d/1xWpA-nl1qU3lCDR30lCBjN5sW3QIzaPP/view?usp=sharing"> 2025.
-      OKTÓBER</a>
- 
+  <!-- LEGFRISSEBB KIVONAT FELÜL -->
+  <a class="btn btn2" href="https://drive.google.com/file/d/1-zoXeddXmdiQchGoAm6FXaNJdDG4VMTL/view?usp=sharing">
+    2026. JÚNIUS
+  </a>
 
-           <a class="btn btn2" href="https://drive.google.com/file/d/15zLERf885sv21Ez4nniVX5ckv6HV51kj/view?usp=sharing"> 2025.
-      NOVEMBER</a>
-  
-   <a class="btn btn2" href="https://drive.google.com/file/d/1aLZ4wJOEhkQmbenJvCy6cnvEnwr1bHkh/view?usp=sharing"> 2025.
-      DECEMBER</a>
-        
-   <a class="btn btn2" href="https://drive.google.com/file/d/1sreLEd3ozaNCDDbwafqUwuKe8_7_Nadp/view?usp=sharing"> 2026. JANUÁR</a>
-   
-     <a class="btn btn2" href="https://drive.google.com/file/d/1gSQrCcirLthIkXgkI97gh-FerKY-QJjR/view?usp=sharing"> 2026. FEBRUÁR</a>
+  <!-- RÉGEBBI KIVONATOK LENYÍLÓBAN -->
+  <details class="statement-details">
+    <summary>További kivonatok</summary>
 
-      
-  <a class="btn btn2" href="https://drive.google.com/file/d/12Ooc1cM-vL9qJEuUCwP2Uiq_IfmdIRA-/view?usp=sharing"> 2026. MÁRCIUS</a>
+    <div class="statement-list">
+      <a class="btn btn2" href="https://drive.google.com/file/d/1FMeuqH0YwtclQYtdZii0vSWTEQY51-fR/view?usp=sharing">2026. MÁJUS</a>
+      <a class="btn btn2" href="https://drive.google.com/file/d/1hTI_40ewvWCSpp71KHIL8O365zYp8SA9/view?usp=sharing">2026. ÁPRILIS</a>
+      <a class="btn btn2" href="https://drive.google.com/file/d/12Ooc1cM-vL9qJEuUCwP2Uiq_IfmdIRA-/view?usp=sharing">2026. MÁRCIUS</a>
+      <a class="btn btn2" href="https://drive.google.com/file/d/1gSQrCcirLthIkXgkI97gh-FerKY-QJjR/view?usp=sharing">2026. FEBRUÁR</a>
+      <a class="btn btn2" href="https://drive.google.com/file/d/1sreLEd3ozaNCDDbwafqUwuKe8_7_Nadp/view?usp=sharing">2026. JANUÁR</a>
+      <a class="btn btn2" href="https://drive.google.com/file/d/1aLZ4wJOEhkQmbenJvCy6cnvEnwr1bHkh/view?usp=sharing">2025. DECEMBER</a>
+      <a class="btn btn2" href="https://drive.google.com/file/d/15zLERf885sv21Ez4nniVX5ckv6HV51kj/view?usp=sharing">2025. NOVEMBER</a>
+      <a class="btn btn2" href="https://drive.google.com/file/d/1xWpA-nl1qU3lCDR30lCBjN5sW3QIzaPP/view?usp=sharing">2025. OKTÓBER</a>
+      <a class="btn btn2" href="https://drive.google.com/file/d/11o7C-0eG_CLEBjWTG_idEr0DdObjP89C/view?usp=sharing">2025. SZEPTEMBER</a>
+    </div>
+  </details>
 
-    <a class="btn btn2" href="https://drive.google.com/file/d/1hTI_40ewvWCSpp71KHIL8O365zYp8SA9/view?usp=sharing"> 2026. ÁPRILIS</a>
-       <a class="btn btn2" href="https://drive.google.com/file/d/1FMeuqH0YwtclQYtdZii0vSWTEQY51-fR/view?usp=sharing"> 2026. MÁJUS</a>
-   <a class="btn btn2" href="https://drive.google.com/file/d/1-zoXeddXmdiQchGoAm6FXaNJdDG4VMTL/view?usp=sharing"> 2026. JÚNIUS</a>
-  </div>
-      </div>
+</div>
   
   <br>
   <h2><i>JÁTÉKSZABÁLYZATOK</i></h2>
@@ -417,7 +451,7 @@
       <a class="btn" href="https://drive.google.com/file/d/1eMWqspbH8X-EDkOsVq3L6e9eFSH4lZlM/view?usp=sharing"> RÖFI KERESŐ JÁTÉK<br></a>
       --->
       <a class="btn" href="https://drive.google.com/file/d/1co9dSFC6aDbKmU3fxganFNEdLRYsUmZg/view?usp=sharing">START 27<br></a>
-  
+    <a class="btn" href="https://drive.google.com/file/d/1M03S6YFrch6zWhIc44x2PoVib_eZRWwk/view?usp=sharing">SZERENCSEKERÉK<br></a>
   
     <!-----
       <a class="btn" href="https://drive.google.com/file/d/1ujg2FfLklbDPON53rtw1npnnPh47eyBu/view?usp=sharing">SOSEM VOLT MÉG ILYEN EGYSZERŰ <br></a>
