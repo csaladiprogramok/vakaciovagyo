@@ -382,8 +382,8 @@ a {
 <p><b>Nyereményfelvétel módja:</b></p>
 <select id="claimType">
 <option value="">VÁLASSZ OPCIÓT</option>
-<option value="BÓNUSZ JÓVÁÍRÁS">BÓNUSZJÓVÁÍRÁS</option>
-<option value="BANKKÁRTYÁS ÁTUTALÁS">BANKKÁRTYÁS ÁTUTALÁS</option>
+<option value="bónuszjóváírás">BÓNUSZJÓVÁÍRÁS</option>
+<option value="bankkártyás átutalás">BANKKÁRTYÁS ÁTUTALÁS</option>
 </select>
 
 <div class="rules">
@@ -418,23 +418,25 @@ Elfogadom a játékszabályzatot,
 </div>
 
 <div class="footer">
-A ticket egyszeri pörgetésre jogosít. A kódot csak egyszer lehet felhasználni.
+A ticket 1–5 alkalmas pörgetésre jogosíthat. A kód a hozzá rendelt alkalmak számáig használható fel.
 </div>
 </div>
 
 <script>
-const validCodes = [
-    "M8Q2L",
-    "X4P7N",
-    "T9K3V",
-    "R5W1H",
-    "C7Y8F",
-    "L2Z6P",
-    "B4N9X",
-    "Q1J5M",
-    "H9R3T",
-    "V7C3K"
-];
+const validCodes = {
+    "M6Q5L":1,
+    "X4P7N":1,
+    "T9K3V":1,
+    "R5W1H":1,
+    "C7Y8F":2,
+    "L2Z6P":2,
+    "B4N9X":3,
+    "Q1J5M":3,
+    "A9T4H":4,
+    "H9R3T":4,
+    "V7C3K":5,
+    "SQ2T5":5
+};
 
 let spinning=false,currentRotation=0;
 
@@ -476,7 +478,7 @@ function spinWheel(){
         return;
     }
 
-    if(!validCodes.includes(code)){
+    if(!(code in validCodes)){
         result.style.color="red";
         result.innerHTML="Érvénytelen kód!";
         return;
@@ -494,15 +496,11 @@ function spinWheel(){
         return;
     }
 
-    if(localStorage.getItem("used_code_"+code)){
-        const s=JSON.parse(localStorage.getItem("used_code_"+code));
+    const maxUses=validCodes[code];
+    let s=JSON.parse(localStorage.getItem("used_code_"+code) || '{"uses":0,"history":[]}');
+    if(s.uses>=maxUses){
         result.style.color="red";
-        result.innerHTML=
-        "Ezt a kódot már felhasználták!<br>" +
-        "Név: <b>"+s.name+"</b><br>" +
-        "Kód: <b>"+s.code+"</b><br>" +
-        "Nyeremény: <b>"+s.prize+" Ft</b><br>" +
-        "Átvétel: <b>"+s.claimType+"</b>";
+        result.innerHTML="Ezt a kódot már felhasználta az összes ("+maxUses+") pörgetési lehetőséggel.";
         return;
     }
 
@@ -512,33 +510,73 @@ function spinWheel(){
 
     const prize=getPrize();
 
-    localStorage.setItem("used_code_"+code,JSON.stringify({
-        name:name,
-        code:code,
-        prize:prize,
-        claimType:claim,
-        date:new Date().toLocaleString("hu-HU")
-    }));
+    s.name=name;
+    s.code=code;
+    s.claimType=claim;
+    s.uses++;
+    s.history.push(prize);
+    localStorage.setItem("used_code_"+code,JSON.stringify(s));
 
     currentRotation+=360*8+(360-getTargetDegree(prize));
     wheel.style.transform="rotate("+currentRotation+"deg)";
 
-  setTimeout(()=>{
-    result.style.color="green";
-    result.innerHTML=
-    "🎉 Gratulálunk!<br>" +
-    "Név: <b>"+name+"</b><br>" +
-    "Nyeremény: <b>"+prize+" Ft</b><br>" +
-    "Kód: <b>"+code+"</b><br>" +
-    "Átvétel: <b>"+claim+"</b><br><br>" +
+setTimeout(() => {
 
-    "<div style='background:#fff8d6;border:2px solid #ffcc00;padding:10px;border-radius:10px;color:#06326e;font-size:13px;line-height:1.5;text-align:left;'>" +
-    "<b>FONTOS!</b><br>" +
-    "A pörgetés eredményéről készíts egy képernyőfotót, majd küldd be a <b>Pörgető Nyereményfelvétel</b> űrlap segítségével, vagy küldd el a <b>vakaciovagyo@gmail.com</b> e-mail címre <b> a nyeremény jóváírása miatt. </b>" +
-    "</div>";
+    // Összes eddigi nyeremény
+    const totalPrize = s.history.reduce((sum, value) => sum + value, 0);
 
-    spinning=false;
-},4200);
+    // Hátralévő pörgetések
+    const remaining = maxUses - s.uses;
+
+    result.style.color = "#06326e";
+
+    result.innerHTML = `
+    <div style="line-height:1.8;font-size:15px;">
+
+        <div style="
+            font-size:12px;
+            font-weight:bold;
+            text-align:center;
+            color:#28a745;
+            margin-bottom:12px;">
+            🎉 GRATULÁLUNK! 🎉
+        </div>
+
+        Az <b>${s.uses}. alkalom</b> nyereménye <b>${prize.toLocaleString("hu-HU")} Ft</b>, így az <b> eddig összesen megnyert </b> összeg <b>${totalPrize.toLocaleString("hu-HU")} Ft</b>. A pörgető neve <b>${name}</b>, a pörgető kódja <b>${code}</b>, a bónuszjóváírás módja <b>${claim}</b>.
+
+        <br><br>
+
+        ${
+            remaining > 0
+            ? `<b>Hátralévő pörgetések száma:</b> <b>${remaining}</b>.`
+            : `<span style="color:#d40000;font-weight:bold;">A pörgetési lehetőségek elfogytak.</span>`
+        }
+
+        <br><br>
+
+        <div style="
+            background:#fff8d6;
+            border:2px solid #ffcc00;
+            border-radius:10px;
+            font-size:14px;
+            line-height:1.6;
+            text-align:left;
+        ">
+
+            <b>📸 FONTOS!</b><br><br>
+
+            A pörgetés eredményéről készíts képernyőképet! <br> 1.) Majd küldd el a fotót a 
+            <b>Pörgető Nyereményfelvétel</b> űrlapon, vagy <br> 2.) Küldd el a
+            <b>vakaciovagyo@gmail.com</b> , e-mail címre, vagy <br> 3.) Küldd el  <b> Kristófnak a messengeren </b> a nyeremény jóváírása érdekében.
+
+        </div>
+
+    </div>
+    `;
+
+    spinning = false;
+
+}, 4200);
 }
 </script>
 
