@@ -162,7 +162,7 @@ button{
     max-width:280px;
     text-align:left;
     line-height:1.25;
-    font-size:12px;
+    font-size:28px;
 }
 
 .rules-label input{
@@ -268,7 +268,7 @@ button{
     color:#fff;
     padding:7px;
     border-radius:8px;
-    font-size:12px;
+    font-size:28px;
 }
 
 @media(max-width:768px){
@@ -519,6 +519,10 @@ function spinWheel(){
 
 currentRotation += 360 * 8 + (360 - getTargetDegree(prize));
 
+wheel.style.transition = "none";
+wheel.style.transform = `rotate(${currentRotation-1}deg)`;
+wheel.offsetHeight;
+wheel.style.transition = "transform 4s cubic-bezier(.12,.72,.18,1)";
 requestAnimationFrame(() => {
     wheel.style.transform = `rotate(${currentRotation}deg)`;
 });
@@ -536,7 +540,7 @@ setTimeout(() => {
     <div style="line-height:1.8;font-size:15px;">
 
         <div style="
-            font-size:12px;
+            font-size:28px;
             font-weight:bold;
             text-align:center;
             color:#28a745;
