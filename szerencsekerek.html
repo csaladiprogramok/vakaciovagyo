@@ -162,7 +162,7 @@ button{
     max-width:280px;
     text-align:left;
     line-height:1.25;
-    font-size:28px;
+    font-size:12px;
 }
 
 .rules-label input{
@@ -268,7 +268,7 @@ button{
     color:#fff;
     padding:7px;
     border-radius:8px;
-    font-size:28px;
+    font-size:12px;
 }
 
 @media(max-width:768px){
@@ -352,7 +352,7 @@ a {
 
 <h1>VAKÁCIÓVÁGYÓ</h1>
 <h2>SZERENCSEKERÉK</h2>
-
+<h4 style="color: white;background-color: red;font-size: 12px;"><b><i> FIGYELEM! - A mobilos pörgetés hibáján a megfelelő működés érdekében dolgozunk! <br>Köszönjük a türelmet!</i></b></h4>
 <div class="top-links">
     <a class="link-btn" href="https://forms.gle/7txvkJhYYwJDmaKt5" target="_blank">
         PÖRGETŐ TICKET VÁSÁRLÁS
@@ -519,10 +519,6 @@ function spinWheel(){
 
 currentRotation += 360 * 8 + (360 - getTargetDegree(prize));
 
-wheel.style.transition = "none";
-wheel.style.transform = `rotate(${currentRotation-1}deg)`;
-wheel.offsetHeight;
-wheel.style.transition = "transform 4s cubic-bezier(.12,.72,.18,1)";
 requestAnimationFrame(() => {
     wheel.style.transform = `rotate(${currentRotation}deg)`;
 });
@@ -540,7 +536,7 @@ setTimeout(() => {
     <div style="line-height:1.8;font-size:15px;">
 
         <div style="
-            font-size:28px;
+            font-size:12px;
             font-weight:bold;
             text-align:center;
             color:#28a745;
