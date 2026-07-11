@@ -428,7 +428,7 @@ const validCodes = {
     "X4P7N":1,
     "T9K3V":1,
     "R5W1H":1,
-    "C7Y8F":2,
+    "C7Y8F":5,
     "L2Z6P":2,
     "B4N9X":3,
     "Q1J5M":3,
@@ -517,11 +517,13 @@ function spinWheel(){
     s.history.push(prize);
     localStorage.setItem("used_code_"+code,JSON.stringify(s));
 
-    currentRotation+=360*8+(360-getTargetDegree(prize));
-    wheel.style.transform="rotate("+currentRotation+"deg)";
+currentRotation += 360 * 8 + (360 - getTargetDegree(prize));
+
+requestAnimationFrame(() => {
+    wheel.style.transform = `rotate(${currentRotation}deg)`;
+});
 
 setTimeout(() => {
-
     // Összes eddigi nyeremény
     const totalPrize = s.history.reduce((sum, value) => sum + value, 0);
 
