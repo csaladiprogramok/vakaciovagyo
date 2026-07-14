@@ -435,14 +435,14 @@ const validCodes = {
     "X4P7N":1,
     "T9K3V":1,
     "R5W1H":1,
-    "C7Y9F":2,
     "L2Z6P":2,
     "B4N9X":3,
     "Q1J5M":3,
     "A9T4H":4,
     "H9R3T":4,
     "V7C3K":5,
-    "SQ2T5":5
+    "SQ2T5":5,
+    "C7X7F":2
 };
 
 let spinning=false,currentRotation=0;
@@ -557,58 +557,113 @@ function animate(timestamp){
 requestAnimationFrame(animate);
 
 setTimeout(() => {
-    // Összes eddigi nyeremény
-    const totalPrize = s.history.reduce((sum, value) => sum + value, 0);
 
-    // Hátralévő pörgetések
+    const totalPrize = s.history.reduce((sum, value) => sum + value, 0);
     const remaining = maxUses - s.uses;
 
     result.style.color = "#06326e";
 
-    result.innerHTML = `
-    <div style="line-height:1.8;font-size:15px;">
-
-        <div style="
-            font-size:12px;
-            font-weight:bold;
-            text-align:center;
-            color:#28a745;
-            margin-bottom:12px;">
-            🎉 GRATULÁLUNK! 🎉
+    // 👉 HA MÉG VAN PÖRGETÉS
+    if(remaining > 0){
+        result.innerHTML = `
+        <div style="text-align:center;font-size:18px;font-weight:bold;">
+            Hátralévő pörgetések száma: ${remaining}
         </div>
+        `;
+        spinning = false;
+        return;
+    }
 
-        Az <b>${s.uses}. alkalom</b> nyereménye <b>${prize.toLocaleString("hu-HU")} Ft</b>, így az <b> eddig összesen megnyert </b> összeg <b>${totalPrize.toLocaleString("hu-HU")} Ft</b>. A pörgető neve <b>${name}</b>, a pörgető kódja <b>${code}</b>, a bónuszjóváírás módja <b>${claim}</b>.
+    // 👉 NYEREMÉNYEK MONDATBAN
+  const prizesList = s.history.map((p, i) => {
+    const value = p.toLocaleString("hu-HU") + " Ft";
 
-        <br><br>
+    if(i === 0) return value;
+    if(i === s.history.length - 1) return " végül " + value;
 
-        ${
-            remaining > 0
-            ? `<b>Hátralévő pörgetések száma:</b> <b>${remaining}</b>.`
-            : `<span style="color:#d40000;font-weight:bold;">A pörgetési lehetőségek elfogytak.</span>`
-        }
+    return " majd " + value;
+}).join("");
 
-        <br><br>
+const now = new Date().toLocaleString("hu-HU");
 
-        <div style="
-            background:#fff8d6;
-            border:2px solid #ffcc00;
-            border-radius:10px;
-            font-size:14px;
-            line-height:1.6;
-            text-align:center;
-        ">
+result.innerHTML = `
+<div style="
+    max-width:360px;
+    margin:0 auto;
+    background:#ffffff;
+    border:2px dashed #ccc;
+    border-radius:14px;
+    padding:16px;
+    box-shadow:0 6px 14px rgba(0,0,0,0.15);
+">
 
-            <b>📸 FONTOS!</b><br><br>
+    <div style="
+        text-align:center;
+        font-weight:bold;
+        font-size:18px;
+        margin-bottom:10px;
+        color:#06326e;
+    ">
+        PÖRGETÉSI BIZONYLAT
+    </div>
 
-            A pörgetés eredményéről készíts képernyőképet! <br>  <br>  1.) Majd küldd el a fotót a 
-            <b>Pörgető Nyereményfelvétel</b> űrlapon, vagy <br> 2.) Küldd el a
-            <b>vakaciovagyo@gmail.com</b> , e-mail címre, vagy <br> 3.) Küldd el  <b> Kristófnak a messengeren </b> a nyeremény jóváírása érdekében.
+    <hr style="border-top:1px dashed #ccc;">
 
-        </div>
+    <!-- 🔥 EZ A TELJES EGYMONDATOS RÉSZ -->
+    <div style="
+        font-size:14px;
+        line-height:1.8;
+        text-align:center;
+    ">
+
+        A <b style="color:#06326e;">${name}</b> nevű pörgető a 
+        <b style="color:#06326e;">${code}</b> kóddal, 
+        <b style="color:#06326e;">${claim}</b> nyereményfelvételi móddal 
+        összesen <b style="color:#06326e;">${s.uses}</b> pörgetést hajtott végre, 
+        melyek során 
+        <span style="color:#28a745;font-weight:bold;">
+            ${prizesList}
+        </span>
+        nyereményeket nyert meg, így az összes megnyert összeg 
+        <b style="color:#d97706;">
+            ${s.history.reduce((a,b)=>a+b,0).toLocaleString("hu-HU")} Ft
+        </b>.
 
     </div>
-    `;
 
+    <hr style="border-top:1px dashed #ccc;margin:10px 0;">
+
+    <!-- FONTOS -->
+    <div style="
+        text-align:center;
+        background:#fff8d6;
+        border:2px solid #ffcc00;
+        border-radius:10px;
+        padding:10px;
+        font-size:13px;
+        line-height:1.7;
+    ">
+        <b style="color:#d97706;">📸 FONTOS!</b><br><br>
+
+        A pörgetés eredményéről <b>készíts képernyőképet</b>, majd azt 
+        <b>töltsd fel az űrlapon</b>, vagy küldd el a 
+        <b>vakaciovagyo@gmail.com</b> e-mail címre, vagy 
+        <b>messengeren Kristófnak</b> a nyeremény jóváírása érdekében.
+    </div>
+
+    <hr style="border-top:1px dashed #ccc;margin:10px 0;">
+
+    <!-- ALÁÍRÁS -->
+    <div style="text-align:center;font-size:13px;">
+        Nyereményéhez gratulálunk!<br>
+        <b>VakációVágyó</b><br><br>
+        <span style="font-size:12px;color:#666;">
+            ${now}
+        </span>
+    </div>
+
+</div>
+`;
     spinning = false;
 
 }, 4200);
