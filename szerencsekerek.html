@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Szerencsekerék</title>
 
 <style>
@@ -160,9 +160,9 @@ button{
     align-items:flex-start;
     gap:8px;
     max-width:280px;
-    text-align:left;
+    text-align:center;
     line-height:1.25;
-    font-size:12px;
+    font-size:14px;
 }
 
 .rules-label input{
@@ -210,8 +210,11 @@ button{
         #e52626 342deg 360deg
     );
     box-shadow:inset 0 0 0 4px #06326e,0 6px 12px rgba(0,0,0,.3);
-    transition:transform 4s cubic-bezier(.12,.72,.18,1);
     position:relative;
+    transform:translateZ(0) rotate(0deg);
+    will-change:transform;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
 }
 
 .wheel::after{
@@ -281,10 +284,14 @@ button{
         gap:10px;
     }
 
-    .wheel-wrap,
+    .wheel-wrap{
+        width:240px;
+        height:240px;
+    }
+
     .wheel{
-        width:165px;
-        height:165px;
+        width:240px;
+        height:240px;
     }
 
     .wheel::after{
@@ -405,7 +412,7 @@ Elfogadom a játékszabályzatot,
 <div class="right">
 <div class="wheel-wrap">
 <div class="pointer"></div>
-<div class="wheel" id="wheel"></div>
+<div class="wheel" id="wheel" style="transform:translateZ(0) rotate(0deg);"></div>
 </div>
 </div>
 </div>
@@ -428,7 +435,7 @@ const validCodes = {
     "X4P7N":1,
     "T9K3V":1,
     "R5W1H":1,
-    "C7Y8F":5,
+    "C7Y9F":2,
     "L2Z6P":2,
     "B4N9X":3,
     "Q1J5M":3,
@@ -519,9 +526,35 @@ function spinWheel(){
 
 currentRotation += 360 * 8 + (360 - getTargetDegree(prize));
 
-requestAnimationFrame(() => {
-    wheel.style.transform = `rotate(${currentRotation}deg)`;
-});
+// NEW smooth animation engine
+let start = null;
+let duration = 4000;
+let startRotation = currentRotation;
+let endRotation = currentRotation;
+
+endRotation += 360 * 8 + (360 - getTargetDegree(prize));
+
+function animate(timestamp){
+    if(!start) start = timestamp;
+    let progress = timestamp - start;
+
+    let t = Math.min(progress / duration, 1);
+
+    // ease-out cubic
+    let eased = 1 - Math.pow(1 - t, 3);
+
+    let current = startRotation + (endRotation - startRotation) * eased;
+
+    wheel.style.transform = `translateZ(0) rotate(${current}deg)`;
+
+    if(t < 1){
+        requestAnimationFrame(animate);
+    } else {
+        currentRotation = endRotation;
+    }
+}
+
+requestAnimationFrame(animate);
 
 setTimeout(() => {
     // Összes eddigi nyeremény
@@ -562,12 +595,12 @@ setTimeout(() => {
             border-radius:10px;
             font-size:14px;
             line-height:1.6;
-            text-align:left;
+            text-align:center;
         ">
 
             <b>📸 FONTOS!</b><br><br>
 
-            A pörgetés eredményéről készíts képernyőképet! <br> 1.) Majd küldd el a fotót a 
+            A pörgetés eredményéről készíts képernyőképet! <br>  <br>  1.) Majd küldd el a fotót a 
             <b>Pörgető Nyereményfelvétel</b> űrlapon, vagy <br> 2.) Küldd el a
             <b>vakaciovagyo@gmail.com</b> , e-mail címre, vagy <br> 3.) Küldd el  <b> Kristófnak a messengeren </b> a nyeremény jóváírása érdekében.
 
