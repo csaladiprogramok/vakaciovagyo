@@ -211,7 +211,137 @@
 }
 
 
-  </style>
+  
+.circle-card{
+background:#fff;
+padding:25px;
+margin:35px auto;
+max-width:380px;
+border-radius:25px;
+box-shadow:0 8px 25px rgba(0,0,0,.18);
+}
+.circle{
+--percent:0;
+width:170px;
+height:170px;
+margin:15px auto;
+border-radius:50%;
+background:conic-gradient(yellowgreen calc(var(--percent)*1%),#e5e5e5 0);
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+.circle:before{
+content:"";
+position:absolute;
+width:125px;
+height:125px;
+background:#fff;
+border-radius:50%;
+}
+.circle span{
+position:relative;
+font-size:28px;
+font-weight:bold;
+color:yellowgreen;
+z-index:1;
+}
+
+
+/* ==== PREMIUM DASHBOARD ==== */
+.cards-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:28px;
+margin:40px auto;
+max-width:1200px;
+align-items:start;
+}
+.circle-card{
+background:rgba(255,255,255,.95);
+backdrop-filter:blur(12px);
+border-radius:28px;
+padding:28px;
+box-shadow:0 15px 35px rgba(0,0,0,.18);
+transition:.35s;
+border:1px solid rgba(255,255,255,.8);
+}
+.circle-card:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 20px 45px rgba(0,0,0,.28);
+}
+.circle-card h2{
+margin:5px 0 20px;
+font-size:1.5rem;
+color:#556b2f;
+}
+.circle{
+width:190px;
+height:190px;
+margin:auto;
+border-radius:50%;
+background:conic-gradient(#24c96b,#19b5fe calc(var(--percent)*1%),#e8ecef 0);
+display:flex;
+justify-content:center;
+align-items:center;
+position:relative;
+animation:pop .8s ease;
+}
+.circle:before{
+content:'';
+position:absolute;
+width:145px;height:145px;
+background:white;
+border-radius:50%;
+box-shadow:inset 0 0 18px rgba(0,0,0,.08);
+}
+.circle span{
+position:relative;
+z-index:2;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+line-height:1.1;
+}
+.circle .percent{
+font-size:44px;
+font-weight:800;
+color:#169b62;
+text-shadow:0 2px 10px rgba(22,155,98,.25);
+}
+.circle .percent small{
+font-size:18px;
+vertical-align:super;
+}
+.circle .money{
+font-size:17px;
+font-weight:700;
+color:#444;
+margin-top:6px;
+}
+.circle .goal{
+font-size:13px;
+color:#888;
+}
+.individual-amount{
+font-size:1.25rem;
+font-weight:700;
+margin:18px 0;
+color:#333;
+}
+@keyframes pop{
+0%{transform:scale(.6);opacity:0}
+100%{transform:scale(1);opacity:1}
+}
+@media(max-width:768px){
+.cards-grid{grid-template-columns:1fr;}
+.circle{width:170px;height:170px;}
+.circle:before{width:128px;height:128px;}
+}
+
+</style>
 <style>
     /* Teljes képernyős, SZÜRKE, ÁTTETSZŐ háttér */
     .modal {
@@ -372,7 +502,7 @@
 </div>
 
     <h1>VakációVágyó <br>2027</h1> 
-    <p><b><i>Álomgyűjtés alakulása az <br> <span class="meret"><b><u> 1.000.000 Ft</u></b> </span><br>cél felé.</i></b></p>
+    <p><b><i>Álomgyűjtés alakulása az <br> <span class="meret"><b><u> 1.200.000 Ft</u></b> </span><br>cél felé.</i></b></p>
 
     <!-- Összesített számláló -->
     <div class="counter-box">
@@ -387,59 +517,35 @@
       </div>
     </div>
 
-    <!-- Egyéni számlálók -->
-    <div class="individual-counter">
-      <div class="individual-name">Orosz Sándor</div>
-      <!-- ÚJ: Persely adatok -->
-      <div>Perselyszámlanév: <br><span id="sandorAccountName"></span><br></div>
+    <!-- Egyéni számlálók --><div class='cards-grid'>
+<div class="circle-card">
+<h2>Orosz Sándor</h2>
+<div class="circle" id="sandorCircle"><span id="sandorPercent"></span></div>
+<div id="sandorAmount"></div>
+<div>Perselyszámlanév:<br><span id="sandorAccountName"></span></div>
+</div>
+
+<div class="circle-card">
+<h2>Orosz Kristóf</h2>
+<div class="circle" id="kristofCircle"><span id="kristofPercent"></span></div>
+<div id="kristofAmount"></div>
+<div>Perselyszámlanév:<br><span id="kristofAccountName"></span></div>
+</div>
+
+<div class="circle-card">
+<h2>Orosz Szilvia</h2>
+<div class="circle" id="szilviaCircle"><span id="szilviaPercent"></span></div>
+<div id="szilviaAmount"></div>
+<div>Perselyszámlanév:<br><span id="szilviaAccountName"></span></div>
+</div>
 
 
-      <div class="individual-amount" id="sandorAmount">0 Ft</div>
-      <!-- ÚJ: százalék -->
-      <div id="sandorPercent"></div>
 
-      <div class="progress-bar">
-        <div class="progress" id="sandorBar"></div>
-      </div>
-    </div>
-
-    <div class="individual-counter">
-      <div class="individual-name">Orosz Szilvia</div>
-      <!-- ÚJ: Persely adatok -->
-      <div>Perselyszámlanév: <br><span id="szilviaAccountName"></span></div>
-   
-
-      <div class="individual-amount" id="szilviaAmount">0 Ft</div>
-      <!-- ÚJ: százalék -->
-      <div id="szilviaPercent"></div>
-
-      <div class="progress-bar">
-        <div class="progress" id="szilviaBar"></div>
-      </div>
-    </div>
-
-    <div class="individual-counter">
-      <div class="individual-name">Orosz Kristóf</div>
-      <!-- ÚJ: Persely adatok -->
-      <div>Perselyszámlanév: <br> <span id="kristofAccountName"></span></div>
-      
-
-      <div class="individual-amount" id="kristofAmount">0 Ft</div>
-      <!-- ÚJ: százalék -->
-      <div id="kristofPercent"></div>
-
-      <div class="progress-bar">
-        <div class="progress" id="kristofBar"></div>
-      </div>
-    </div>
-
-    <div class="button-box">
+</div><div class="button-box">
       <a href="befizetesek.html">Befizetések megtekintése</a>
     </div>
   </div> <br>
-  <a href="https://smartlinetravel.hu/menu/last-minute">
-    <img src="ajanlat.png" alt="Ajánlat" style="width: 90%; max-width: 700px; height: auto; display: block; margin: 0 auto;">
-  </a>
+
 
   <script>
     // NAVIGÁCIÓS MENÜ
@@ -448,8 +554,8 @@
     }
 
     // Összesített érték
-    const currentValue = 219200;
-    const maxValue = 1000000;
+    const currentValue = 270000;
+    const maxValue = 1200000;
 
     // ÚJ: Félretett (összesítő)
     const savedValue = 0; // itt adható meg a félretett összeg
@@ -457,8 +563,10 @@
     // Egyéni értékek (befizetett)
     const sandorValue = 0;
     const szilviaValue = 0;
-    const kristofValue = 219200;
-    const individualMax = 340000;
+    const kristofValue = 270000;
+    const sandorGoal = 500000;
+    const szilviaGoal = 200000;
+    const kristofGoal = 500000;
 
     // ÚJ: Egyéni félretett értékek
     const sandorSaved = 0;
@@ -503,22 +611,16 @@
       document.getElementById('totalPercent').innerText = ` ${percentNow.toFixed(1)}%`;
     }
 
-    function updateIndividual(idAmount, idBar, value, saved, percentId) {
-      // Kiírás: (befizetett + félretett) / cél
-      const totalInd = value + saved;
-      document.getElementById(idAmount).innerText =
-        `${totalInd.toLocaleString('hu-HU')} Ft / ${individualMax.toLocaleString('hu-HU')} Ft`;
-
-      // Százalék kiírása
-      const p = individualMax > 0 ? (totalInd / individualMax) * 100 : 0;
-      if (percentId) {
-        document.getElementById(percentId).innerText = `${p.toFixed(1)}%`;
-      }
-
-      // Meglévő progress bar működését NEM módosítjuk (az eredeti value alapján)
-      const percent = Math.min(100, (value / individualMax) * 100);
-      document.getElementById(idBar).style.width = percent + "%";
-    }
+    function updateIndividual(amountId,circleId,value,saved,goal,percentId){
+ const total=value+saved;
+ const p=(total/goal)*100;
+ document.getElementById(amountId).innerText=`${total.toLocaleString('hu-HU')} Ft / ${goal.toLocaleString('hu-HU')} Ft`;
+ document.getElementById(percentId).innerHTML=
+'<div class="percent">'+Math.round(p)+'<small>%</small></div>'+
+'<div class="money">'+total.toLocaleString("hu-HU")+' Ft</div>'+
+'<div class="goal">Cél: '+goal.toLocaleString("hu-HU")+' Ft</div>';
+ document.getElementById(circleId).style.setProperty('--percent',Math.min(p,100));
+}
 
     // ÚJ: Persely adatok kiírása
     function fillAccount(idName, idNum, nameVal, numVal){
@@ -533,9 +635,9 @@
       updateProgressBar();
       updateTotalTexts();
 
-      updateIndividual("sandorAmount", "sandorBar", sandorValue, sandorSaved, "sandorPercent");
-      updateIndividual("szilviaAmount", "szilviaBar", szilviaValue, szilviaSaved, "szilviaPercent");
-      updateIndividual("kristofAmount", "kristofBar", kristofValue, kristofSaved, "kristofPercent");
+      updateIndividual("sandorAmount","sandorCircle",sandorValue,sandorSaved,sandorGoal,"sandorPercent");
+      updateIndividual("szilviaAmount","szilviaCircle",szilviaValue,szilviaSaved,szilviaGoal,"szilviaPercent");
+      updateIndividual("kristofAmount","kristofCircle",kristofValue,kristofSaved,kristofGoal,"kristofPercent");
 
       fillAccount("sandorAccountName", "sandorAccountNumber", sandorAccountName, sandorAccountNumber);
       fillAccount("szilviaAccountName", "szilviaAccountNumber", szilviaAccountName, szilviaAccountNumber);
