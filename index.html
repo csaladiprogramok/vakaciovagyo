@@ -605,6 +605,7 @@
     </div>
   </div>
 
+  <!--
   <!-- === Főoldal === -->
   <header>VakációVágyó <br>2027</header> <br>
 
@@ -646,74 +647,33 @@
     </div>
   </div>
 
+  -->
+
   <script>
-    // --- Visszaszámláló ---
+    // --- Modal visszaszámláló + automatikus továbblépés ---
     (function() {
       const t = new Date(2027, 5, 1, 0, 0, 0);
-
-
-      // Eredeti modal számláló elemei
-      const d1 = document.getElementById('days'),
-            h1 = document.getElementById('hours'),
-            m1 = document.getElementById('minutes'),
-            s1 = document.getElementById('seconds');
-
-      // ÚJ: inline számláló elemei (ha jelen vannak)
-      const d2 = document.getElementById('days2'),
-            h2 = document.getElementById('hours2'),
-            m2 = document.getElementById('minutes2'),
-            s2 = document.getElementById('seconds2');
-
-      function setValues(diff, dEl, hEl, mEl, sEl) {
-        if (!dEl || !hEl || !mEl || !sEl) return;
-        dEl.textContent = Math.floor(diff / (1000*60*60*24)).toString().padStart(2,'0');
-        hEl.textContent = Math.floor((diff / (1000*60*60)) % 24).toString().padStart(2,'0');
-        mEl.textContent = Math.floor((diff / (1000*60)) % 60).toString().padStart(2,'0');
-        sEl.textContent = Math.floor((diff / 1000) % 60).toString().padStart(2,'0');
-      }
+      const d = document.getElementById('days');
+      const h = document.getElementById('hours');
+      const m = document.getElementById('minutes');
+      const sec = document.getElementById('seconds');
 
       function update() {
-        const now = new Date(), diff = t - now;
-        if (diff <= 0) return;
-        setValues(diff, d1, h1, m1, s1);
-        setValues(diff, d2, h2, m2, s2);
+        const diff = Math.max(0, t - new Date());
+        d.textContent = Math.floor(diff / 86400000).toString().padStart(2, '0');
+        h.textContent = Math.floor((diff / 3600000) % 24).toString().padStart(2, '0');
+        m.textContent = Math.floor((diff / 60000) % 60).toString().padStart(2, '0');
+        sec.textContent = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
       }
 
-      setInterval(update, 1000);
       update();
+      setInterval(update, 1000);
 
-      setTimeout(()=>document.getElementById('vv2026-modal').classList.add('hidden'),3000);
-
+      // 5 ms után azonnal továbblép a számláló oldalra.
+      setTimeout(() => {
+        window.location.replace('szamlalo.html');
+      }, 5000);
     })();
-
-    // --- Bejelentkezés ---
-    const loginBtn = document.getElementById('loginBtn');
-    const loginModal = document.getElementById('loginModal');
-    const confirmBtn = document.getElementById('confirmBtn');
-    const passwordInput = document.getElementById('passwordInput');
-    const errorMsg = document.getElementById('errorMsg');
-
-    loginBtn.addEventListener('click', ()=>{
-      loginModal.classList.add('active');
-      passwordInput.value='';
-      errorMsg.style.display='none';
-    });
-
-    confirmBtn.addEventListener('click', ()=>{
-      if (passwordInput.value.trim() === 'NY26') {
-        window.location.href = 'szamlalo.html';
-      } else {
-        errorMsg.style.display = 'block';
-      }
-    });
-
-    window.addEventListener('keydown', e=>{
-      if (e.key === 'Escape') loginModal.classList.remove('active');
-    });
-
-    loginModal.addEventListener('click', e=>{
-      if (e.target === loginModal) loginModal.classList.remove('active');
-    });
   </script>
 </body>
 </html>
