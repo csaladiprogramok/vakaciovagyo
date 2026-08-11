@@ -341,6 +341,189 @@ color:#333;
 .circle:before{width:128px;height:128px;}
 }
 
+
+
+/* ==== MENŐBB SZÁMLÁLÓ STÍLUS – csak a fő- és egyéni számlálók ==== */
+.counter-box{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(247,255,235,.96));
+  border:1px solid rgba(154,205,50,.35);
+  border-radius:30px;
+  padding:2em 1.6em 1.7em;
+  box-shadow:
+    0 18px 45px rgba(65,90,25,.18),
+    inset 0 1px 0 rgba(255,255,255,.95);
+}
+.counter-box::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  top:-110px;
+  right:-70px;
+  background:radial-gradient(circle,rgba(154,205,50,.28),rgba(154,205,50,0) 70%);
+  pointer-events:none;
+}
+.counter-box::after{
+  content:"ÖSSZESEN";
+  display:inline-block;
+  position:relative;
+  z-index:1;
+  padding:6px 13px;
+  margin-top:18px;
+  border-radius:999px;
+  background:rgba(154,205,50,.12);
+  border:1px solid rgba(154,205,50,.28);
+  color:#5f7d22;
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:1.8px;
+}
+.counter-box .amount{
+  position:relative;
+  z-index:1;
+  margin:.15em 0 .35em;
+  font-size:clamp(2.3rem,8vw,3.7rem);
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-2px;
+  color:#628d18;
+  text-shadow:0 5px 18px rgba(98,141,24,.18);
+}
+#totalVsGoal{
+  position:relative;
+  z-index:1;
+  font-weight:750;
+  color:#3f4934;
+  font-size:1rem;
+}
+#totalPercent{
+  position:relative;
+  z-index:1;
+  display:inline-block;
+  margin-top:9px;
+  padding:6px 13px;
+  border-radius:999px;
+  background:#eef8dc;
+  color:#608b18;
+  font-weight:900;
+  font-size:1.05rem;
+}
+.counter-box .progress-bar{
+  position:relative;
+  z-index:1;
+  height:14px;
+  margin-top:18px;
+  padding:3px;
+  border-radius:999px;
+  background:#e8ecdf;
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.10);
+}
+.counter-box .progress{
+  border-radius:999px;
+  background:linear-gradient(90deg,#8fc92d,#57c979,#35b9d7);
+  box-shadow:0 0 14px rgba(111,190,75,.45);
+}
+
+/* Egyéni körszámlálók */
+.circle-card{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(249,252,244,.96));
+  border:1px solid rgba(154,205,50,.25);
+  box-shadow:0 18px 42px rgba(56,74,32,.16);
+}
+.circle-card::before{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  top:-95px;
+  right:-70px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(25,181,254,.16),rgba(25,181,254,0) 70%);
+  pointer-events:none;
+}
+.circle-card h2{
+  position:relative;
+  z-index:2;
+  font-weight:850;
+  letter-spacing:.2px;
+  color:#405823;
+}
+.circle{
+  width:198px;
+  height:198px;
+  padding:7px;
+  background:
+    conic-gradient(from -90deg,#8fcb2f 0%,#37c879 calc(var(--percent)*.55%),#22aee8 calc(var(--percent)*1%),#e6ebdf 0);
+  box-shadow:
+    0 14px 32px rgba(47,151,116,.22),
+    0 0 0 7px rgba(255,255,255,.8),
+    0 0 0 8px rgba(154,205,50,.12);
+}
+.circle:before{
+  width:148px;
+  height:148px;
+  background:linear-gradient(145deg,#ffffff,#f6faef);
+  box-shadow:
+    inset 0 0 22px rgba(83,112,43,.09),
+    0 5px 18px rgba(0,0,0,.08);
+}
+.circle .percent{
+  font-size:48px;
+  font-weight:900;
+  letter-spacing:-2px;
+  color:#4e8f2a;
+  text-shadow:0 3px 12px rgba(78,143,42,.22);
+}
+.circle .percent small{
+  font-size:17px;
+  margin-left:2px;
+  color:#20a5a6;
+}
+.circle .money{
+  margin-top:8px;
+  padding:4px 9px;
+  border-radius:999px;
+  background:rgba(154,205,50,.11);
+  color:#34402c;
+  font-size:15px;
+  font-weight:800;
+}
+.circle .goal{
+  margin-top:5px;
+  font-size:12px;
+  font-weight:650;
+  color:#7b8473;
+}
+.circle-card > div[id$="Amount"]{
+  margin:20px auto 15px;
+  width:max-content;
+  max-width:100%;
+  padding:8px 14px;
+  border-radius:14px;
+  background:#f4f8ed;
+  border:1px solid #e2ebd4;
+  color:#40502f;
+  font-weight:800;
+}
+.circle-card:hover .circle{
+  transform:scale(1.035);
+  transition:transform .3s ease, box-shadow .3s ease;
+  box-shadow:
+    0 18px 38px rgba(47,151,116,.28),
+    0 0 0 7px rgba(255,255,255,.9),
+    0 0 0 9px rgba(154,205,50,.16);
+}
+@media(max-width:768px){
+  .circle{width:180px;height:180px;}
+  .circle:before{width:134px;height:134px;}
+  .circle .percent{font-size:43px;}
+}
+
 </style>
 <style>
     /* Teljes képernyős, SZÜRKE, ÁTTETSZŐ háttér */
@@ -439,6 +622,72 @@ color:#333;
 }
 
   </style>
+
+<style>
+@media (max-width: 768px) {
+  .cards-grid {
+    gap: 12px;
+    margin-top: 22px;
+    margin-bottom: 22px;
+  }
+
+  .circle-card {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+</style>
+
+
+<style>
+/* Egyforma és szélesebb egyéni körszámláló-kártyák */
+.cards-grid {
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  max-width: 1250px;
+}
+
+.circle-card {
+  width: 100%;
+  max-width: 430px;
+  min-height: 390px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    width: 94%;
+    max-width: 460px;
+    gap: 12px;
+  }
+
+  .circle-card {
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+  }
+}
+</style>
+
+
+<style>
+/* Főszámláló pontosan ugyanolyan széles, mint az egyéni körszámláló-kártyák */
+.counter-box {
+  width: 100%;
+  max-width: 430px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .counter-box {
+    width: 94%;
+    max-width: 460px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -448,7 +697,7 @@ color:#333;
       <img
         id="modalImage"
         class="modal__img"
-        src="blokkhirdetostart.jpg"
+        src="CÉLEGYENESBEN2.jpg"
         alt="Megnyitott kép – kattints a bezáráshoz"
       />
     </div>
@@ -502,8 +751,9 @@ color:#333;
 </div>
 
     <h1>VakációVágyó <br>2027</h1> 
+    <!---
     <p><b><i>Álomgyűjtés alakulása az <br> <span class="meret"><b><u> 1.200.000 Ft</u></b> </span><br>cél felé.</i></b></p>
-
+----->
     <!-- Összesített számláló -->
     <div class="counter-box">
       <div class="amount" id="currentAmount">0 Ft</div>
@@ -554,7 +804,7 @@ color:#333;
     }
 
     // Összesített érték
-    const currentValue = 270000;
+    const currentValue = 320000;
     const maxValue = 1200000;
 
     // ÚJ: Félretett (összesítő)
@@ -563,7 +813,7 @@ color:#333;
     // Egyéni értékek (befizetett)
     const sandorValue = 0;
     const szilviaValue = 0;
-    const kristofValue = 270000;
+    const kristofValue = 320000;
     const sandorGoal = 500000;
     const szilviaGoal = 200000;
     const kristofGoal = 500000;
@@ -578,7 +828,7 @@ color:#333;
     const sandorAccountNumber = '';     // pl.: "12345678-00000000"
     const szilviaAccountName = '';
     const szilviaAccountNumber = '';
-    const kristofAccountName = 'VakációVágyó 2026 - Kristóf';
+    const kristofAccountName = 'VakációVágyó 2027 - Kristóf';
     const kristofAccountNumber = '11773047-02016142-00000000';
 
     function animateCounter() {
