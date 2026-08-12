@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nyaralási Ajánlatok 2027</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fefcc8;
+            color: #164e45;
+        }
+
+        /* =========================
+           TELJES OLDAL
+        ========================= */
+
+        .nyaralas {
+            position: relative;
+
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100svh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            overflow: hidden;
+
+            background-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(254, 252, 200, 0.15),
+                    rgba(174, 238, 202, 0.12),
+                    rgba(74, 190, 160, 0.18)
+                ),
+                url("tenger.jpg");
+
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        /* Finom világos réteg */
+
+        .nyaralas::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(
+                to bottom,
+                rgba(254, 252, 200, 0.10) 0%,
+                rgba(212, 248, 206, 0.05) 45%,
+                rgba(65, 190, 160, 0.10) 100%
+            );
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           X GOMB
+        ========================= */
+
+        .bezaras {
+            position: fixed;
+
+            top: 16px;
+            right: 16px;
+
+            z-index: 100;
+
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #247f6c;
+            background-color: #fefcc8;
+
+            border: 2px solid rgba(36, 127, 108, 0.35);
+            border-radius: 50%;
+
+            text-decoration: none;
+
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1;
+
+            box-shadow:
+                0 5px 18px rgba(20, 90, 75, 0.20);
+
+            transition:
+                background-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .bezaras:hover {
+            background-color: #247f6c;
+            color: #ffffff;
+
+            transform: scale(1.07);
+        }
+
+
+        /* =========================
+           FŐCÍM
+        ========================= */
+
+        .fejlec {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+
+            padding: 55px 70px 15px;
+
+            text-align: center;
+        }
+
+        .fejlec h1 {
+            color: #247f6c;
+
+            font-size: clamp(22px, 3.5vw, 42px);
+            font-weight: 800;
+
+            line-height: 1.15;
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            text-shadow:
+                0 2px 5px rgba(10, 70, 60, 0.35),
+                0 4px 15px rgba(10, 70, 60, 0.20);
+        }
+
+
+        /* 2027 ZÖLD */
+
+        .fejlec h1 span {
+            color: #247f6c;
+
+            font-weight: 900;
+
+            text-shadow:
+                0 1px 3px rgba(255, 255, 255, 0.60);
+        }
+
+
+        /* =========================
+           KÖZÉPSŐ TARTALOM
+        ========================= */
+
+        .tartalom {
+            position: relative;
+            z-index: 2;
+
+            flex: 1;
+
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px 20px 80px;
+        }
+
+
+        /* =========================
+           HAMAROSAN DOBOZ
+        ========================= */
+
+        .hamarosan {
+            width: min(520px, 88%);
+
+            padding: 25px;
+
+            text-align: center;
+
+            background: rgba(254, 252, 200, 0.90);
+
+            border: 1px solid rgba(255, 255, 255, 0.80);
+            border-radius: 20px;
+
+            box-shadow:
+                0 12px 35px rgba(19, 94, 79, 0.20);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            /*
+                FINOM LÜKTETŐ ANIMÁCIÓ
+            */
+            animation: lüktetes 2.2s ease-in-out infinite;
+
+            transform-origin: center;
+        }
+
+
+        /* =========================
+           LÜKTETŐ ANIMÁCIÓ
+        ========================= */
+
+        @keyframes lüktetes {
+
+            0% {
+                transform: scale(1);
+
+                box-shadow:
+                    0 12px 35px rgba(19, 94, 79, 0.20);
+            }
+
+            50% {
+                transform: scale(1.045);
+
+                box-shadow:
+                    0 16px 45px rgba(36, 127, 108, 0.38),
+                    0 0 25px rgba(140, 235, 195, 0.25);
+            }
+
+            100% {
+                transform: scale(1);
+
+                box-shadow:
+                    0 12px 35px rgba(19, 94, 79, 0.20);
+            }
+        }
+
+
+        /* =========================
+           HAMAROSAN FELIRAT
+        ========================= */
+
+        .hamarosan h2 {
+            color: #247f6c;
+
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 900;
+
+            line-height: 1.1;
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            /*
+                A szövegnek is adunk
+                egy nagyon enyhe animációt
+            */
+            animation: szovegLuktetes 2.2s ease-in-out infinite;
+        }
+
+
+        @keyframes szovegLuktetes {
+
+            0%,
+            100% {
+                opacity: 0.88;
+                text-shadow: none;
+            }
+
+            50% {
+                opacity: 1;
+
+                text-shadow:
+                    0 0 12px rgba(36, 127, 108, 0.20);
+            }
+        }
+
+
+        /* =========================
+           ALSÓ SZÖVEG
+        ========================= */
+
+        .hamarosan p {
+            margin-top: 12px;
+
+            color: #39796d;
+
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           MOBIL
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .nyaralas {
+                min-height: 100vh;
+                min-height: 100svh;
+
+                background-size: cover;
+                background-position: center center;
+            }
+
+
+            /* X gomb */
+
+            .bezaras {
+                top: 12px;
+                right: 12px;
+
+                width: 40px;
+                height: 40px;
+
+                font-size: 25px;
+            }
+
+
+            /* Főcím */
+
+            .fejlec {
+                padding:
+                    calc(68px + env(safe-area-inset-top))
+                    15px
+                    10px;
+            }
+
+            .fejlec h1 {
+                font-size: 23px;
+                line-height: 1.2;
+
+                letter-spacing: 0.5px;
+            }
+
+
+            /* 2027 mobilon */
+
+            .fejlec h1 span {
+                display: block;
+
+                margin-top: 5px;
+
+                color: #247f6c;
+
+                font-size: 27px;
+            }
+
+
+            /* Középső rész */
+
+            .tartalom {
+                padding: 15px 15px 60px;
+            }
+
+
+            /* Hamarosan doboz */
+
+            .hamarosan {
+                width: 88%;
+                max-width: 360px;
+
+                padding: 20px 15px;
+
+                border-radius: 17px;
+            }
+
+
+            /* Hamarosan felirat */
+
+            .hamarosan h2 {
+                font-size: 31px;
+
+                letter-spacing: 1px;
+            }
+
+
+            /* Leírás */
+
+            .hamarosan p {
+                margin-top: 10px;
+
+                font-size: 14px;
+                line-height: 1.4;
+            }
+        }
+
+
+        /* =========================
+           NAGYON KICSI MOBIL
+        ========================= */
+
+        @media (max-width: 360px) {
+
+            .fejlec h1 {
+                font-size: 20px;
+            }
+
+            .fejlec h1 span {
+                font-size: 24px;
+            }
+
+            .hamarosan {
+                width: 86%;
+                padding: 18px 12px;
+            }
+
+            .hamarosan h2 {
+                font-size: 27px;
+            }
+
+            .hamarosan p {
+                font-size: 13px;
+            }
+        }
+
+
+        /* =========================
+           MOZGÁSCSÖKKENTÉS
+           Akik kikapcsolják az
+           animációkat a készülékükön
+        ========================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .hamarosan,
+            .hamarosan h2 {
+                animation: none;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <section class="nyaralas">
+
+
+        <!-- =====================
+             X GOMB
+        ====================== -->
+
+        <a
+            href="index.html"
+            class="bezaras"
+            aria-label="Bezárás"
+            title="Bezárás"
+        >
+            &times;
+        </a>
+
+
+        <!-- =====================
+             FELSŐ CÍM
+        ====================== -->
+
+        <header class="fejlec">
+
+            <h1>
+                Nyaralási ajánlatok
+                <span>2027</span>
+            </h1>
+
+        </header>
+
+
+        <!-- =====================
+             KÖZÉPSŐ TARTALOM
+        ====================== -->
+
+        <main class="tartalom">
+
+            <div class="hamarosan">
+
+                <h2>Hamarosan!</h2>
+
+                <p> 
+                    <b><i>Az utazási irodák 2027-es nyaralási ajánlataik hamarosan elérhetőek lesznek.</i></b>
+                </p>
+
+            </div>
+
+        </main>
+
+
+    </section>
+
+</body>
+</html>

@@ -194,6 +194,133 @@
   border-radius: 5px;
 }
 
+  
+    /* Modern kártyás megjelenés + névszűrő */
+    :root { --accent:#7fb52f; --accent-dark:#5d8f19; --ink:#24301b; --soft:#f7f9ef; }
+    body { background: linear-gradient(135deg,#fffbd2 0%,#f4f8df 55%,#eef7df 100%); color:var(--ink); }
+    .container { max-width:980px; padding:clamp(20px,5vw,52px); }
+    h1 { margin:24px 0 18px; letter-spacing:-.04em; color:#26351d; }
+    .filter-panel { position:sticky; top:72px; z-index:900; margin:0 auto 28px; padding:12px; display:flex; gap:9px; justify-content:center; flex-wrap:wrap; background:rgba(255,255,255,.86); border:1px solid rgba(127,181,47,.2); border-radius:18px; box-shadow:0 10px 30px rgba(55,76,33,.10); backdrop-filter:blur(10px); }
+    .filter-btn { appearance:none; border:1px solid #dfe8cf; background:#fff; color:#344225; padding:10px 15px; border-radius:999px; font:inherit; font-weight:700; cursor:pointer; transition:.2s ease; }
+    .filter-btn:hover { transform:translateY(-1px); border-color:var(--accent); box-shadow:0 5px 14px rgba(93,143,25,.13); }
+    .filter-btn.active { color:#fff; background:linear-gradient(135deg,var(--accent),var(--accent-dark)); border-color:transparent; box-shadow:0 6px 16px rgba(93,143,25,.24); }
+    .cards { gap:18px; }
+    .card { position:relative; overflow:hidden; border:1px solid rgba(127,181,47,.18); border-radius:22px; padding:22px 24px; margin-bottom:18px; background:rgba(255,255,255,.96); box-shadow:0 12px 32px rgba(48,68,29,.11); transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease; }
+    .card::before { content:''; position:absolute; inset:0 auto 0 0; width:5px; background:linear-gradient(180deg,#a8d84c,#659c1e); }
+    .card:hover { transform:translateY(-3px); box-shadow:0 18px 42px rgba(48,68,29,.16); border-color:rgba(127,181,47,.38); }
+    .card-content { display:grid; gap:7px; }
+    .card-content > div { margin:0; line-height:1.55; }
+    .label { width:auto; max-width:100%; }
+    .label2 { width:auto; min-width:105px; }
+    .download-link { display:inline-block; margin-left:8px; padding:5px 10px; border-radius:999px; background:#eff7e3; color:#507f16; font-weight:700; transition:.2s ease; }
+    .download-link:hover { text-decoration:none; background:#dff0c5; }
+    .card.filtered-out { display:none !important; }
+    @media (max-width:600px) { .filter-panel { top:66px; border-radius:15px; } .filter-btn { flex:1 1 45%; padding:9px 10px; } .card { padding:18px 17px 18px 21px; border-radius:18px; } .label2 { min-width:0; } }
+
+  
+    /* EXTRA MODERN KÁRTYÁK + MINDIG LÁTHATÓ SZŰRŐ */
+    .filter-panel {
+      position: sticky !important;
+      top: 76px !important;
+      z-index: 999 !important;
+      padding: 10px 12px !important;
+      background: rgba(255,255,255,.78) !important;
+      border: 1px solid rgba(255,255,255,.72) !important;
+      border-radius: 20px !important;
+      box-shadow: 0 12px 35px rgba(43,65,20,.16), inset 0 1px 0 rgba(255,255,255,.85) !important;
+      backdrop-filter: blur(18px) saturate(150%) !important;
+      -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+    }
+    .filter-btn { box-shadow:0 3px 10px rgba(46,65,27,.07); }
+    .filter-btn.active { transform:translateY(-1px); box-shadow:0 8px 22px rgba(93,143,25,.30) !important; }
+    .card {
+      border: 1px solid rgba(127,181,47,.16) !important;
+      border-radius: 26px !important;
+      padding: 25px 27px !important;
+      background: linear-gradient(145deg, rgba(255,255,255,.99), rgba(250,253,245,.96)) !important;
+      box-shadow: 0 14px 38px rgba(40,59,24,.10), 0 2px 7px rgba(40,59,24,.05) !important;
+      isolation:isolate;
+    }
+    .card::before {
+      width: 7px !important;
+      background: linear-gradient(180deg,#c7ef67 0%,#8fc52d 48%,#5f941c 100%) !important;
+      box-shadow: 2px 0 12px rgba(127,181,47,.16);
+    }
+    .card::after {
+      content:''; position:absolute; width:150px; height:150px; right:-70px; top:-80px;
+      border-radius:50%; background:radial-gradient(circle,rgba(183,224,94,.18),rgba(183,224,94,0) 70%);
+      z-index:-1; pointer-events:none;
+    }
+    .card:hover { transform:translateY(-5px) scale(1.006) !important; box-shadow:0 22px 50px rgba(40,59,24,.16),0 5px 14px rgba(40,59,24,.07) !important; }
+    .card-content > div { padding:4px 0; }
+    .download-link { display:inline-flex !important; align-items:center; padding:6px 11px; border-radius:10px; background:#f0f7e4; border:1px solid #dcebbf; font-weight:700; transition:.18s ease; }
+    .download-link:hover { background:#e4f2ca; text-decoration:none !important; transform:translateY(-1px); }
+    @media (max-width:600px) {
+      .filter-panel { top:68px !important; padding:8px !important; border-radius:16px !important; }
+      .card { padding:20px 18px 20px 23px !important; border-radius:21px !important; }
+    }
+
+    /* 2026-08 frissítés: a szűrő NEM tapad, a kártyák karakteresebb prémium stílust kapnak */
+    .filter-panel {
+      position: relative !important;
+      top: auto !important;
+      z-index: 2 !important;
+      background: linear-gradient(135deg, rgba(255,255,255,.94), rgba(244,250,232,.92)) !important;
+      border: 1px solid rgba(116,160,43,.18) !important;
+      box-shadow: 0 12px 30px rgba(46,65,27,.10) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    .card {
+      border: 1px solid rgba(107,151,37,.18) !important;
+      border-radius: 30px !important;
+      padding: 28px 30px 27px 34px !important;
+      background:
+        radial-gradient(circle at 94% 8%, rgba(176,221,83,.17) 0 55px, transparent 56px),
+        linear-gradient(135deg,#ffffff 0%,#fbfff5 58%,#f5faeb 100%) !important;
+      box-shadow: 0 18px 45px rgba(42,61,25,.11), inset 0 1px 0 rgba(255,255,255,.95) !important;
+    }
+    .card::before {
+      inset: 18px auto 18px 0 !important;
+      width: 7px !important;
+      border-radius: 0 10px 10px 0 !important;
+      background: linear-gradient(180deg,#d2f46d,#8fc52d 52%,#568916) !important;
+      box-shadow: 4px 0 18px rgba(111,165,31,.18) !important;
+    }
+    .card::after {
+      content: '' !important;
+      position: absolute !important;
+      width: 90px !important; height: 90px !important;
+      right: 18px !important; bottom: -54px !important; top: auto !important;
+      border: 14px solid rgba(133,184,49,.055) !important;
+      border-radius: 50% !important;
+      background: transparent !important;
+      z-index: -1 !important;
+    }
+    .card:hover {
+      transform: translateY(-7px) !important;
+      border-color: rgba(115,165,37,.34) !important;
+      box-shadow: 0 26px 58px rgba(42,61,25,.17), 0 7px 18px rgba(87,130,24,.07) !important;
+    }
+    .card-content { gap: 8px !important; }
+    .card-content > div {
+      padding: 5px 0 !important;
+      border-bottom: 1px solid rgba(76,103,45,.065);
+    }
+    .card-content > div:last-child { border-bottom: 0; }
+    .download-link {
+      border-radius: 12px !important;
+      padding: 7px 12px !important;
+      background: linear-gradient(135deg,#eff8df,#e3f2c8) !important;
+      border: 1px solid rgba(113,160,38,.20) !important;
+      box-shadow: 0 4px 12px rgba(72,112,20,.08);
+    }
+    @media (max-width:600px) {
+      .filter-panel { position:relative !important; top:auto !important; }
+      .card { padding:22px 19px 22px 25px !important; border-radius:24px !important; }
+      .card::before { inset:14px auto 14px 0 !important; width:6px !important; }
+    }
+
   </style>
 </head>
 
@@ -230,6 +357,13 @@
 
  
     <h1>Befizetések</h1>
+    <div class="filter-panel" aria-label="Szűrés befizető szerint">
+      <button class="filter-btn active" type="button" data-person="all">Összes</button>
+      <button class="filter-btn" type="button" data-person="orosz-sandor">Orosz Sándor</button>
+      <button class="filter-btn" type="button" data-person="orosz-kristof">Orosz Kristóf</button>
+      <button class="filter-btn" type="button" data-person="orosz-szilvia">Orosz Szilvia</button>
+    </div>
+
 
     <div class="cards">
 
@@ -728,7 +862,7 @@
 </div>
 <b>--------------------------------------- </b>
 <br> <br>
-
+<!--
  <div class="card">
       <div class="card-title"></div>
       <div class="card-content">
@@ -778,7 +912,7 @@
       </div>
     </div>
 
-
+------>
         <p><b><i>Minden apró számít, tegyél egy picit Te is a repülőmalacba!</i></b></p>
         <p><b><i>Ne feledd! Sok kicsi, sokra megy!</i></b></p>
         <p><b><i>A megtakarításról szóló tranzakciót töltsd le és küldd el a <u>vakaciovagyo@gmail.com</u> email
@@ -793,6 +927,37 @@
         function toggleMenu() {
           document.getElementById('navMenu').classList.toggle('active');
         }
+
+        const personAliases = {
+          'orosz-sandor': ['orosz sándor', 'o.sándor', 'o. sándor'],
+          'orosz-kristof': ['orosz kristóf', 'o.kristóf', 'o. kristóf'],
+          'orosz-szilvia': ['orosz szilvia', 'o.szilvia', 'o. szilvia']
+        };
+
+        function normalizeName(text) {
+          return text.toLocaleLowerCase('hu-HU').replace(/\s+/g, ' ').trim();
+        }
+
+        function filterByPerson(person) {
+          document.querySelectorAll('.card').forEach(card => {
+            if (person === 'all') {
+              card.classList.remove('filtered-out');
+              return;
+            }
+            const text = normalizeName(card.textContent);
+            const matches = personAliases[person].some(alias => text.includes(normalizeName(alias)));
+            card.classList.toggle('filtered-out', !matches);
+          });
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(button => {
+          button.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            filterByPerson(button.dataset.person);
+          });
+        });
+
       </script>
 </body>
 

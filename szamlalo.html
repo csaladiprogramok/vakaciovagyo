@@ -84,13 +84,11 @@
         display: flex;
       }
     }
-
-    .container {
-      padding: 5vw;
-      max-width: 700px;
-      margin: auto;
-    }
-
+.container {
+  padding: 2vw 2vw 0 2vw;
+  max-width: 700px;
+  margin: 0 auto;
+}
     h1 {
       font-size: 6vw;
       margin-bottom: 1em;
@@ -527,15 +525,15 @@ color:#333;
 </style>
 <style>
     /* Teljes képernyős, SZÜRKE, ÁTTETSZŐ háttér */
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(128, 128, 128, 0.6); /* szürke + áttetsző */
-      z-index: 9999;
-    }
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 20, 0.98);
+  z-index: 9999;
+}
     .hidden { display: none; }
 
     /* Tartó */
@@ -721,16 +719,18 @@ color:#333;
       <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/fooldal"><i style="color: red;">Kilépés</i></a>
     </div>
   </div>
-<!---
-  <div class="container">
-<div class="kozep">
-  <img src="nya3.JPG"
-       alt="Útmutató"
-       class="kozep-kep"
-       onclick="openOfferModal()"
-       style="cursor:pointer;">
+
+<div class="container">
+    <div class="kozep">
+        <a href="nyaralasiajanlatok.html">
+            <img src="nyajanlatok.jpg"
+                 alt="Nyaralási ajánlatok 2027"
+                 class="kozep-kep"
+                 style="cursor:pointer;">
+        </a>
+    </div>
 </div>
----->
+
 <!-- AJÁNLATI MODAL -->
 <div class="modal hidden" id="offerModal">
   <div class="modal__box">
@@ -749,8 +749,9 @@ color:#333;
     </div>
   </div>
 </div>
-
+<!----
     <h1>VakációVágyó <br>2027</h1> 
+    --->
     <!---
     <p><b><i>Álomgyűjtés alakulása az <br> <span class="meret"><b><u> 1.200.000 Ft</u></b> </span><br>cél felé.</i></b></p>
 ----->
