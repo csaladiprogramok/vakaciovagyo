@@ -6,6 +6,30 @@
   <title>Rangom</title>
   <link rel="stylesheet" href="keresdrofit.css">
   <style>
+.szerencsekerek-gomb {
+  display: inline-block;
+  padding: 14px 30px;
+  background: #315a96;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(49, 90, 150, 0.22);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.szerencsekerek-gomb:hover {
+  background: #244878;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(49, 90, 150, 0.30);
+}
+
+.szerencsekerek-gomb:active {
+  transform: translateY(0);
+}
+</style>
+  <style>
     :root{
       --bg: #fffbe9;
       --fg: #333;
@@ -330,6 +354,20 @@
         font-size: 12px;
       }
     }
+
+
+    /* ===== BÓNUSZPERSELY ===== */
+    .bonusz-wrap{max-width:640px;margin:0 auto;padding:0 16px 48px;}
+    .bonusz-details{background:#fff;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.08);overflow:hidden;}
+    .bonusz-details summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:800;font-size:1.1rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#fff7c9,#ffe6a8);}
+    .bonusz-details summary::-webkit-details-marker{display:none}.bonusz-details summary::after{content:'⌄';font-size:1.4rem;transition:.2s}.bonusz-details[open] summary::after{transform:rotate(180deg)}
+    .bonusz-belso{padding:20px 16px 18px;}
+    .jar-box{display:flex;justify-content:center;padding:10px 0 22px}.jar{position:relative;width:180px;height:230px;filter:drop-shadow(0 12px 12px rgba(0,0,0,.12));animation:jarfloat 3s ease-in-out infinite}.jar-lid{position:absolute;z-index:3;left:25px;top:0;width:130px;height:27px;border-radius:7px;background:repeating-linear-gradient(90deg,#71b6c9 0 8px,#91cfdb 8px 15px);border:3px solid #5795a5}.jar-body{position:absolute;left:10px;right:10px;top:24px;bottom:0;border:5px solid rgba(255,255,255,.9);border-radius:25px 25px 38px 38px;background:rgba(204,241,249,.38);overflow:hidden;box-shadow:inset 8px 5px 15px rgba(255,255,255,.7)}.jar-fill{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(#ffe274,#ffb648);transition:height .7s ease}.jar-fill::before{content:'';position:absolute;left:-5%;top:-8px;width:110%;height:17px;border-radius:50%;background:#ffe98e}.jar-shine{position:absolute;z-index:2;left:25px;top:48px;width:12px;height:110px;border-radius:20px;background:rgba(255,255,255,.65)}.jar-amount{position:absolute;z-index:4;left:50%;top:112px;transform:translateX(-50%);width:130px;text-align:center;padding:10px 5px;border-radius:12px;background:#fff9da;border:2px dashed #e0b04a;font-weight:900;color:#155e75}.jar-caption{text-align:center;font-size:.88rem;color:#666;margin-top:-10px;margin-bottom:18px}
+    @keyframes jarfloat{50%{transform:translateY(-5px)}}
+    .bonusz-lista{display:grid;gap:12px}.bonusz-kartya{border:1px solid #eee3c5;border-radius:13px;padding:14px;background:#fffdf5;display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center}.bonusz-nev{font-weight:800}.bonusz-osszeg{font-weight:900;color:#e26f3e;text-align:right}.bonusz-bizonylat{font-size:.88rem;color:#666;min-width:0;overflow-wrap:anywhere}.letoltes{display:inline-block;text-decoration:none;text-align:center;padding:9px 13px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;font-weight:800;font-size:.88rem;white-space:nowrap}
+    @media(max-width:520px){.bonusz-kartya{grid-template-columns:1fr}.bonusz-osszeg{text-align:left}.letoltes{width:100%}.jar{transform:scale(.92)} }
+    @media(prefers-reduced-motion:reduce){.jar{animation:none}}
+
   </style>
 </head>
 
@@ -369,7 +407,7 @@
     <p class="helper">Írd be a négyjegyű születési éved, majd kattints a „Lekérdezés” gombra. <br> Nézd meg az elért pontszámodat, rangodat. <br><br>A játékoskártyán lévő pontjaid utoljára <b><i>2026.08.11. 21:30 - kor </i></b>voltak frissítve!</p>
     <p style="text-align: center;">
     <a href="pontgyujtoszabalyzat.html" class="szabalyzat-gomb">
-        <b>Elolvasom a játékszabályzatot</b>
+        <b>JÁTÉKSZABÁLYZAT</b>
     </a>
 </p>
 
@@ -381,6 +419,35 @@
       </div>
       <div id="feedback" class="result" aria-live="polite"></div>
     </div>
+    <div style="text-align: center; margin: 30px 0;">
+  <a href="szerencsekerek.html" class="szerencsekerek-gomb">
+    🎡 SZERENCSEKERÉK 🎡
+  </a>
+</div>
+
+  <!-- BÓNUSZPERSELY: a teljes persely + kártyalista együtt nyílik le -->
+  <div class="bonusz-wrap">
+    <details class="bonusz-details">
+      <summary>🫙 BónuszPersely</summary>
+      <div class="bonusz-belso">
+        <div class="jar-box">
+          <div class="jar" aria-label="BónuszPersely">
+            <div class="jar-lid"></div>
+            <div class="jar-body"><div class="jar-fill" id="bonuszJarFill"></div></div>
+            <div class="jar-shine"></div>
+            <div class="jar-amount" id="bonuszJarAmount">0 Ft</div>
+          </div>
+        </div>
+        
+<!------
+        <div class="bonusz-lista">
+          <div class="bonusz-kartya"><div class="bonusz-nev">Kristóf</div><div class="bonusz-osszeg">15 000 Ft</div><div class="bonusz-bizonylat">Bizonylat: kristof-2026-08.pdf</div><a class="letoltes" href="bizonylatok/kristof-2026-08.pdf" download>Letöltés</a></div>
+          <div class="bonusz-kartya"><div class="bonusz-nev">Szilvia</div><div class="bonusz-osszeg">10 000 Ft</div><div class="bonusz-bizonylat">Bizonylat: szilvia-2026-08.pdf</div><a class="letoltes" href="bizonylatok/szilvia-2026-08.pdf" download>Letöltés</a></div>
+          <div class="bonusz-kartya"><div class="bonusz-nev">Sándor</div><div class="bonusz-osszeg">15 000 Ft</div><div class="bonusz-bizonylat">Bizonylat: sandor-2026-08.pdf</div><a class="letoltes" href="bizonylatok/sandor-2026-08.pdf" download>Letöltés</a></div>
+        </div>
+        ----->
+      </div>
+    </details>
   </div>
 
   <script>
@@ -455,6 +522,22 @@
 
     updateCountdown();
     setInterval(updateCountdown, 60000);
+  </script>
+
+  <script>
+    // ===== BÓNUSZPERSELY BEÁLLÍTÁS =====
+    // Csak ezeket az értékeket kell átírnod a persely állításához.
+    const BONUSZ_PERSELY_OSSZEG = 0;
+    const BONUSZ_PERSELY_CEL = 100000;
+
+    (function(){
+      const osszeg = Math.max(0, Number(BONUSZ_PERSELY_OSSZEG) || 0);
+      const cel = Math.max(1, Number(BONUSZ_PERSELY_CEL) || 1);
+      const szazalek = Math.min(100, (osszeg / cel) * 100);
+      document.getElementById('bonuszJarFill').style.height = szazalek + '%';
+      document.getElementById('bonuszJarAmount').textContent =
+        new Intl.NumberFormat('hu-HU').format(osszeg) + ' Ft';
+    })();
   </script>
 
 </body>
