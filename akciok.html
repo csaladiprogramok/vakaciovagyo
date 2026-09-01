@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="hu">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Akciók</title>
+
   <style>
     html,
     body {
       margin: 0;
       padding: 0;
       background: #fefcc8;
-      /* ugyanaz a háttér mindkettőn */
       min-height: 100dvh;
-      /* teljes mobilnézet lefedése */
     }
 
     body {
@@ -162,13 +160,10 @@
 
     button {
       background-color: #22c55e;
-      /* zöld háttér */
       color: #fff;
-      /* fehér szöveg */
       border: none;
       padding: 10px 16px;
       border-radius: 9999px;
-      /* teljesen lekerekített */
       font-weight: 600;
       cursor: pointer;
       transition: background-color .2s ease;
@@ -176,59 +171,194 @@
 
     button:hover {
       background-color: #16a34a;
-      /* sötétebb zöld hover-re */
     }
 
     button:focus {
       outline: 2px solid #bbf7d0;
-      /* halvány zöld fókuszkeret */
       outline-offset: 2px;
     }
+
     footer {
       margin-top: auto;
       text-align: center;
       padding: 10px;
-      
     }
 
     footer a {
       text-decoration: none;
-      color: #007bff; /* link színe */
+      color: #007bff;
       font-weight: bold;
     }
 
     footer a:hover {
       text-decoration: underline;
     }
-    .kozep {
-  text-align: center;
-  margin: 20px 0;
-  margin-top: 0px;
-}
 
-.kozep-kep {
-  width: 90%;
-  max-width: 700px;
-  height: auto;
-  border-radius: 20px;
-  display: block;
-  margin: 0 auto;
-  margin-top: 0px;
-}
+    .kozep {
+      text-align: center;
+      margin: 20px 0;
+      margin-top: 0px;
+    }
+
+    .kozep-kep {
+      width: 90%;
+      max-width: 700px;
+      height: auto;
+      border-radius: 20px;
+      display: block;
+      margin: 0 auto;
+      margin-top: 0px;
+    }
+
+    /* ===== NYÁRI VISSZASZÁMLÁLÓ ===== */
+    #summer-countdown {
+      /* 💻 ASZTALI / LAPTOP: ezt állítsd */
+      top: 80px;
+
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 900;
+
+      width: min(76%, 520px);
+      min-height: 28px;
+      padding: 2px 8px;
+      box-sizing: border-box;
+
+      background: rgba(255,255,255,.96);
+      border-radius: 8px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      overflow: hidden;
+
+      color: #155e75;
+      font-size: clamp(11px, 1.5vw, 14px);
+      font-weight: 800;
+      line-height: 1;
+
+      box-shadow: 0 3px 9px rgba(0,0,0,.12);
+    }
+
+    #summer-countdown::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 -35%;
+      width: 30%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,215,0,.62),
+        transparent
+      );
+      animation: shine 4s linear infinite;
+    }
+
+    #summer-countdown .sun,
+    #summer-countdown .palm,
+    #summer-countdown .text {
+      position: relative;
+      z-index: 1;
+    }
+
+    #summer-countdown .text {
+      flex: 1;
+      min-width: 0;
+      text-align: center;
+      line-height: 1.05;
+      white-space: nowrap;
+    }
+
+    #summer-countdown .sun,
+    #summer-countdown .palm {
+      flex: 0 0 auto;
+      font-size: 15px;
+    }
+
+    #summer-countdown .sun {
+      animation: sun 2.4s ease-in-out infinite;
+    }
+
+    #summer-countdown .palm {
+      transform-origin: bottom center;
+      animation: palm 2.2s ease-in-out infinite;
+    }
+
+    #summer-countdown .days-highlight {
+      color: #ff4f87;
+      font-size: inherit;
+      font-weight: 900;
+      display: inline-block;
+    }
+
+    @keyframes shine {
+      from { left: -35%; }
+      to   { left: 120%; }
+    }
+
+    @keyframes sun {
+      0%,100% { transform: rotate(-8deg) scale(1); }
+      50%     { transform: rotate(8deg) scale(1.08); }
+    }
+
+    @keyframes palm {
+      0%,100% { transform: rotate(-4deg); }
+      50%     { transform: rotate(4deg); }
+    }
+
+    /* 📱 MOBIL: külön állítható TOP */
+    @media (max-width: 700px) {
+      #summer-countdown {
+        top: 68px;   /* 📱 MOBILON EZT ÁLLÍTSD */
+
+        width: 78%;
+        max-width: 360px;
+        min-height: 25px;
+        padding: 2px 6px;
+        gap: 3px;
+        border-radius: 7px;
+        font-size: clamp(9px, 2.8vw, 11px);
+      }
+
+      #summer-countdown .sun,
+      #summer-countdown .palm {
+        font-size: 13px;
+      }
+    }
+
+    /* Keskeny telefonon csak a méret változik, a TOP nem */
+    @media (max-width: 380px) {
+      #summer-countdown {
+        top: 12%;
+        width: 82%;
+        max-width: 300px;
+        font-size: 9px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+
+      #summer-countdown .sun,
+      #summer-countdown .palm {
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  
   <!-- NAVBAR -->
   <div class="navbar">
     <a href="index.html" class="logo">VakációVágyó 2027</a>
+
     <div class="hamburger" onclick="toggleMenu()">
       <div></div>
       <div></div>
       <div></div>
     </div>
+
     <div class="menu" id="navMenu">
       <a href="szamlalo.html">Számláló</a>
       <a href="befizetesek.html">Befizetések</a>
@@ -240,96 +370,61 @@
     </div>
   </div>
 
+  <!-- NYÁRI VISSZASZÁMLÁLÓ -->
+  <div id="summer-countdown">
+    <span class="sun">☀️</span>
+    <span class="text">
+      MÁR CSAK
+      <span class="days-highlight"><span id="days">...</span> NAP</span>
+      ÉS ITT A NYÁR!
+    </span>
+    <span class="palm">🌴</span>
+  </div>
+
   <main class="container">
-    <!--
-<div class="kozep">
-  <a href="szerencsekerek.html">
-    <img src="porgessesnyerj.jpg"
-         alt="Útmutató"
-         class="kozep-kep"
-         style="cursor:pointer;">
-  </a>
-</div>
- --->
+
     <h1>KIEMELT AJÁNLAT</h1>
 
-            <article class="card">
-      <img src="CÉLEGYENESBEN.jpg" alt="Akció">
-      <div class="card-body">
-        <h3 class="card-title">CÉLEGYENESBEN! </h3>
-        <div style="text-align: justify;">
-  <p>
-    <strong>CÉLEGYENESBEN!</strong> Fogjunk össze, tegyünk félre, és valósítsuk meg együtt az álmunkat: <strong>utazzunk az Egyenlítő környékére!</strong>
-  </p>
-
-  <p>
-    A cél, hogy <strong>2027. június 06-ig</strong> összegyűjtsük a szükséges megtakarítást: <strong>Apa 500.000 Ft, Kristóf 500.000 Ft, Anya 200.000 Ft.</strong>
-  </p>
-
-  <p>
-    <strong>Sok kicsi, sokra megy!</strong> Kövessük együtt a számlálónk gyarapodását, és haladjunk lépésről lépésre a <strong>közös nyaralásunk felé!</strong>
-  </p>
-</div>
-        <p class="card-text"> <b>Promóciós időszak: <br> 2026.08.01. - 2027.06.06.</b></p>
-        <a href="szamlalo.html"><button>MEGNÉZEM A SZÁMLÁLÓNKAT </button></a>
-      </div>
-    </article> <br>
-    <!----
-        <article class="card">
-      <img src="start.jpg" alt="Akció">
-      <div class="card-body">
-        <h3 class="card-title">START 27 </h3>
-        <p class="card-text"> <b>Promóciós időszak: <br> 2026.06.01. - 2026.08.31.</b></p>
-        <p><b><i>A játékszabályzatot <a href="https://drive.google.com/file/d/1co9dSFC6aDbKmU3fxganFNEdLRYsUmZg/view?usp=sharing">ide kattintva</a> éred el!</p></i></b>
-        <a href="teljesitesinaplostart27.html"><button>MEGNÉZEM A TELJESÍTÉSI NAPLÓT </button></a>
-      </div>
-    </article> <br>
-    ----->
-  <!-----
     <article class="card">
-      <img src="sksmakcio.jpg" alt="Akció">
+      <img src="CÉLEGYENESBEN.jpg" alt="Akció">
+
       <div class="card-body">
-        <h3 class="card-title"> Sok kicsi, sokra megy! </h3>
-        <p class="card-text"> <b>Promóciós időszak: <br> 2025. október 01. - 2026. június 05.</b></p>
-        <p><b><i>A játékszabályzatot <a href="sksm.html">ide kattintva</a> éred el!</p></i></b>
-        <a href="teljesitesinaplo.html"><button>MEGNÉZEM A TELJESÍTÉSI NAPLÓT </button></a>
+        <h3 class="card-title">CÉLEGYENESBEN!</h3>
+
+        <div style="text-align: justify;">
+          <p>
+            <strong>CÉLEGYENESBEN!</strong> Fogjunk össze, tegyünk félre, és valósítsuk meg együtt az álmunkat:
+            <strong>utazzunk az Egyenlítő környékére!</strong>
+          </p>
+
+          <p>
+            A cél, hogy <strong>2027. június 06-ig</strong> összegyűjtsük a szükséges megtakarítást:
+            <strong>Apa 500.000 Ft, Kristóf 500.000 Ft, Anya 200.000 Ft.</strong>
+          </p>
+
+          <p>
+            <strong>Sok kicsi, sokra megy!</strong> Kövessük együtt a számlálónk gyarapodását,
+            és haladjunk lépésről lépésre a <strong>közös nyaralásunk felé!</strong>
+          </p>
+        </div>
+
+        <p class="card-text">
+          <b>Promóciós időszak: <br> 2026.08.01. - 2027.06.06.</b>
+        </p>
+
+        <a href="szamlalo.html">
+          <button>MEGNÉZEM A SZÁMLÁLÓNKAT</button>
+        </a>
       </div>
-    </article> <br>
-    ------->
-
-
-
-
-  <!-- EGY KÁRTYA 
-
-    <h1>AKCIÓK</h1>
-
-    
-
-    <p style="text-align: center;"><b><i>Jelenleg nincs rendelkezésre álló akciónk. Tekintsd meg a kiemelt
-          ajánlatunkat!</i></b></p>
+    </article>
     <br>
 
--->
-    <!-----
-    <article class="card">
-      <img src="SUM.jpg" alt="Akció">
-      <div class="card-body">
-        <h3 class="card-title"> SOSEM VOLT MÉG ILYEN EGYSZERŰ </h3>
-        <p class="card-text"> <b>Promóciós időszak: <br> 2026. január 24. - 2026. január 31.</b></p>
-        <p> <b><i>Számold össze, hogy összesen: </i></b><br> - hány darab családi közös programunk van a <b>CSALÁDI PROGRAMJAINK </b>webalkalmazásunkban, <br> - hány darab befizetés szerepel a <b>VAKÁCIÓVÁGYÓ </b>rendszerében, <br> - és hány darab pipa szerepel a <b>SOK KICSI, SOKRA MEGY</b> című játék <b>TELJESÍTÉSI NAPLÓ</b> menüpontjában.<br><br> Ha megvan <b>A HELYES SZÁM</b> akkor jóváírunk a bónuszegyenlegeden <b>2000 - FT-OT!</b></p> 
-        <p><b><i>A játékszabályzatot <a href="https://drive.google.com/file/d/1ujg2FfLklbDPON53rtw1npnnPh47eyBu/view?usp=sharing">ide kattintva</a> éred el!</p></i></b>
-        <a href="https://forms.gle/uCs5SXVzRHc4Z6Ja9"><button>KÉSZ VAGYOK! BEKÜLDÖM A SZÁMOT!</button></a>
-      </div>
-    </article> <br>
+  </main>
 
--------->
-      </main>
   <footer>
     <a href="archivakciok.html">
       <h3 style="font-size: 15px;"><b><i>Archív akciók</i></b></h3>
     </a>
-
   </footer>
 
   <script>
@@ -337,7 +432,39 @@
       document.getElementById("navMenu").classList.toggle("active");
     }
   </script>
+
+  <script>
+    function updateCountdown() {
+      const now = new Date();
+      const text = document.querySelector("#summer-countdown .text");
+      const year = now.getFullYear();
+
+      const june1 = new Date(year, 5, 1, 0, 0, 0);
+      const sep1  = new Date(year, 8, 1, 0, 0, 0);
+
+      // Június 1-től augusztus 31-ig nyári felirat
+      if (now >= june1 && now < sep1) {
+        text.innerHTML = '„NYÁR VAN, ALIG FÜRDŐRUHÁBAN...”';
+        return;
+      }
+
+      // Szeptember 1-től május 31-ig visszaszámlálás
+      const target =
+        now >= sep1
+          ? new Date(year + 1, 5, 1, 0, 0, 0)
+          : june1;
+
+      const days = Math.ceil((target - now) / 86400000);
+
+      text.innerHTML =
+        'MÁR CSAK <span class="days-highlight"><span id="days">' +
+        days +
+        '</span> NAP</span> ÉS ITT A NYÁR!';
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+  </script>
+
 </body>
-
 </html>
-
