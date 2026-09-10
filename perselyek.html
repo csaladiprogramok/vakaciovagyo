@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rangom</title>
-  <link rel="stylesheet" href="keresdrofit.css">
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style>
 .szerencsekerek-gomb {
   display: inline-block;
   padding: 14px 30px;
@@ -368,148 +367,321 @@
     @media(max-width:520px){.bonusz-kartya{grid-template-columns:1fr}.bonusz-osszeg{text-align:left}.letoltes{width:100%}.jar{transform:scale(.92)} }
     @media(prefers-reduced-motion:reduce){.jar{animation:none}}
 
-  </style>
-</head>
+       .close-btn{position:fixed;top:18px;right:18px;z-index:9999;width:46px;height:46px;border:0;border-radius:50%;background:#fff;color:#18345e;box-shadow:0 6px 22px rgba(28,45,75,.18);font-size:30px;line-height:42px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s ease,box-shadow .15s ease}.close-btn:hover{transform:scale(1.06);box-shadow:0 8px 26px rgba(28,45,75,.25)}.close-btn:focus-visible{outline:3px solid #315a96;outline-offset:3px}@media print{.close-btn{display:none}}
 
-<body>
-   <div class="navbar center">
-    <a href="index.html" class="logo">VakációVágyó 2027</a>
-    <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-
-    <div class="menu" id="navMenu">
-      <a href="szamlalo.html">Számláló</a>
-      <a href="befizetesek.html">Befizetések</a>
-      <a href="eldujra.html">Éld újra</a>
-      <a href="akciok.html">Akciók</a>
-      <a href="rangom.html">Rangom</a>
-      <a href="tovabbiak.html">Továbbiak</a>
-      <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/fooldal"><i style="color: red;">Kilépés</i></a>
-    </div>
-  </div>
-
-  <!-- NYÁRI VISSZASZÁMLÁLÓ -->
-  <div id="summer-countdown">
-    <span class="sun">☀️</span>
-    <span class="text">
-      MÁR CSAK
-      <span class="days-highlight"><span id="days">...</span> NAP</span>
-      ÉS ITT A NYÁR!
-    </span>
-    <span class="palm">🌴</span>
-  </div>
-<br><br>
-  <div class="wrap">
-    <h1>RANGOM</h1>
-    <p class="helper">Írd be a négyjegyű születési éved, majd kattints a „Lekérdezés” gombra. <br> Nézd meg az elért pontszámodat, rangodat. <br><br>A játékoskártyán lévő pontjaid utoljára <b><i>2026.09.10. 22:00 - kor </i></b>voltak frissítve!</p>
-    <p style="text-align: center;">
-    <a href="pontgyujtoszabalyzat.html" class="szabalyzat-gomb">
-        <b>JÁTÉKSZABÁLYZAT</b>
-    </a>
-</p>
-
-    <div class="card">
-      <div class="field">
-        <input id="yearInput" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Írd be a születési éved!" aria-label="Születési év" />
-        <br>
-        <button id="queryBtn" aria-label="Lekérdezés gomb">Lekérdezés</button>
-      </div>
-      <div id="feedback" class="result" aria-live="polite"></div>
-    </div>
   
-
-
-  <script>
-    (function(){
-      const map = {
-        "2004": "Kristóf-K.jpg",
-        "1971": "Szilvia-K.jpg",
-        "1966": "Sándor-K.jpg"
-      };
-
-      const input = document.getElementById('yearInput');
-      const btn = document.getElementById('queryBtn');
-      const feedback = document.getElementById('feedback');
-
-      function showResult(){
-        const raw = (input.value || "").trim();
-        const year = raw.replace(/\s+/g,'');
-        feedback.innerHTML = "";
-
-        if(map[year]){
-          const img = document.createElement('img');
-          img.src = map[year];
-          img.alt = `Kép a(z) ${year} évhez`;
-          feedback.appendChild(img);
-        }else{
-          const p = document.createElement('p');
-          p.className = 'error';
-          p.textContent = 'Hibás születési dátum. Próbáld újra!';
-          feedback.appendChild(p);
-        }
-      }
-
-      btn.addEventListener('click', showResult);
-      input.addEventListener('keydown', e => {
-        if(e.key === 'Enter'){ showResult(); }
-      });
-    })();
-
-    function toggleMenu() {
-      document.getElementById('navMenu').classList.toggle('active');
+    /* ===== PRÉMIUM FŐPERSELY ===== */
+    .fo-details{
+      border:1px solid rgba(70,155,120,.24);
+      box-shadow:0 14px 34px rgba(25,105,95,.14);
     }
-  </script>
-
-  <script>
-    function updateCountdown() {
-      const now = new Date();
-      const text = document.querySelector("#summer-countdown .text");
-      const year = now.getFullYear();
-
-      const june1 = new Date(year, 5, 1, 0, 0, 0);
-      const sep1  = new Date(year, 8, 1, 0, 0, 0);
-
-      // Június 1-től augusztus 31-ig nyári felirat
-      if (now >= june1 && now < sep1) {
-        text.innerHTML = '„NYÁR VAN, ALIG FÜRDŐRUHÁBAN...”';
-        return;
-      }
-
-      // Szeptember 1-től május 31-ig visszaszámlálás
-      const target =
-        now >= sep1
-          ? new Date(year + 1, 5, 1, 0, 0, 0)
-          : june1;
-
-      const days = Math.ceil((target - now) / 86400000);
-
-      text.innerHTML =
-        'MÁR CSAK <span class="days-highlight"><span id="days">' +
-        days +
-        '</span> NAP</span> ÉS ITT A NYÁR!';
+    .fo-details summary{
+      background:linear-gradient(135deg,#eaffd8,#d9f8ec,#dff4ff);
+      color:#285b4b;
+      letter-spacing:.3px;
+    }
+    .fo-belso{
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 15% 10%,rgba(154,205,50,.13),transparent 34%),
+        radial-gradient(circle at 90% 25%,rgba(25,181,254,.12),transparent 34%);
+    }
+    .fo-status{
+      text-align:center;
+      margin:2px auto 10px;
+      font-size:.78rem;
+      font-weight:900;
+      letter-spacing:1.7px;
+      color:#39745e;
+    }
+    .fo-vault-box{
+      display:flex;
+      justify-content:center;
+      padding:8px 0 18px;
+    }
+    .fo-vault{
+      position:relative;
+      width:235px;
+      height:285px;
+      border-radius:48px 48px 58px 58px;
+      border:5px solid rgba(255,255,255,.94);
+      background:linear-gradient(145deg,rgba(218,250,244,.55),rgba(211,238,255,.42));
+      overflow:hidden;
+      box-shadow:
+        0 20px 34px rgba(25,105,95,.18),
+        inset 9px 8px 20px rgba(255,255,255,.82),
+        0 0 0 2px rgba(68,170,145,.17);
+      animation:foFloat 3.5s ease-in-out infinite;
+    }
+    .fo-vault::before{
+      content:"";
+      position:absolute;
+      z-index:5;
+      top:16px;
+      left:50%;
+      transform:translateX(-50%);
+      width:120px;
+      height:16px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#628f79,#8bc96a,#4bbbc3);
+      box-shadow:inset 0 2px 4px rgba(0,0,0,.18),0 2px 5px rgba(255,255,255,.65);
+    }
+    .fo-vault-fill{
+      position:absolute;
+      z-index:1;
+      left:0;
+      right:0;
+      bottom:0;
+      height:0;
+      background:linear-gradient(180deg,#40c8d5 0%,#4fc887 48%,#91ca32 100%);
+      transition:height 1.1s cubic-bezier(.2,.75,.25,1);
+      box-shadow:inset 0 10px 22px rgba(255,255,255,.18);
+    }
+    .fo-vault-fill::before,
+    .fo-vault-fill::after{
+      content:"";
+      position:absolute;
+      left:-10%;
+      width:120%;
+      height:22px;
+      top:-10px;
+      border-radius:50%;
+      background:rgba(109,224,203,.88);
+      animation:foWave 3s ease-in-out infinite;
+    }
+    .fo-vault-fill::after{
+      opacity:.5;
+      top:-5px;
+      animation-delay:-1.4s;
+      transform:translateX(8px);
+    }
+    .fo-vault-shine{
+      position:absolute;
+      z-index:4;
+      left:30px;
+      top:48px;
+      width:14px;
+      height:150px;
+      border-radius:20px;
+      background:linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.15));
+    }
+    .fo-vault-info{
+      position:absolute;
+      z-index:6;
+      inset:58px 24px auto;
+      text-align:center;
+      padding:17px 10px 14px;
+      border-radius:22px;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(255,255,255,.95);
+      box-shadow:0 10px 25px rgba(32,96,78,.14);
+      backdrop-filter:blur(6px);
+    }
+    .fo-percent{
+      font-size:2.35rem;
+      line-height:1;
+      font-weight:950;
+      letter-spacing:-1.5px;
+      color:#278d69;
+    }
+    .fo-amount{
+      margin-top:9px;
+      font-size:1.18rem;
+      font-weight:950;
+      color:#294b43;
+    }
+    .fo-goal{
+      margin-top:6px;
+      font-size:.78rem;
+      font-weight:750;
+      color:#687b75;
+    }
+    .fo-progress-track{
+      width:min(360px,90%);
+      height:12px;
+      margin:4px auto 2px;
+      padding:2px;
+      border-radius:999px;
+      background:#e6eee8;
+      box-shadow:inset 0 2px 5px rgba(0,0,0,.08);
+    }
+    .fo-progress-bar{
+      width:0;
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,#91ca32,#4fc887,#40bddd);
+      transition:width 1.1s cubic-bezier(.2,.75,.25,1);
+    }
+    .fo-caption{
+      text-align:center;
+      margin:9px 0 2px;
+      font-size:.82rem;
+      color:#61716c;
+      font-weight:650;
+    }
+    @keyframes foFloat{50%{transform:translateY(-5px)}}
+    @keyframes foWave{
+      0%,100%{transform:translateX(-7%) scaleY(1)}
+      50%{transform:translateX(7%) scaleY(.72)}
+    }
+    @media(max-width:520px){
+      .fo-vault{width:215px;height:265px}
+      .fo-percent{font-size:2.1rem}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .fo-vault,.fo-vault-fill::before,.fo-vault-fill::after{animation:none}
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 60000);
-  </script>
+
+    /* ===== FIX VISSZA X ===== */
+    .close-btn{
+      position:fixed !important;
+      top:18px !important;
+      right:18px !important;
+      left:auto !important;
+      bottom:auto !important;
+      width:46px !important;
+      min-width:46px !important;
+      max-width:46px !important;
+      height:46px !important;
+      padding:0 !important;
+      margin:0 !important;
+      flex:none !important;
+      transform:none !important;
+      z-index:99999 !important;
+    }
+    .close-btn:hover,
+    .close-btn:active,
+    .close-btn:focus{
+      transform:none !important;
+    }
+    @media (max-width:520px){
+      .close-btn{
+        width:46px !important;
+        min-width:46px !important;
+        max-width:46px !important;
+        height:46px !important;
+        top:14px !important;
+        right:14px !important;
+      }
+    }
+
+</style>
+</head>
+<body> 
+    <br><br> <h1>PERSELYEK</h1>
+    <h4 style="text-align: center;"><i>A weboldal megmutatja miként oszlik fel a VakációVágyó rendszerben összegyűjtött aktuális pénzösszeg.</i></h4>
+    <p style="text-align: center;">A weboldalon lévő perselyek utoljára <b><i>2026.09.10. 22:00 - kor </i></b>voltak frissítve!</p>  <br>
+
+      <button class="close-btn" type="button" aria-label="Visszalépés" title="Vissza" onclick="window.location.href='szamlalo.html'">&times;</button>
+      
+      
+            <div class="bonusz-wrap">
+    <details class="bonusz-details fo-details">
+      <summary>💎 FőPersely</summary>
+      <div class="bonusz-belso fo-belso">
+        <div class="fo-status">A NAGY KÖZÖS CÉL</div>
+
+        <div class="fo-vault-box">
+          <div class="fo-vault" aria-label="FőPersely">
+            <div class="fo-vault-fill" id="foJarFill"></div>
+            <div class="fo-vault-shine"></div>
+
+            <div class="fo-vault-info">
+              <div class="fo-percent" id="foJarPercent">0%</div>
+              <div class="fo-amount" id="foJarAmount">0 Ft</div>
+              <div class="fo-goal" id="foJarGoal">Cél: 1 200 000 Ft</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fo-progress-track">
+          <div class="fo-progress-bar" id="foProgressBar"></div>
+        </div>
+        <div class="fo-caption">VakációVágyó 2027 • FőPersely</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="bonusz-wrap">
+    <details class="bonusz-details">
+      <summary>🫙 BónuszPersely</summary>
+      <div class="bonusz-belso">
+        <div class="jar-box">
+          <div class="jar" aria-label="BónuszPersely">
+            <div class="jar-lid"></div>
+            <div class="jar-body"><div class="jar-fill" id="bonuszJarFill"></div></div>
+            <div class="jar-shine"></div>
+            <div class="jar-amount" id="bonuszJarAmount">0 Ft</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
 
   <script>
-    // ===== BÓNUSZPERSELY BEÁLLÍTÁS =====
-    // Csak ezeket az értékeket kell átírnod a persely állításához.
+    // ===== PERSELYEK BEÁLLÍTÁSA =====
+    // Csak ezt a 4 értéket kell átírnod.
+
+    // FőPersely
+    const FO_PERSELY_OSSZEG = 350000;
+    const FO_PERSELY_CEL = 1200000;
+
+    // BónuszPersely
     const BONUSZ_PERSELY_OSSZEG = 0;
     const BONUSZ_PERSELY_CEL = 100000;
 
-    (function(){
-      const osszeg = Math.max(0, Number(BONUSZ_PERSELY_OSSZEG) || 0);
-      const cel = Math.max(1, Number(BONUSZ_PERSELY_CEL) || 1);
-      const szazalek = Math.min(100, (osszeg / cel) * 100);
-      document.getElementById('bonuszJarFill').style.height = szazalek + '%';
-      document.getElementById('bonuszJarAmount').textContent =
-        new Intl.NumberFormat('hu-HU').format(osszeg) + ' Ft';
-    })();
+    function frissitPersely(osszeg, cel, fillId, amountId, percentId, goalId, progressId) {
+      const aktualisOsszeg = Math.max(0, Number(osszeg) || 0);
+      const celOsszeg = Math.max(1, Number(cel) || 1);
+      const szazalek = Math.min(100, (aktualisOsszeg / celOsszeg) * 100);
+
+      const fill = document.getElementById(fillId);
+      const amount = document.getElementById(amountId);
+      const percent = percentId ? document.getElementById(percentId) : null;
+      const goal = goalId ? document.getElementById(goalId) : null;
+      const progress = progressId ? document.getElementById(progressId) : null;
+
+      if (fill) fill.style.height = szazalek + "%";
+
+      if (amount) {
+        amount.textContent =
+          new Intl.NumberFormat("hu-HU").format(aktualisOsszeg) + " Ft";
+      }
+
+      if (percent) {
+        percent.textContent = szazalek.toFixed(1).replace(".", ",") + "%";
+      }
+
+      if (goal) {
+        goal.textContent =
+          "Cél: " + new Intl.NumberFormat("hu-HU").format(celOsszeg) + " Ft";
+      }
+
+      if (progress) {
+        progress.style.width = szazalek + "%";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      frissitPersely(
+        FO_PERSELY_OSSZEG,
+        FO_PERSELY_CEL,
+        "foJarFill",
+        "foJarAmount",
+        "foJarPercent",
+        "foJarGoal",
+        "foProgressBar"
+      );
+
+      frissitPersely(
+        BONUSZ_PERSELY_OSSZEG,
+        BONUSZ_PERSELY_CEL,
+        "bonuszJarFill",
+        "bonuszJarAmount"
+      );
+    });
   </script>
 
 </body>
