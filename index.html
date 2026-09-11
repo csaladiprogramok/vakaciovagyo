@@ -1,367 +1,679 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hu">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nyaraláskereső 2027</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;color:#17324d;min-height:100vh;background:radial-gradient(circle at top left,#fff4cf 0%,transparent 34%),linear-gradient(135deg,#f3d7a4,#fffaf0)}
-.page{width:min(1040px,100%);margin:0 auto;padding:10px 16px 55px}
-.top-box{width:min(820px,100%);margin:0 auto 18px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.95);border-radius:20px;padding:14px 16px 13px;box-shadow:0 12px 28px rgba(75,60,25,.12);text-align:left}
-.hero{text-align:left;padding:0}
-h1{margin-top:8px;font-size:clamp(25px,5vw,38px);font-weight:900;letter-spacing:-2px;background:linear-gradient(90deg,#087f8c,#00b8c8,#ffb703,#ff8c42,#087f8c);background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:colors 5s linear infinite;text-align:left}
-.subtitle{margin-top:12px;font-size:clamp(15px,2.5vw,19px);font-style:italic;color:#566b73;text-align:justify;text-justify:inter-word;hyphens:auto}
-.update-note{margin-top:22px;max-width:850px;font-size:15px;line-height:1.65;color:#566b73;text-align:justify;text-justify:inter-word;hyphens:auto}.update-note strong{color:#087f8c}
-.agency-title{font-size:clamp(18px,3vw,23px);font-weight:900;margin:18px auto 9px;color:#087f8c;text-align:left;width:min(820px,100%)}
-.agency-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;width:min(820px,100%);margin:0 auto}
-.agency-btn{width:100%;height:76px;border:0;border-radius:15px;overflow:hidden;cursor:pointer;position:relative;background:#fff;box-shadow:0 14px 35px rgba(80,60,20,.13);transition:transform .3s ease,box-shadow .3s ease}.agency-btn:hover{transform:translateY(-6px);box-shadow:0 22px 42px rgba(75,60,25,.2)}.agency-btn img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.agency-btn:hover img{transform:scale(1.06)}.agency-btn span{position:absolute;left:0;right:0;bottom:0;padding:7px 9px;color:#fff;font-weight:900;font-size:13px;text-align:left;background:linear-gradient(transparent,rgba(0,0,0,.72))}
-.agency-card{display:none;width:min(820px,100%);max-width:820px;margin:12px auto 0;background:rgba(255,255,255,.96);border-radius:25px;overflow:hidden;box-shadow:0 16px 38px rgba(75,60,25,.14);animation:cardIn .65s ease both}.agency-card.show{display:block}.card-image{height:150px;overflow:hidden;background:linear-gradient(135deg,#7ddfe9,#f4d28d)}.card-image img{width:100%;height:100%;object-fit:cover;display:block}.card-body{padding:15px}.agency-name{font-size:23px;color:#087f8c;margin-bottom:14px}.country-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}.country-tab{border:1px solid rgba(8,127,140,.18);background:#e9f8f8;color:#087f8c;border-radius:999px;padding:9px 14px;font-weight:800;cursor:pointer;transition:.2s}.country-tab.active,.country-tab:hover{background:linear-gradient(135deg,#00b4c4,#087f8c);color:white}.offer-title{font-size:20px;color:#087f8c;margin-bottom:10px}.offer-text{font-size:14px;line-height:1.65;color:#60727b;margin-bottom:20px;text-align:justify;text-justify:inter-word;hyphens:auto}.details-btn{display:inline-block;text-decoration:none;color:white;font-weight:800;padding:12px 19px;border-radius:999px;background:linear-gradient(135deg,#00b4c4,#087f8c);box-shadow:0 8px 20px rgba(8,127,140,.28);transition:.25s}.details-btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 12px 24px rgba(8,127,140,.36)}
-.close-btn{position:fixed;z-index:1000;top:13px;right:15px;text-decoration:none;font-size:24px;font-weight:700;color:#333;background:#f1f1f1;border:1px solid #ccc;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;transition:.3s}.close-btn:hover{background:#ff4d4d;color:#fff;border-color:#ff1a1a}
-@keyframes colors{from{background-position:0 center}to{background-position:300% center}}@keyframes cardIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:620px){
-.page{width:100%;padding:8px 10px 32px}
-.top-box,.agency-title,.agency-grid,.agency-card{width:100%;max-width:820px}
-.top-box{padding:12px 13px 11px;border-radius:17px}
-.hero{padding:0}
-h1{font-size:clamp(23px,7.5vw,31px);line-height:1.08;letter-spacing:-.5px;overflow-wrap:anywhere}
-.subtitle{font-size:13px;line-height:1.35;margin-top:7px;text-align:justify}
-.update-note{font-size:12px;line-height:1.4;margin-top:10px;text-align:justify}
-.agency-title{font-size:19px;margin-top:15px;margin-bottom:8px}
-.agency-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
-.agency-btn{height:68px;border-radius:13px}
-.agency-btn span{font-size:11.5px;padding:6px 7px}
-.agency-card{border-radius:18px;margin-top:10px}
-.card-image{height:130px}
-.card-body{padding:13px}
-.agency-name{font-size:21px;margin-bottom:10px}
-.country-tabs{gap:6px;margin-bottom:13px}
-.country-tab{font-size:12px;padding:7px 9px}
-.offer-title{font-size:18px}
-.offer-text{font-size:13px;line-height:1.5;margin-bottom:15px;text-align:justify}
-.details-btn{width:100%;text-align:center;padding:11px 14px;font-size:13px}
-}
-@media(max-width:460px){
-.page{padding-left:7px;padding-right:7px}
-.top-box,.agency-title,.agency-grid,.agency-card{width:calc(100vw - 14px);max-width:none}
-.agency-btn{height:61px}
-.agency-btn span{font-size:10.5px}
-h1{font-size:23px}
-}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VakációVágyó 2027</title>
+  <style>
+    :root {
+      --duration-ms: 3000;
+      --duration: calc(var(--duration-ms) * 1ms);
+      --bg: #1e90ff;
+      --text: #ffffff;
+      --yellow: #ffd700;
+    }
 
-@media (max-width: 620px){
-  body{overflow-x:hidden}
-  .page{width:100%;max-width:100%;padding-left:10px;padding-right:10px}
-  .top-box,.agency-title,.agency-grid,.agency-card{
-    width:100%;
-    max-width:100%;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  .agency-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .agency-btn{min-width:0}
-  .country-tabs{width:100%}
-}
-@media (max-width: 360px){
-  .agency-grid{gap:5px}
-  .country-tab{font-size:11px;padding:7px 8px}
-}
+    * { box-sizing: border-box; }
 
-
-/* 16:9 arányú, reszponzív képek */
-.agency-btn{
-  height:auto !important;
-  aspect-ratio:16 / 9;
-}
-.agency-btn img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.card-image{
-  height:auto !important;
-  aspect-ratio:16 / 9;
-}
-.card-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* Mobilon a két irodakép továbbra is egymás mellett marad,
-   ezért természetesen kisebb 16:9-es bélyegképek lesznek. */
-@media(max-width:620px){
-  .agency-btn{
-    height:auto !important;
-    aspect-ratio:16 / 9;
-  }
-  .card-image{
-    height:auto !important;
-    aspect-ratio:16 / 9;
-  }
-}
-
-
-/* Jól olvasható ajánlati felsorolás */
-.offer-text ul,
-.offer-text ol,
-.offer-list{
-  margin:10px 0 14px 0;
-  padding-left:28px;
-  list-style-position:outside;
-}
-.offer-text li,
-.offer-list li{
-  padding-left:4px;
-  margin:4px 0;
-  line-height:1.45;
-}
-.offer-text{
-  overflow-wrap:anywhere;
-}
-
-/* A valódi török zászló megjelenítése CSS-ből, emoji helyett */
-.tr-flag{
-  display:inline-block;
-  width:22px;
-  aspect-ratio:3 / 2;
-  margin-right:7px;
-  vertical-align:-3px;
-  border-radius:2px;
-  background:#e30a17;
-  position:relative;
-  box-shadow:0 0 0 1px rgba(0,0,0,.08);
-}
-.tr-flag::before{
-  content:"";
-  position:absolute;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#fff;
-  left:5px;
-  top:4px;
-}
-.tr-flag::after{
-  content:"★";
-  position:absolute;
-  color:#fff;
-  font-size:7px;
-  line-height:1;
-  left:12px;
-  top:5px;
-  transform:rotate(8deg);
-}
-.tr-flag .cut{
-  position:absolute;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#e30a17;
-  left:8px;
-  top:5px;
-  z-index:2;
-}
-
-@media(max-width:620px){
-  .offer-text ul,
-  .offer-text ol,
-  .offer-list{
-    padding-left:25px;
-  }
-  .offer-text li,
-  .offer-list li{
-    padding-left:3px;
-  }
-}
-
-
-/* Magasabb országválasztó gombok – a zászló biztosan teljesen kifér */
-.country-tab{
-  min-height:48px;
-  padding:10px 16px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  line-height:1.2;
-  white-space:nowrap;
-  overflow:visible;
-}
-.country-tab .tr-flag{
-  flex:0 0 24px;
-  width:24px;
-  height:16px;
-  margin-right:0;
-  vertical-align:middle;
-  overflow:visible;
-}
-
-@media(max-width:620px){
-  .country-tab{
-    min-height:44px;
-    padding:9px 12px;
-    font-size:12px;
-  }
-  .country-tab .tr-flag{
-    flex-basis:22px;
-    width:22px;
-    height:15px;
-  }
-}
-.coming-soon {
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      background-color: #fefcc8;
+      color: black;
+      overflow-x: hidden;
       display: flex;
+      flex-direction: column;
+      min-height: 100vh;          /* <<< mobilon felülírjuk */
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    /* ===== MODAL (repülős intro) ===== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    .modal.hidden { display: none; }
+
+    .modal__wrap {
+      width: min(1100px, 92vw);
+      height: min(90vh, 800px);
+      display: grid;
+      grid-template-rows: auto 1fr auto auto;
+      gap: 2rem;
+      align-items: center;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .countdown-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      color: var(--yellow);
+      font-weight: 700;
+      text-align: center;
+    }
+    .countdown-title { font-size: clamp(1.3rem, 1rem + 1vw, 2rem); }
+    .countdown { display: flex; gap: 1.5rem; justify-content: center; }
+    .countdown-item .number { font-size: clamp(2.5rem, 3vw + 1rem, 4rem); }
+    .countdown-item .label { font-size: clamp(0.8rem, 0.7rem + 0.3vw, 1rem); }
+
+    .title {
+      font-weight: 800;
+      line-height: 1.1;
+      text-shadow: 0 6px 20px rgba(0,0,0,.25);
+      animation: zoomIn var(--duration) ease-out both;
+    }
+    .title span.big { display: block; font-size: clamp(1.5rem, 3vw + .3rem, 3rem); }
+    @keyframes zoomIn {
+      0% { transform: scale(.85); opacity: 0; }
+      12% { opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .slide-area {
+      position: relative;
+      width: 100%;
+      height: clamp(120px, 20vh, 220px);
+      overflow: hidden;
+    }
+    .slider {
+      position: absolute;
+      top: 50%;
+      left: -200px;
+      transform: translateY(-50%);
+      width: clamp(150px, 25vw, 350px);
+      border: none;
+      animation: planeFly var(--duration) linear forwards;
+    }
+    @keyframes planeFly {
+      0% { transform: translateX(-200px) translateY(-50%); opacity: 1; }
+      90% { transform: translateX(100vw) translateY(-50%); opacity: 1; }
+      100% { transform: translateX(120vw) translateY(-50%); opacity: 0; }
+    }
+
+    .loading {
+      width: 100%;
+      display: grid;
+      gap: .6rem;
+      justify-items: center;
+    }
+    .loading__label { font-size: 1.1rem; color: #fff; opacity: 0.9; }
+    .progress {
+      width: 80%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.2);
+      overflow: hidden;
+    }
+    .progress__bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #fff, rgba(255,255,255,.8));
+      animation: fill var(--duration) linear forwards;
+    }
+    @keyframes fill { from { width: 0%; } to { width: 100%; } }
+
+    /* ===== FŐTARTALOM ===== */
+    header {
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: black;
+    }
+
+    main {
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    .left-text {
+      flex: 1 1 400px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .main-line { font-weight: 700; }
+    .subline  { font-size: 1.1rem; font-weight: 600; opacity: .9; }
+
+    .right-img {
+      flex: 1 1 400px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .right-img img {
+      width: 85%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      object-fit: contain;
+    }
+
+    .login-btn {
+      background-color: #ffd700;
+      color: #000;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.7rem 1.4rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, background-color 0.3s ease;
+      width: fit-content;
+    }
+    .login-btn:hover { transform: scale(1.05); background-color: #ffea00; }
+
+    /* === ÚJ: Inline visszaszámláló stílusa a főoldalon === */
+    .countdown-inline {
+      margin-top: .5rem;
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      gap: .5rem;
+    }
+    .countdown-inline .countdown-title {
+      font-size: clamp(1rem, 0.9rem + 0.5vw, 1.3rem);
+      color: #0d47a1;
+      font-weight: 800;
+    }
+    .countdown-inline .countdown {
+      display: flex;
+      gap: 1rem;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      width: 100%;
-      margin: 0 auto 22px;
-      text-align: center
     }
-
-    .coming-soon h2 {
-      flex: 0 0 auto;
-      font-size: clamp(30px, 5vw, 52px);
+    .countdown-inline .countdown-item .number {
       font-weight: 900;
-      letter-spacing: -1px;
-      background: linear-gradient(90deg, #087f8c, #00b8c8, #ffb703, #ff8c42, #087f8c);
-      background-size: 300% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      filter: drop-shadow(0 6px 12px rgba(8, 127, 140, .13));
-      animation: colors 5s linear infinite, soonFloat 2.8s ease-in-out infinite
+      font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem);
+      line-height: 1;
+    }
+    .countdown-inline .countdown-item .label {
+      font-size: clamp(0.7rem, 0.6rem + 0.3vw, 0.9rem);
+      opacity: .8;
     }
 
-    .coming-line {
-      width: min(150px, 15vw);
-      height: 3px;
-      border-radius: 99px;
-      background: linear-gradient(90deg, transparent, #00a9b7, #ffb703, transparent)
+    .text {
+      font-family: Handlee;
+      font-size: 20px;
     }
 
-    @keyframes soonFloat {
+      .text2 {
+      font-family: Handlee;
+     
+    }
+    a {
+      text-decoration: none;
+    }
+    /* ===== DESKTOP / LAPTOP ===== */
+    @media (min-width: 769px) {
+      .login-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+      }
+      .left-text {
+        align-items: center;      /* vízszintes közép */
+        justify-content: center;  /* függőleges közép */
+        text-align: center;
+      }
+    }
 
-      0%,
-      100% {
-        transform: translateY(0)
+    /* ===== MOBIL: kép → gomb → szövegek → számláló, és minden kiférjen ===== */
+    @media (max-width: 768px) {
+      html, body { height: 100dvh; }
+      body {
+        min-height: 100dvh;
+        display: block;
+        margin: 0;
+        overflow-y: hidden;   /* ne gördüljön */
       }
 
-      50% {
-        transform: translateY(-5px)
+      header { font-size: 1.4rem; padding: .6rem 0; }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: .4rem;
+        align-items: center;
+        padding: .5rem;
       }
+
+      .right-img {
+        order: 1;                 /* 1) KÉP */
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      .right-img img {
+        width: 65%;
+        max-width: 260px;
+        border-radius: 16px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+      }
+
+      .login-btn {
+        position: static;         /* 2) GOMB a kép alatt */
+        order: 2;
+        margin: .2rem 0 .1rem;
+        align-self: center;
+        font-size: .95rem;
+        padding: .55rem 1.1rem;
+        border-radius: 40px;
+      }
+
+      .left-text {
+        order: 3;                 /* 3) SZÖVEGEK */
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        font-size: 1rem;          /* összenyomva */
+        line-height: 1.35;
+        gap: .35rem;
+      }
+      .subline { font-size: .95rem; }
+
+      /* 4) SZÁMLÁLÓ a gomb után — mivel a számláló a left-text-ben van, itt kompakt méretet adunk */
+      .countdown-inline {
+        order: 4;
+        margin-top: .2rem;
+        gap: .25rem;
+      }
+      .countdown-inline .countdown { gap: .6rem; }
+      .countdown-inline .countdown-item .number { font-size: 1.4rem; }
+      .countdown-inline .countdown-item .label { font-size: .7rem; }
+    }
+    .color2 {
+      color: blue;
     }
 
+    /* --- Bejelentkezés modal --- */
+    .login-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(3px);
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 5vh;
+      z-index: 10000;
+    }
+    .login-modal.active { display: flex; }
 
-/* Javítás: a legújabb változtatások és a Hamarosan blokk megtartásával */
-.top-box{
-  margin-top:0 !important;
-}
+    .modal-content {
+      background: #fff;
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .modal-content h2 { color: #0d47a1; margin-bottom: 1rem; }
 
-/* Az Á/Ő/É és minden magyar ékezet kapjon elegendő függőleges helyet */
-.hero h1{
-  margin-top:0;
-  padding-top:9px;
-  line-height:1.18;
-  overflow:visible;
-}
-
-/* A Hamarosan marad a dobozon belül, reszponzívan */
-.coming-soon{
-  margin-top:54px;
-  margin-bottom:22px;
-  padding:0 12px;
-}
-.coming-soon h2{
-  line-height:1.12;
-  overflow:visible;
-  padding-top:5px;
-  padding-bottom:5px;
-}
-
-@media(max-width:620px){
-  .hero h1{
-    padding-top:8px;
-    line-height:1.18;
+    .modal-content input {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    .modal-content button {
+      background-color: #0d6efd;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .error-msg { color: red; font-weight: 600; display: none; }
+  </style>
+  <style>
+ @media (max-width: 768px) {
+  /* háttér csak a tartalomig + természetes PTR */
+  html, body { height: auto; }
+  body {
+    min-height: auto;
+    display: block;
+    margin: 0;
+    overflow-y: auto;                  /* engedjük a gördülést + PTR-t */
+    -webkit-overflow-scrolling: touch; /* iOS gördülés+PTR */
+    overscroll-behavior-y: auto;       /* PTR ne legyen tiltva */
+    touch-action: pan-y;               /* függőleges gesztusok */
   }
-  .coming-soon{
-    gap:10px;
-    margin-top:46px;
-    margin-bottom:18px;
-    padding:0 4px;
+
+  /* elrendezés */
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: .6rem;
+    padding: 1rem 5vw 1.2rem;
+    min-height: auto;
   }
-  .coming-soon h2{
-    font-size:clamp(28px,8.5vw,42px);
-    white-space:nowrap;
+  .mainwrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem;
+    padding: .6rem 0 1rem;
   }
-  .coming-line{
-    width:min(95px,13vw);
+
+  .right-img { order: 1; align-items: center; }
+  .right-img img {
+    /* kicsit kisebb kép, hogy minden biztosan kiférjen */
+    width: 58%;
+    max-width: 240px;
+    border-radius: 16px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+  }
+
+  .login-btn {
+    position: static;
+    order: 2;
+    margin: .25rem 0 .15rem;
+    align-self: center;
+
+    /* nagyobb, de visszafogott méretezés */
+    font-size: clamp(1rem, 2.8vw + .6rem, 1.2rem);
+    padding: .7rem 1.4rem;
+    border-radius: 44px;
+
+    /* jobb tappolhatóság */
+    min-height: 44px;
+    min-width: 180px;
+    letter-spacing: .3px;
+  }
+
+  .left-text {
+    /* egy hajszállal kompaktabb, hogy biztosan ne kelljen görgetni */
+    order: 3;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    font-size: .95rem;
+    line-height: 1.35;
+    gap: .3rem;
+  }
+
+  .subline { font-size: .9rem; }
+
+  .countdown-inline {
+    margin-top: .2rem;
+    gap: .2rem;
+  }
+  .countdown-inline .countdown { gap: .5rem; }
+  .countdown-inline .countdown-item .number { font-size: 1.35rem; }
+  .countdown-inline .countdown-item .label { font-size: .68rem; }
+}
+@media (max-width: 768px) {
+  /* ne feszítsd szét a nézetet */
+  html, body { height: auto; }
+  body {
+    overflow-y: auto;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* FŐ: ne flex, ne grid, ne gap – sima folyó elrendezés */
+  main {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* “Blokkos” wrapek kilapítása – nem hoznak létre saját dobozt */
+  .row, .container, .section, .block, .card,
+  .left-text, .right-img, .panel, .box {
+    display: contents !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* minden közvetlen elem egymás alatt, minimális réssel */
+  main > * {
+    display: block;
+    margin: 0;                /* teljesen zéró extra térköz */
+    padding: 0;
+  }
+
+  /* ha kell pici, egységes ritmus: */
+  p, h1, h2, h3, ul, ol, figure {
+    margin: 0 0 .5rem 0;      /* egységes, kicsi alsó térköz */
+  }
+
+  /* képek szépen a szövegfolyamban */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* gombok is a folyó szövegben jelenjenek meg */
+  .login-btn, .btn, button, a.button {
+    position: static !important;
+    display: inline-block;
+    margin: .5rem 0 0 0;
+  }
+
+  /* bármilyen korábbi flex/grid “gap” kiiktatása */
+  [class*="flex"], [class*="grid"] {
+    gap: 0 !important;
+  }
+
+  /* felesleges sortörések hatásának csökkentése */
+  br { line-height: 0; }
+}
+@media (max-width: 768px) {
+  /* KÉP középre */
+  img,
+  .right-img img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* GOMB középre */
+  .login-btn,
+  .btn,
+  button,
+  a.button {
+    position: static !important;   /* ne legyen fix */
+    display: block;                /* így működik a margin: auto */
+    margin: .75rem auto 0;         /* középre igazítás */
+    left: auto; right: auto;       /* biztos ami biztos */
+    text-align: center;            /* gombon belüli szöveg is középen */
+  }
+}
+@media (max-width: 768px) {
+  /* 1) A visszaszámláló alá kis alsó margó */
+  .countdown,
+  .countdown-inline {
+    margin-bottom: .6rem !important;   /* finom ritmus */
+  }
+
+  /* 2) Ha közvetlenül a visszaszámláló UTÁN jön a kép, kapjon felső margót */
+  .countdown + img,
+  .countdown-inline + img,
+  .countdown + .right-img img,
+  .countdown-inline + .right-img img {
+    margin-top: .6rem !important;
+  }
+}
+@media (max-width: 768px) {
+  body { padding-bottom: 160px; } /* hely a fix elemeknek */
+
+  /* GOMB legalul, középen */
+  .login-btn {
+    position: fixed !important;
+    left: 50%;
+    bottom: calc(env(safe-area-inset-bottom, 0) + 12px);
+    transform: translateX(-50%);
+    margin: 0 !important;
+    z-index: 1000;
+  }
+
+  /* KÉP a gomb fölött, középen */
+  .right-img {
+    position: fixed !important;
+    left: 50%;
+    transform: translateX(-50%);
+    /* gomb magassága ~48–56px + kis térköz */
+    bottom: calc(env(safe-area-inset-bottom, 0) + 12px + 56px + .6rem);
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    pointer-events: none;        /* ne takarja ki a tartalmat érintésnél */
+  }
+  .right-img img {
+    pointer-events: auto;        /* a képre lehessen kattintani */
+    max-width: 240px;
+    height: auto;
+    display: block;
+  }
+}
+@media (max-width: 768px) {
+  .main-line {
+    font-size: 1.3rem;   /* eddig kb. 1rem volt */
+    line-height: 1.5;
   }
 }
 
-</style>
+  </style>
 </head>
 <body>
-<a href="https://csaladiprogramok.github.io/vakaciovagyo/szamlalo.html" class="close-btn" aria-label="Vissza az akciókhoz">×</a>
 
-<main class="page">
-<section class="top-box">
-<header class="hero"><h1>NYARALÁSKERESŐ <br>2027</h1><p class="subtitle">„ Az együtt töltött idő a legszebb ajándék. ”</p></header>
-<section class="coming-soon" aria-label="Hamarosan">
-        <div class="coming-line"></div>
-        <h2>Hamarosan...</h2>
-        <div class="coming-line"></div>
-      </section><!------
-<p class="update-note">Az utazási irodák folyamatosan töltik fel saját weboldalukra a <strong>2027 - es nyári ajánlataikat</strong>. Azok alapján fog frissülni folyamatosan ez a weboldal is. <strong>Nézz vissza később is, ne marad le a legjobb ajánlatokról! :)</strong><br><br><i><b>Utolsó frissítés: </b><strong style="color: red;">2026.09.11. 22:00 </i></strong></p>
-<h2 class="agency-title">Utazási iroda választó</h2>
-<div class="agency-grid">
-<button class="agency-btn" type="button" data-agency="zemplen"><img src="zemplentouristlogo.png" alt="Zemplén Tour"><span>Zemplén Tourist</span></button>
-<!-----
-<button class="agency-btn" type="button" data-agency="soon"><img src="images/zakynthos.jpg" alt="Hamarosan új utazási iroda"><span>Hamarosan...</span></button>
------->
-</div><!------
-</section>
-<article class="agency-card" id="zemplenCard">
-<div class="card-image"><img id="offerImage" src="zemplentouristlogo.png" alt="Zemplén Tour nyári ajánlat"></div>
-<div class="card-body">
-<h2 class="agency-name">Zemplén Tourist</h2>
-<div class="country-tabs" aria-label="Ország választó">
-<button class="country-tab active" data-country="torok"><span class="tr-flag" aria-hidden="true"><span class="cut"></span></span>Törökország</button>
-<!----
-<button class="country-tab" data-country="gorog">🇬🇷 Görögország</button>
-<button class="country-tab" data-country="ciprus">🇨🇾 Ciprus</button>
-------->
-</div><!------
-<h3 class="offer-title" id="offerTitle">Törökország</h3>
-<div class="offer-text" id="offerText">A mai nappal megnyitottuk a <strong>2027-es nyári szezon előfoglalási időszakát.</strong> Elsőként Törökország legnépszerűbb üdülőhelyeire hoztuk el előfoglalási ajánlatainkat, kedvező feltételekkel és számos extra előnnyel.<br><br>
-<strong>Előfoglalási kedvezmények</strong>
-<ol class="offer-list">
-<li>Akár <strong>45% kedvezmény</strong> az utazási csomagban foglalt hotelek árából.</li>
-<li>Az <strong>útlemondási biztosítás</strong> az utazási csomag részét képezi.</li>
-<li>Már <strong>20% előleggel</strong> foglalhatóak az utak.</li>
-<li><strong>5% kedvezmény</strong> az utazási csomag alapárából.</li>
-<li>Árgarancia <strong>10.000 Ft / fő</strong> díj ellenében.</li>
-<li>Foglalásonként <strong>2 alkalommal díjmentes módosítás.</strong></li>
-<li>Ingyenes privát transzfer meghatározott, magas kategóriájú szállodák esetén.</li>
-<li>Ingyenes shopping-city túra az Antalya régióba utazók számára.</li>
-<li><strong>10% kedvezmény</strong> a BBP biztosítás árából.</li>
-<li><strong>10% kedvezménykupon</strong> bizonyos fakultatív programokra.</li>
-</ol>
-A kedvezmények a <strong>2026. november 30-ig</strong> beérkezett foglalásokra érvényesek.</div>
-<a class="details-btn" id="detailsBtn" href="https://zemplentourist.hu/talalati-lista/torokorszag/wQxlG">Részletek ---&gt;</a>
-</div>
-</article>
-</main>
-<script>
-const card=document.getElementById('zemplenCard');
-const data={
- torok:{title:'Törökország',html:'A mai nappal megnyitottuk a <strong>2027-es nyári szezon előfoglalási időszakát.</strong> Elsőként Törökország legnépszerűbb üdülőhelyeire hoztuk el előfoglalási ajánlatainkat, kedvező feltételekkel és számos extra előnnyel.<br><br><strong>Előfoglalási kedvezmények</strong><ol class="offer-list"><li>Akár <strong>45% kedvezmény</strong> az utazási csomagban foglalt hotelek árából.</li><li>Az <strong>útlemondási biztosítás</strong> az utazási csomag részét képezi.</li><li>Már <strong>20% előleggel</strong> foglalhatóak az utak.</li><li><strong>5% kedvezmény</strong> az utazási csomag alapárából.</li><li>Árgarancia <strong>10.000 Ft / fő</strong> díj ellenében.</li><li>Foglalásonként <strong>2 alkalommal díjmentes módosítás.</strong></li><li>Ingyenes privát transzfer meghatározott, magas kategóriájú szállodák esetén.</li><li>Ingyenes shopping-city túra az Antalya régióba utazók számára.</li><li><strong>10% kedvezmény</strong> a BBP biztosítás árából.</li><li><strong>10% kedvezménykupon</strong> bizonyos fakultatív programokra.</li></ol>A kedvezmények a <strong>2026. november 30-ig</strong> beérkezett foglalásokra érvényesek.',href:'torokorszag.html',img:'images/ciprus.jpg'},
- gorog:{title:'Görögország',text:'Görögország 2027-es nyári kínálatában szigetek, hangulatos tengerparti üdülőhelyek és családi nyaralások közül lehet majd választani. A részletes ajánlatok a Zemplén Tour frissítései alapján kerülnek fel.',href:'gorogorszag.html',img:'images/zakynthos.jpg'},
- ciprus:{title:'Ciprus',text:'Ciprus napsütéses tengerpartjai és mediterrán hangulata remek választás lehet a 2027-es nyárra. A konkrét szállások, időpontok és további részletek az iroda aktuális kínálata szerint frissülnek.',href:'ciprus.html',img:'images/ciprus.jpg'}
-};
-document.querySelectorAll('.agency-btn').forEach(btn=>btn.addEventListener('click',()=>{if(btn.dataset.agency==='zemplen'){card.classList.add('show');card.scrollIntoView({behavior:'smooth',block:'start'});}}));
-document.querySelectorAll('.country-tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.country-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d=data[btn.dataset.country];document.getElementById('offerTitle').textContent=d.title;document.getElementById('offerText').innerHTML=d.html||d.text;document.getElementById('detailsBtn').href=d.href;document.getElementById('offerImage').src=d.img;document.getElementById('offerImage').alt=d.title+' nyári ajánlat';}));
-</script>
-------->
-</body></html>
+  <!-- === Repülős intro modal === -->
+  <div class="modal" id="vv2026-modal">
+    <div class="modal__wrap">
+      <div class="countdown-section">
+        <div class="countdown-title">MINDJÁRT ITT A NYÁR!</div>
+        <div class="countdown" id="countdown">
+          <div class="countdown-item"><div class="number" id="days">00</div><div class="label">NAP</div></div>
+          <div class="countdown-item"><div class="number" id="hours">00</div><div class="label">ÓRA</div></div>
+          <div class="countdown-item"><div class="number" id="minutes">00</div><div class="label">PERC</div></div>
+          <div class="countdown-item"><div class="number" id="seconds">00</div><div class="label">M.PERC</div></div>
+        </div>
+      </div>
+
+      <h2 class="title"><span class="big">VAKÁCIÓVÁGYÓ <br><i>Orosz Család</i> </span></h2>
+      
+
+      <div class="slide-area">
+        <img src="repulo.png" alt="Repülő animáció" class="slider">
+      </div>
+
+      <div class="loading">
+        <div class="loading__label">Betöltés...</div>
+        <div class="progress"><div class="progress__bar"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  <!-- === Főoldal === -->
+  <header>VakációVágyó <br>2027</header> <br>
+
+  <main>
+    <div class="left-text">
+      <p class="main-line text2"><b><i>Fogjunk össze 🤝, tegyünk félre 💰, és utazzunk az egyenlítő környékére. 🌎</i></b></p>
+      <br> 
+      <p class="subline">Ne feledd! Sok kicsi, sokra megy! </p>
+
+      <!-- === ÚJ: Visszaszámláló a "Ne feledd!" szöveg alatt === -->
+      <section class="countdown-inline" aria-label="Visszaszámláló"> <br> <br>
+        <div class="countdown-title color2">VISSZASZÁMLÁLÁS NYÁRIG</div>
+        <div class="countdown">
+          <div class="countdown-item"><div class="number" id="days2">00</div><div class="label">NAP</div></div>
+          <div class="countdown-item"><div class="number" id="hours2">00</div><div class="label">ÓRA</div></div>
+          <div class="countdown-item"><div class="number" id="minutes2">00</div><div class="label">PERC</div></div>
+          <div class="countdown-item"><div class="number" id="seconds2">00</div><div class="label">M.PERC</div></div>
+        </div>
+      </section>
+      <!-- === /ÚJ === -->
+    </div>
+
+    <div class="right-img">
+      <img src="vakaciovagyo.jpg" alt="Utazás hangulatkép" height="200" width="100">
+    </div>
+
+    <!-- GOMB külön, hogy mobilon könnyen rendezhető legyen -->
+    <a href="szamlalo.html" class="login-btn" style="text-align: center; font-size: 16px;">BELÉPÉS</a>
+
+  </main>
+
+  <!-- === Bejelentkezés modal === -->
+  <div class="login-modal" id="loginModal">
+    <div class="modal-content">
+      <h2>BEJELENTKEZÉS</h2>
+      <input type="password" id="passwordInput" placeholder="Add meg a jelszót...">
+      <div class="error-msg" id="errorMsg">Hibás jelszó! Próbáld újra.</div>
+      <button id="confirmBtn">Belépés</button>
+    </div>
+  </div>
+
+  -->
+
+  <script>
+    // --- Modal visszaszámláló + automatikus továbblépés ---
+    (function() {
+      const t = new Date(2027, 5, 1, 0, 0, 0);
+      const d = document.getElementById('days');
+      const h = document.getElementById('hours');
+      const m = document.getElementById('minutes');
+      const sec = document.getElementById('seconds');
+
+      function update() {
+        const diff = Math.max(0, t - new Date());
+        d.textContent = Math.floor(diff / 86400000).toString().padStart(2, '0');
+        h.textContent = Math.floor((diff / 3600000) % 24).toString().padStart(2, '0');
+        m.textContent = Math.floor((diff / 60000) % 60).toString().padStart(2, '0');
+        sec.textContent = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
+      }
+
+      update();
+      setInterval(update, 1000);
+
+      // 5 ms után azonnal továbblép a számláló oldalra.
+      setTimeout(() => {
+        window.location.replace('szamlalo.html');
+      }, 5000);
+    })();
+  </script>
+</body>
+</html>
