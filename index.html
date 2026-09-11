@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,Helvetica,sans-serif;color:#17324d;min-height:100vh;background:radial-gradient(circle at top left,#fff4cf 0%,transparent 34%),linear-gradient(135deg,#f3d7a4,#fffaf0)}
-.page{width:min(1040px,100%);margin:auto;padding:20px 16px 55px}
+.page{width:min(1040px,100%);margin:0 auto;padding:10px 16px 55px}
 .top-box{width:min(820px,100%);margin:0 auto 18px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.95);border-radius:20px;padding:14px 16px 13px;box-shadow:0 12px 28px rgba(75,60,25,.12);text-align:left}
 .hero{text-align:left;padding:0}
 h1{margin-top:8px;font-size:clamp(25px,5vw,38px);font-weight:900;letter-spacing:-2px;background:linear-gradient(90deg,#087f8c,#00b8c8,#ffb703,#ff8c42,#087f8c);background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:colors 5s linear infinite;text-align:left}
@@ -17,10 +17,10 @@ h1{margin-top:8px;font-size:clamp(25px,5vw,38px);font-weight:900;letter-spacing:
 .agency-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;width:min(820px,100%);margin:0 auto}
 .agency-btn{width:100%;height:76px;border:0;border-radius:15px;overflow:hidden;cursor:pointer;position:relative;background:#fff;box-shadow:0 14px 35px rgba(80,60,20,.13);transition:transform .3s ease,box-shadow .3s ease}.agency-btn:hover{transform:translateY(-6px);box-shadow:0 22px 42px rgba(75,60,25,.2)}.agency-btn img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.agency-btn:hover img{transform:scale(1.06)}.agency-btn span{position:absolute;left:0;right:0;bottom:0;padding:7px 9px;color:#fff;font-weight:900;font-size:13px;text-align:left;background:linear-gradient(transparent,rgba(0,0,0,.72))}
 .agency-card{display:none;width:min(820px,100%);max-width:820px;margin:12px auto 0;background:rgba(255,255,255,.96);border-radius:25px;overflow:hidden;box-shadow:0 16px 38px rgba(75,60,25,.14);animation:cardIn .65s ease both}.agency-card.show{display:block}.card-image{height:150px;overflow:hidden;background:linear-gradient(135deg,#7ddfe9,#f4d28d)}.card-image img{width:100%;height:100%;object-fit:cover;display:block}.card-body{padding:15px}.agency-name{font-size:23px;color:#087f8c;margin-bottom:14px}.country-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}.country-tab{border:1px solid rgba(8,127,140,.18);background:#e9f8f8;color:#087f8c;border-radius:999px;padding:9px 14px;font-weight:800;cursor:pointer;transition:.2s}.country-tab.active,.country-tab:hover{background:linear-gradient(135deg,#00b4c4,#087f8c);color:white}.offer-title{font-size:20px;color:#087f8c;margin-bottom:10px}.offer-text{font-size:14px;line-height:1.65;color:#60727b;margin-bottom:20px;text-align:justify;text-justify:inter-word;hyphens:auto}.details-btn{display:inline-block;text-decoration:none;color:white;font-weight:800;padding:12px 19px;border-radius:999px;background:linear-gradient(135deg,#00b4c4,#087f8c);box-shadow:0 8px 20px rgba(8,127,140,.28);transition:.25s}.details-btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 12px 24px rgba(8,127,140,.36)}
-.close-btn{position:absolute;top:13px;right:15px;text-decoration:none;font-size:24px;font-weight:700;color:#333;background:#f1f1f1;border:1px solid #ccc;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;transition:.3s}.close-btn:hover{background:#ff4d4d;color:#fff;border-color:#ff1a1a}
+.close-btn{position:fixed;z-index:1000;top:13px;right:15px;text-decoration:none;font-size:24px;font-weight:700;color:#333;background:#f1f1f1;border:1px solid #ccc;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;transition:.3s}.close-btn:hover{background:#ff4d4d;color:#fff;border-color:#ff1a1a}
 @keyframes colors{from{background-position:0 center}to{background-position:300% center}}@keyframes cardIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:620px){
-.page{width:100%;padding:10px 10px 32px}
+.page{width:100%;padding:8px 10px 32px}
 .top-box,.agency-title,.agency-grid,.agency-card{width:100%;max-width:820px}
 .top-box{padding:12px 13px 11px;border-radius:17px}
 .hero{padding:0}
@@ -253,6 +253,53 @@ h1{font-size:23px}
       }
     }
 
+
+/* Javítás: a legújabb változtatások és a Hamarosan blokk megtartásával */
+.top-box{
+  margin-top:0 !important;
+}
+
+/* Az Á/Ő/É és minden magyar ékezet kapjon elegendő függőleges helyet */
+.hero h1{
+  margin-top:0;
+  padding-top:9px;
+  line-height:1.18;
+  overflow:visible;
+}
+
+/* A Hamarosan marad a dobozon belül, reszponzívan */
+.coming-soon{
+  margin-top:54px;
+  margin-bottom:22px;
+  padding:0 12px;
+}
+.coming-soon h2{
+  line-height:1.12;
+  overflow:visible;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+@media(max-width:620px){
+  .hero h1{
+    padding-top:8px;
+    line-height:1.18;
+  }
+  .coming-soon{
+    gap:10px;
+    margin-top:46px;
+    margin-bottom:18px;
+    padding:0 4px;
+  }
+  .coming-soon h2{
+    font-size:clamp(28px,8.5vw,42px);
+    white-space:nowrap;
+  }
+  .coming-line{
+    width:min(95px,13vw);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -261,7 +308,6 @@ h1{font-size:23px}
 <main class="page">
 <section class="top-box">
 <header class="hero"><h1>NYARALÁSKERESŐ <br>2027</h1><p class="subtitle">„ Az együtt töltött idő a legszebb ajándék. ”</p></header>
-<br><br> 
 <section class="coming-soon" aria-label="Hamarosan">
         <div class="coming-line"></div>
         <h2>Hamarosan...</h2>
