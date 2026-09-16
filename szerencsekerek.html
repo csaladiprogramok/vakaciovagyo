@@ -558,6 +558,40 @@ body.modal-open{
   .result{font-size:12px;padding:9px 6px;}
 }
 
+
+/* ===== Mobil görgetés javítás ===== */
+@media (max-width:720px){
+  html{
+    height:auto !important;
+    min-height:100% !important;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch;
+  }
+  body{
+    position:static !important;
+    height:auto !important;
+    min-height:100dvh !important;
+    max-height:none !important;
+    overflow-x:hidden !important;
+    overflow-y:visible !important;
+    overscroll-behavior-y:auto !important;
+    touch-action:pan-y !important;
+  }
+  .container{
+    height:auto !important;
+    min-height:100dvh !important;
+    max-height:none !important;
+    overflow:visible !important;
+    touch-action:pan-y !important;
+  }
+  .main,.left,.right,.wheel-wrap,.wheel,.result{
+    touch-action:pan-y !important;
+  }
+  button,input,a,label{touch-action:manipulation;}
+  .ticket-modal.open{touch-action:pan-y;}
+  .ticket-modal-card{overflow-y:auto !important;-webkit-overflow-scrolling:touch;}
+}
 </style>
 </head>
 
@@ -610,7 +644,7 @@ Elfogadom a játékszabályzatot,
 </div>
 
 <div class="prizes">
-<div class="prize p1">500 Ft</div>
+<div class="prize p1">500 Ft </div>
 <div class="prize p4">1000 Ft</div>
 <div class="prize p2">2000 Ft</div>
 </div>
@@ -813,13 +847,13 @@ const ticketModal = document.getElementById("ticketModal");
         text-align:center;
     ">
 
-        <b style="color:#06326e;">${name}</b> nevű játékos a
-        <b style="color:#06326e;">${code}</b> kóddal az egyszeri pörgetési lehetőségét felhasználva,
-        a pörgetés során
+        A <b style="color:#06326e;">${name}</b> nevű pörgető a
+        <b style="color:#06326e;">${code}</b> kóddal az egyszeri pörgetési lehetőségét felhasználta,
+        és a pörgetés során
         <b style="color:#28a745;font-size:18px;">
             ${prize.toLocaleString("hu-HU")} Ft
         </b>
-        nyereményt ért el.
+        nyereményt nyert.
 
     </div>
 
@@ -853,7 +887,7 @@ const ticketModal = document.getElementById("ticketModal");
 
 </div>
 `;
-    result.innerHTML = `A pörgetés véget ért!`;
+    result.innerHTML = `Gratulálunk! <b>${prize.toLocaleString("hu-HU")} Ft</b> nyereményed lett. A bizonylat megnyílt.`;
     const scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
     document.body.style.setProperty("--scrollbar-compensation", scrollbarWidth + "px");
     ticketModal.classList.add("open");
