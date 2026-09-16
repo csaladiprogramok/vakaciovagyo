@@ -204,10 +204,9 @@ button{
     border-radius:50%;
     border:8px solid #ffcc00;
     background:conic-gradient(
-        #2fa84f 0 270deg,
-        #008bd2 270deg 306deg,
-        #7b3fa1 306deg 342deg,
-        #e52626 342deg 360deg
+        #e52626 0 54deg,
+        #008bd2 54deg 306deg,
+        #2fa84f 306deg 360deg
     );
     box-shadow:inset 0 0 0 4px #06326e,0 6px 12px rgba(0,0,0,.3);
     position:relative;
@@ -406,6 +405,159 @@ button:active{transform:translateY(2px);box-shadow:0 2px 0 #b56b00;}
   .close-btn{top:9px;right:9px;width:30px;height:30px;font-size:18px;}
 }
 
+
+/* Stabil pörgetés + modal bizonylat */
+html{overflow-y:scroll;}
+body{overflow-x:hidden;}
+.wheel{transform-origin:50% 50%;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+.result{min-height:52px;}
+.ticket-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(6,33,74,.68);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
+.ticket-modal.open{display:flex;}
+.ticket-modal-card{position:relative;width:min(430px,100%);max-height:calc(100vh - 36px);overflow:auto;background:#fff;border-radius:18px;padding:22px 18px 18px;box-shadow:0 22px 60px rgba(0,0,0,.32);}
+.ticket-modal-close{position:absolute;right:10px;top:8px;width:34px;height:34px;min-height:0;margin:0;padding:0;border-radius:50%;background:#eef3f7;color:#06326e;box-shadow:none;font-size:22px;line-height:34px;}
+.ticket-modal-close:hover{transform:none;background:#e2e8ee;}
+body.modal-open{overflow:hidden;}
+@media(max-width:720px){.ticket-modal{padding:10px}.ticket-modal-card{max-height:calc(100vh - 20px);padding:20px 14px 14px}}
+
+
+/* ===== Stabil, mobilbarát véglegesítés ===== */
+html{
+  width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+  overflow-y:auto;
+  scrollbar-gutter:stable;
+  -webkit-text-size-adjust:100%;
+}
+body{
+  width:100%;
+  min-height:100dvh;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior-y:none;
+}
+.container{
+  width:min(100%,920px);
+  height:auto;
+  max-height:none;
+  overflow:visible;
+}
+.main,.left,.right,.wheel-wrap,.result{contain:layout style;}
+.right{display:flex;align-items:center;justify-content:center;}
+.wheel-wrap{
+  flex:0 0 auto;
+  aspect-ratio:1/1;
+  overflow:visible;
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+.wheel{
+  aspect-ratio:1/1;
+  transform-origin:center center;
+  contain:layout paint style;
+  isolation:isolate;
+  will-change:transform;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  perspective:1000px;
+}
+.pointer{will-change:auto;}
+.result{
+  min-height:54px;
+  height:54px;
+  overflow:hidden;
+  flex:none;
+}
+.ticket-modal{
+  /* A blur mobilon pörgetés/megnyitás közben képes az egész viewportot újrarajzolni. */
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  overscroll-behavior:contain;
+}
+.ticket-modal-card{-webkit-overflow-scrolling:touch;}
+body.modal-open{
+  overflow:hidden;
+  padding-right:var(--scrollbar-compensation,0px);
+}
+
+@media (min-width:721px){
+  body{height:auto;min-height:100dvh;overflow-x:hidden;overflow-y:auto;align-items:center;}
+  .container{max-height:none;overflow:visible;}
+}
+
+@media (max-width:720px){
+  html,body{width:100%;max-width:100%;}
+  body{padding:0;align-items:flex-start;}
+  .container{
+    width:100%;
+    max-width:none;
+    min-height:100dvh;
+    margin:0;
+    padding:14px 12px 22px;
+    border-radius:0;
+  }
+  h1{font-size:clamp(24px,8vw,34px);line-height:1.05;padding:0 38px;word-break:normal;}
+  h2{font-size:clamp(13px,4vw,17px);letter-spacing:.08em;}
+  .info-box{width:100%;margin:8px 0 14px;padding:11px 12px;font-size:13px;}
+  .main{width:100%;display:flex;flex-direction:column-reverse;gap:14px;}
+  .left,.right{width:100%;min-width:0;}
+  .left{padding:14px;border-radius:15px;}
+  .right{min-height:clamp(230px,72vw,290px);}
+  .wheel-wrap,.wheel{
+    width:clamp(220px,70vw,280px);
+    height:clamp(220px,70vw,280px);
+  }
+  input,select,button{width:100%;max-width:100%;font-size:16px;}
+  #codeInput{font-size:18px;letter-spacing:.22em;}
+  button{min-height:48px;touch-action:manipulation;}
+  .rules-label{font-size:12px;line-height:1.35;}
+  .result{height:56px;min-height:56px;padding:8px;font-size:12px;}
+  .prizes{width:100%;margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  .prize{max-width:none;min-width:0;padding:7px 4px;font-size:11px;white-space:nowrap;}
+  .ticket-modal{padding:8px;align-items:center;}
+  .ticket-modal-card{width:100%;max-width:430px;max-height:calc(100dvh - 16px);padding:18px 12px 12px;border-radius:15px;}
+  .close-btn{position:absolute;top:8px;right:8px;}
+}
+
+@media (max-width:380px){
+  .container{padding-left:9px;padding-right:9px;}
+  .wheel-wrap,.wheel{width:min(68vw,240px);height:min(68vw,240px);}
+  .right{min-height:220px;}
+  .prize{font-size:10px;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  button,.link-btn{transition:none;}
+}
+
+/* Mobilbarát eredménydoboz */
+.result{
+  width:100%;
+  height:auto;
+  min-height:58px;
+  padding:10px 12px;
+  line-height:1.4;
+  white-space:normal;
+  overflow:visible;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.result b{white-space:nowrap;}
+@media(max-width:720px){
+  .result{
+    height:auto;
+    min-height:64px;
+    padding:10px 8px;
+    font-size:13px;
+    line-height:1.45;
+    text-align:center;
+  }
+}
+@media(max-width:360px){
+  .result{font-size:12px;padding:9px 6px;}
+}
+
 </style>
 </head>
 
@@ -443,7 +595,7 @@ Elfogadom a játékszabályzatot,
 </label>
 </div>
 
-<button onclick="spinWheel()">PÖRGETÉS</button>
+<button type="button" onclick="spinWheel()">PÖRGETÉS</button>
 
 <div class="result" id="result">Sok szerencsét! 🎁</div>
 
@@ -458,19 +610,43 @@ Elfogadom a játékszabályzatot,
 </div>
 
 <div class="prizes">
-<div class="prize p1">1000 Ft</div>
+<div class="prize p1">500 Ft</div>
+<div class="prize p4">1000 Ft</div>
 <div class="prize p2">2000 Ft</div>
-<div class="prize p3">3000 Ft</div>
-<div class="prize p4">5000 Ft</div>
 </div>
 
 
+</div>
+
+<div class="ticket-modal" id="ticketModal" role="dialog" aria-modal="true" aria-labelledby="ticketModalTitle">
+  <div class="ticket-modal-card">
+    <button type="button" class="ticket-modal-close" onclick="closeTicketModal()" aria-label="Bezárás">×</button>
+    <div id="ticketModalContent"></div>
+  </div>
 </div>
 
 <script>
 const validCodes = {
-    "ABCDE": 1,
-    "ABBDE": 1
+    "K7M2Q": 1,
+    "V4N8X": 1,
+    "T9R3P": 1,
+    "H6W2K": 1,
+    "Q8F5M": 1,
+    "Z3P7R": 1,
+    "N5X9T": 1,
+    "G2K8V": 1,
+    "R7M4H": 1,
+    "W9Q3N": 1,
+    "F6T2X": 1,
+    "P8V5K": 1,
+    "M3R7Q": 1,
+    "X5H9G": 1,
+    "K2N8W": 1,
+    "T7Q4F": 1,
+    "V9M3P": 1,
+    "H5X6R": 1,
+    "Q2W8N": 1,
+    "G7P4T": 1
 };
 
 let spinning=false,currentRotation=0;
@@ -480,16 +656,35 @@ function randomBetween(a,b){
 }
 
 function getPrize(){
-    let r=Math.random()*100;
-    return r<75?1000:r<85?2000:r<95?3000:5000;
+    // Nyerési arányok: 2000 Ft = 70%, 1000 Ft = 15%, 500 Ft = 15%
+    const r = Math.random() * 100;
+    if (r < 70) return 2000;
+    if (r < 85) return 1000;
+    return 500;
 }
 
 function getTargetDegree(p){
-    if(p===1000)return randomBetween(40,250);
-    if(p===2000)return randomBetween(280,300);
-    if(p===3000)return randomBetween(315,335);
-    return randomBetween(348,357);
+    // A kerék vizuális szektorai ugyanazokat az arányokat követik.
+    // A szélektől pár fokkal beljebb állunk meg, hogy a mutató egyértelmű legyen.
+    if(p===2000) return randomBetween(60,300);   // 70%
+    if(p===500)  return randomBetween(312,354);  // 15%
+    return randomBetween(6,48);                  // 1000 Ft, 15%
 }
+
+function closeTicketModal(){
+    document.getElementById("ticketModal").classList.remove("open");
+    document.body.classList.remove("modal-open");
+    document.body.style.removeProperty("--scrollbar-compensation");
+}
+
+document.addEventListener("keydown", e => {
+    if(e.key === "Escape") closeTicketModal();
+});
+
+document.addEventListener("click", e => {
+    const modal = document.getElementById("ticketModal");
+    if(e.target === modal) closeTicketModal();
+});
 
 function spinWheel(){
     const name=document.getElementById("nameInput").value.trim();
@@ -544,37 +739,26 @@ function spinWheel(){
     s.history.push(prize);
     localStorage.setItem("used_code_"+code,JSON.stringify(s));
 
-currentRotation += 360 * 8 + (360 - getTargetDegree(prize));
+// Stabil kerék-animáció: CSS transitionnel pörgetjük, így mobilon is megbízható.
+const duration = 4000;
+const targetDegree = getTargetDegree(prize);
+const startRotation = currentRotation;
+const endRotation = startRotation + (360 * 8) + (360 - targetDegree);
 
-// NEW smooth animation engine
-let start = null;
-let duration = 4000;
-let startRotation = currentRotation;
-let endRotation = currentRotation;
+// Előző animáció maradványainak törlése, majd az induló állapot rögzítése.
+wheel.style.transition = "none";
+wheel.style.transform = `translate3d(0,0,0) rotate(${startRotation}deg)`;
+void wheel.offsetWidth; // böngésző újrarajzolás kikényszerítése
 
-endRotation += 360 * 8 + (360 - getTargetDegree(prize));
+// A következő képkockában indul a tényleges forgás.
+requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+        wheel.style.transition = `transform ${duration}ms cubic-bezier(0.12, 0.72, 0.18, 1)`;
+        wheel.style.transform = `translate3d(0,0,0) rotate(${endRotation}deg)`;
+    });
+});
 
-function animate(timestamp){
-    if(!start) start = timestamp;
-    let progress = timestamp - start;
-
-    let t = Math.min(progress / duration, 1);
-
-    // ease-out cubic
-    let eased = 1 - Math.pow(1 - t, 3);
-
-    let current = startRotation + (endRotation - startRotation) * eased;
-
-    wheel.style.transform = `translateZ(0) rotate(${current}deg)`;
-
-    if(t < 1){
-        requestAnimationFrame(animate);
-    } else {
-        currentRotation = endRotation;
-    }
-}
-
-requestAnimationFrame(animate);
+currentRotation = endRotation;
 
 setTimeout(() => {
 
@@ -594,19 +778,12 @@ setTimeout(() => {
         return;
     }
 
-    // 👉 NYEREMÉNYEK MONDATBAN
-  const prizesList = s.history.map((p, i) => {
-    const value = p.toLocaleString("hu-HU") + " Ft";
+    // Egyszeri pörgetés: közvetlenül az egyetlen nyereményt jelenítjük meg.
+    const now = new Date().toLocaleString("hu-HU");
 
-    if(i === 0) return value;
-    if(i === s.history.length - 1) return " végül " + value;
-
-    return " majd " + value;
-}).join("");
-
-const now = new Date().toLocaleString("hu-HU");
-
-result.innerHTML = `
+const ticketModal = document.getElementById("ticketModal");
+    const ticketModalContent = document.getElementById("ticketModalContent");
+    ticketModalContent.innerHTML = `
 <div style="
     max-width:360px;
     margin:0 auto;
@@ -636,17 +813,13 @@ result.innerHTML = `
         text-align:center;
     ">
 
-        A <b style="color:#06326e;">${name}</b> nevű pörgető a 
-        <b style="color:#06326e;">${code}</b> kóddal, 
-        összesen <b style="color:#06326e;">${s.uses}</b> pörgetést hajtott végre, 
-        melyek során 
-        <span style="color:#28a745;font-weight:bold;">
-            ${prizesList}
-        </span>
-        nyeremény vagy nyereményeket nyert meg, így az összes megnyert összeg 
-        <b style="color:#d97706;">
-            ${s.history.reduce((a,b)=>a+b,0).toLocaleString("hu-HU")} Ft
-        </b>.
+        <b style="color:#06326e;">${name}</b> nevű játékos a
+        <b style="color:#06326e;">${code}</b> kóddal az egyszeri pörgetési lehetőségét felhasználva,
+        a pörgetés során
+        <b style="color:#28a745;font-size:18px;">
+            ${prize.toLocaleString("hu-HU")} Ft
+        </b>
+        nyereményt ért el.
 
     </div>
 
@@ -680,6 +853,11 @@ result.innerHTML = `
 
 </div>
 `;
+    result.innerHTML = `A pörgetés véget ért!`;
+    const scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+    document.body.style.setProperty("--scrollbar-compensation", scrollbarWidth + "px");
+    ticketModal.classList.add("open");
+    document.body.classList.add("modal-open");
     spinning = false;
 
 }, 4200);
