@@ -677,6 +677,107 @@ body.modal-open{
 }
 </style>
 
+
+<style id="hard-mobile-scroll-fix">
+/* Mobilon a dokumentum maga görgethető; a tartalom nem ragadhat be egy belső viewportba. */
+@media (max-width:720px){
+  html{
+    height:auto !important;
+    min-height:100% !important;
+    overflow-x:hidden !important;
+    overflow-y:visible !important;
+  }
+
+  body{
+    position:relative !important;
+    display:block !important;
+    height:auto !important;
+    min-height:100vh !important;
+    min-height:100dvh !important;
+    max-height:none !important;
+    overflow:visible !important;
+    overflow-x:hidden !important;
+    touch-action:auto !important;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  body:not(.modal-open){
+    overflow-y:visible !important;
+  }
+
+  .container{
+    position:relative !important;
+    display:block !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:visible !important;
+    contain:none !important;
+    padding-bottom:40px !important;
+  }
+
+  .main,
+  .left,
+  .right,
+  .wheel-wrap,
+  .wheel,
+  .result{
+    contain:none !important;
+  }
+
+  .main{
+    display:flex !important;
+    flex-direction:column-reverse !important;
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  .left,
+  .right{
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  .right{
+    min-height:0 !important;
+    padding:8px 0 14px !important;
+  }
+
+  .wheel-wrap{
+    flex:none !important;
+  }
+
+  .result{
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  /* A görgető mozdulat a nem interaktív felületeken mindig függőleges lapgörgetés lehessen. */
+  .container,
+  .main,
+  .left,
+  .right,
+  .wheel-wrap,
+  .wheel,
+  .result,
+  .info-box,
+  .prizes,
+  .footer{
+    touch-action:pan-y !important;
+  }
+
+  input,
+  button,
+  a,
+  label{
+    touch-action:manipulation !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
