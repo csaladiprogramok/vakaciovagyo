@@ -593,6 +593,90 @@ body.modal-open{
   .ticket-modal-card{overflow-y:auto !important;-webkit-overflow-scrolling:touch;}
 }
 </style>
+
+<style id="mobile-scroll-only-fix">
+/* Csak mobilbarát elrendezés + lefelé görgethetőség. */
+@media (max-width:720px){
+  html{
+    width:100% !important;
+    height:auto !important;
+    min-height:100% !important;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  body{
+    position:static !important;
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:100dvh !important;
+    max-height:none !important;
+    margin:0 !important;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+    overscroll-behavior-y:auto !important;
+    touch-action:pan-y !important;
+  }
+
+  .container{
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-height:100dvh !important;
+    max-height:none !important;
+    margin:0 !important;
+    overflow:visible !important;
+  }
+
+  .main{
+    width:100% !important;
+    grid-template-columns:1fr !important;
+  }
+
+  .left,
+  .right{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+  }
+
+  input,
+  select,
+  button{
+    max-width:100% !important;
+  }
+
+  .wheel-wrap,
+  .wheel{
+    max-width:100% !important;
+  }
+
+  .main,
+  .left,
+  .right,
+  .wheel-wrap,
+  .wheel,
+  .result{
+    touch-action:pan-y !important;
+  }
+
+  button,
+  input,
+  select,
+  a,
+  label{
+    touch-action:manipulation;
+  }
+
+  .ticket-modal-card{
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch;
+  }
+}
+</style>
+
 </head>
 
 <body>
