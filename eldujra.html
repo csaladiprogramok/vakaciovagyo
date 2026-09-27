@@ -18,22 +18,22 @@
       text-align: center;
     }
 
-    /* MENÜSÁV */
+    /* NAVBAR */
     .navbar {
-      background-color: #fff;
+      background: #fff;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1em 2em;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     .navbar a.logo {
-      font-size: 1.5em;
-      font-weight: bold;
+      font-size: 1.25rem;
+      font-weight: 700;
       text-decoration: none;
       color: yellowgreen;
     }
@@ -47,7 +47,6 @@
       text-decoration: none;
       color: #333;
       font-weight: 500;
-      font-size: 1em;
     }
 
     .hamburger {
@@ -59,36 +58,32 @@
     .hamburger div {
       width: 25px;
       height: 3px;
-      background-color: #333;
+      background: #333;
       margin: 4px;
+      border-radius: 2px;
     }
 
-@media (max-width: 768px) {
-  /* a hamburger továbbra is látszódjon mobilon */
-  .hamburger {
-    display: flex;
-    -webkit-tap-highlight-color: transparent;
-  }
+    @media(max-width:768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+        border-radius: 10px;
+        text-align: center;
+      }
 
-  /* >>> EZT használd a menüre <<< */
-  #navMenu {
-    display: none;                
-    position: absolute;           
-    top: 100%;                    
-    right: 20px;
-    left: auto;
-    z-index: 3000;                
-    flex-direction: column;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    border-radius: 10px;
-    overflow: hidden;
-  }
+      .menu.active {
+        display: flex;
+      }
 
-  #navMenu.active {
-    display: flex;
-  }
-}
+      .hamburger {
+        display: flex;
+      }
+    }
 
     .container {
       padding: 5vw;
@@ -303,25 +298,155 @@
       }
     }
   </style>
+<style>
+/* ===== ÚJ, JOBB OLDALRÓL NYÍLÓ HAMBURGER MENÜ =====
+   A referencia elrendezése alapján, az oldal eredeti színvilágával. */
+.menu-overlay{
+  position:fixed;
+  inset:0;
+  z-index:1998;
+  background:rgba(20,20,20,.48);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .28s ease, visibility .28s ease;
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+}
+.menu-overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+@media (max-width:768px){
+  .navbar{
+    position:sticky;
+    top:0;
+    z-index:2000;
+  }
+
+  .hamburger{
+    display:flex;
+    position:relative;
+    z-index:2002;
+    width:42px;
+    height:42px;
+    padding:7px;
+    margin:-7px;
+    align-items:center;
+    justify-content:center;
+    gap:0;
+    border-radius:50%;
+    transition:background .2s ease;
+  }
+  .hamburger:hover{background:rgba(154,205,50,.10)}
+  .hamburger div{
+    position:absolute;
+    width:26px;
+    height:2px;
+    margin:0;
+    border-radius:999px;
+    background:#333;
+    transition:transform .28s ease, opacity .2s ease, background .2s ease;
+  }
+  .hamburger div:nth-child(1){transform:translateY(-8px)}
+  .hamburger div:nth-child(2){transform:translateY(0)}
+  .hamburger div:nth-child(3){transform:translateY(8px)}
+  .hamburger.active div:nth-child(1){transform:rotate(45deg)}
+  .hamburger.active div:nth-child(2){opacity:0}
+  .hamburger.active div:nth-child(3){transform:rotate(-45deg)}
+
+  .menu{
+    display:flex;
+    position:fixed;
+    z-index:1999;
+    top:0;
+    right:0;
+    bottom:0;
+    width:min(84vw,420px);
+    height:100dvh;
+    padding:0 0 24px;
+    margin:0;
+    gap:0;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    overflow-y:auto;
+    background:#fff;
+    border-radius:0;
+    box-shadow:-14px 0 38px rgba(0,0,0,.22);
+    transform:translateX(105%);
+    opacity:1;
+    visibility:hidden;
+    transition:transform .32s cubic-bezier(.22,.8,.25,1), visibility .32s ease;
+  }
+  .menu.active{
+    display:flex;
+    transform:translateX(0);
+    visibility:visible;
+  }
+
+  
+
+  .menu a{
+    display:flex;
+    align-items:center;
+    min-height:74px;
+    padding:0 28px;
+    margin:0;
+    border-bottom:1px solid rgba(51,51,51,.10);
+    color:yellowgreen;
+    background:#fff;
+    font-size:clamp(1.05rem,4.6vw,1.35rem);
+    font-weight:500;
+    letter-spacing:.8px;
+    line-height:1.2;
+    text-align:left;
+    text-transform:uppercase;
+    transition:background .18s ease, padding-left .18s ease, color .18s ease;
+  }
+  .menu a:hover,
+  .menu a:focus-visible{
+    background:rgba(154,205,50,.10);
+    color:#6da06d;
+    padding-left:34px;
+    outline:none;
+  }
+
+  /* A KILÉPÉS marad az eredeti piros kiemeléssel, de nagybetűs lesz. */
+  .menu a i{
+    font-style:normal !important;
+    text-transform:uppercase;
+  }
+
+  body.menu-open{overflow:hidden}
+}
+
+@media (min-width:769px){
+  .menu-overlay{display:none}
+}
+</style>
+
 </head>
 <body>
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()" aria-hidden="true"></div>
 
   <!-- MENÜSÁV -->
   <div class="navbar">
     <a href="index.html" class="logo">VakációVágyó 2027</a>
-    <div class="hamburger" onclick="toggleMenu()">
+    <div class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" role="button" tabindex="0" aria-label="Menü megnyitása" aria-controls="navMenu" aria-expanded="false">
       <div></div>
       <div></div>
       <div></div>
     </div>
     <div class="menu" id="navMenu">
-      <a href="szamlalo.html">Számláló</a>
-      <a href="befizetesek.html">Befizetések</a>
-      <a href="eldujra.html">Éld újra</a>
-      <a href="akciok.html">Akciók</a>
-      <a href="rangom.html">Rangom</a>
-      <a href="tovabbiak.html">Továbbiak</a>
-      <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/fooldal"><i style="color: red;">Kilépés</i></a>
+      <a href="szamlalo.html">SZÁMLÁLÓ</a>
+      <a href="befizetesek.html">BEFIZETÉSEK</a>
+      <a href="https://csaladiprogramok.github.io/nyaralaskereso/">NYARALÁSKERESŐ</a>
+      <a href="eldujra.html">ÉLD ÚJRA</a>
+      <a href="akciok.html">AKCIÓK</a>
+      <a href="rangom.html">RANGOM</a>
+      <a href="tovabbiak.html">TOVÁBBIAK</a>
+      <a href="https://csaladiprogramok.github.io/csaladiprogramjaink/fooldal"><i style="color: red;">KILÉPÉS</i></a>
     </div>
   </div>
 
@@ -351,18 +476,49 @@
 </a>
 
 <script>
-  function toggleMenu() {
-    document.getElementById('navMenu').classList.toggle('active');
-  }
+    // NAVIGÁCIÓS MENÜ
+    function setMenuState(open) {
+      const menu = document.getElementById('navMenu');
+      const hamburger = document.getElementById('hamburgerBtn');
+      const overlay = document.getElementById('menuOverlay');
 
-  document.addEventListener('click', function (e) {
-    const menu = document.getElementById('navMenu');
-    const burger = document.querySelector('.hamburger');
-    if (menu && menu.classList.contains('active')) {
-      const clickedInside = menu.contains(e.target) || burger.contains(e.target);
-      if (!clickedInside) menu.classList.remove('active');
+      menu.classList.toggle('active', open);
+      hamburger.classList.toggle('active', open);
+      overlay.classList.toggle('active', open);
+      document.body.classList.toggle('menu-open', open);
+
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      hamburger.setAttribute('aria-label', open ? 'Menü bezárása' : 'Menü megnyitása');
+      overlay.setAttribute('aria-hidden', open ? 'false' : 'true');
     }
-  });
+
+    function toggleMenu() {
+      const menu = document.getElementById('navMenu');
+      setMenuState(!menu.classList.contains('active'));
+    }
+
+    function closeMenu() {
+      setMenuState(false);
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') closeMenu();
+
+      if ((event.key === 'Enter' || event.key === ' ') &&
+          document.activeElement === document.getElementById('hamburgerBtn')) {
+        event.preventDefault();
+        toggleMenu();
+      }
+    });
+
+    document.querySelectorAll('#navMenu a').forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) closeMenu();
+    });
+
 </script>
 
 <script>
